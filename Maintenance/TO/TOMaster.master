@@ -1,0 +1,127 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="TOMaster.master.vb" Inherits="Maintenance_TO_TOMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="TOTitle" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <%--<table cellpadding="0" cellspacing="0"  style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px; ">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" 
+                        NavigateUrl="~/Maintenance/TO/TO.aspx" Text = "&lt;&lt; Back to TO's" />                
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="TOMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Details" Value="Details" 
+                                NavigateUrl="~/Maintenance/TO/TtOoDetail.aspx" />
+                            <asp:MenuItem NavigateUrl="~/Maintenance/TO/TOContacts.aspx" 
+                                Text="Contacts" Value="Contacts" />
+                            <asp:MenuItem NavigateUrl="~/Maintenance/TO/TOUsers.aspx" 
+                                Text="Granted Users" Value="Users" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="TourOpID" 
+            DataSourceID="dsTODetail"  Width="100%" >
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="TOLabel" runat="server" SkinID="skGridLabel" Text='<%# Eval("TourOp") %>' />
+                            <asp:Label ID="TOIDLabel" runat="server" Text='<%# Eval("TourOpID") %>' style="color: White; vertical-align: top; margin-left: 15px;" />
+                        </td>
+                    </tr>
+                </table> 
+             </ItemTemplate>
+            <EmptyDataTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="TOLabel" runat="server" SkinID="skGridLabel" Text="New Tour Operator" />
+                        </td>
+                    </tr>
+                </table> 
+             </EmptyDataTemplate>
+        </asp:FormView>--%>
+        <asp:FormView ID="fvMaster" runat="server" DataKeyNames="TourOpID" 
+            DataSourceID="dsTODetail"  Width="100%" >
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0"  style="width: 100%;">
+                    <tr>
+                        <td class="LocalMenuRow" style="width: 130px; ">
+                            <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" 
+                                NavigateUrl="~/Maintenance/TO/TO.aspx" Text = "&lt;&lt; Back to TO's" />                
+                        </td>
+                        <td class="LocalMenuRow">
+                            <asp:Menu ID="TOMenu" runat="server" SkinID="skLocalMenu" OnLoad="TOMenu_Load">
+                                <Items>
+                                    <asp:MenuItem Text="Details" Value="Details" 
+                                        NavigateUrl="~/Maintenance/TO/TtOoDetail.aspx" />
+                                    <asp:MenuItem  Text="Contacts" Value="Contacts" 
+                                        NavigateUrl="~/Maintenance/TO/TOContacts.aspx" />
+                                    <asp:MenuItem Value="Users" Text="Granted Users" 
+                                        NavigateUrl="~/Maintenance/TO/TOUsers.aspx" />
+                                </Items>
+                            </asp:Menu>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="TOLabel" runat="server" SkinID="skGridLabel" Text='<%# Eval("TourOp") %>' />
+                            <asp:Label ID="TOIDLabel" runat="server" Text='<%# Eval("TourOpID") %>' style="color: White; vertical-align: top; margin-left: 15px;" />
+                        </td>
+                    </tr>
+                </table> 
+             </ItemTemplate>
+            <EmptyDataTemplate>
+                <table cellpadding="0" cellspacing="0"  style="width: 100%;">
+                    <tr>
+                        <td class="LocalMenuRow" style="width: 130px; ">
+                            <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" 
+                                NavigateUrl="~/Maintenance/TO/TO.aspx" Text = "&lt;&lt; Back to TO's" />                
+                        </td>
+                        <td class="LocalMenuRow">
+                            <asp:Menu ID="TOMenu" runat="server" SkinID="skLocalMenu" OnLoad="TOMenu_Load">
+                                <Items>
+                                    <asp:MenuItem Text="Details" Value="Details" 
+                                        NavigateUrl="~/Maintenance/TO/TtOoDetail.aspx" />
+                                    <asp:MenuItem  Text="Contacts" Value="Contacts" 
+                                        NavigateUrl="~/Maintenance/TO/TOContacts.aspx" />
+                                    <asp:MenuItem Value="Users" Text="Granted Users" 
+                                        NavigateUrl="~/Maintenance/TO/TOUsers.aspx" />
+                                </Items>
+                            </asp:Menu>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="TOLabel" runat="server" SkinID="skGridLabel" Text="New Tour Operator" />
+                        </td>
+                    </tr>
+                </table> 
+             </EmptyDataTemplate>
+        </asp:FormView>
+    </div>
+    <asp:ObjectDataSource ID="dsTODetail" runat="server"
+        OldValuesParameterFormatString="original_{0}" SelectMethod="GetDataByTOID"
+        TypeName="TourOperTableAdapters.TourOpTableAdapter">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="TOID" QueryStringField="TOID" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ContentPlaceHolder ID="TOContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

@@ -1,0 +1,1913 @@
+﻿body 
+{
+	height:100%;
+	width:100%;
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+}
+
+input
+{
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+    /*-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;*/
+}
+
+input[type="submit"]:disabled
+{
+	background:#888888;
+}
+/*th
+{
+    text-align: left;
+}*/
+
+h6 {
+    display: inline;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.hidden
+{
+    display: none;
+} 
+
+.ImgButton
+{
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.modalBackground 
+{
+	background-color:White;
+	filter:alpha(opacity=70);
+	opacity:0.7;
+}
+
+.popupPanel{
+	visibility:hidden;
+}
+
+.searchPanel{
+	height: 0px;
+}
+
+.creditBck
+{
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+
+.debitBck{
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+.TransferB
+{
+    border-right-width: 1px;
+    border-right-style: solid;
+    background-image: url('../../Images/BlueWashOut.GIF');
+}
+
+.TransferR
+{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-right-width: 1px;
+    border-right-style: solid;
+    background-image: url('../../Images/BlueWashOut.GIF');
+}
+
+.normal 
+{
+	/*height:100%;*/
+	width:100%;
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+}
+.txtLeft
+{
+	text-align: left;
+}
+
+.txtRight
+{
+	text-align: right;
+}
+
+.padingLeft5
+{
+	padding-left: 15px;
+}
+
+.TextBoxLabel
+{
+	color: inherit;
+	width: 100%;
+	border: hidden 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ListGrid
+{
+	border: solid 1px Gray;
+	background-color: White;
+}
+
+.ListItem
+{
+	color: inherit;
+	text-decoration: none;
+	width: 100%;
+	border: none 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.ListItem:hover
+{
+	background-color: #0078D7 !important;
+	color: White !important;
+}
+.ListItem a
+{
+	color: inherit !important;
+	text-decoration: none;
+	border: none 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+.PreRowHead
+{
+	border-style: solid none solid none;
+	border-width: 2px 1px 2px 1px;
+	font-weight: bold; 
+	font-style: italic;
+	padding-left: 2px;
+	padding-right: 2px;
+	text-align: center;
+}
+.PreRowHeadSel
+{
+	border-style: solid solid solid solid;
+	border-width: 2px 1px 2px 1px;
+	font-weight: bold; 
+	padding-left: 2px;
+	padding-right: 2px;
+	text-align: center;
+	background-color: #D9FFFF;
+}
+.PreRow
+{
+	border-style: solid solid solid solid;
+	border-width: 1px 1px 1px 1px;
+	/*font-weight: bold; */
+	padding-left: 2px;
+	padding-right: 2px;
+	text-align: center;
+}
+.PreLogHead
+{
+	border: none;
+	border-top: solid 2px;	
+	font-weight: bold; 
+	padding-left: 10px;
+	text-align: left;
+	background-color: #D9FFFF;
+	height: 30px;
+}
+.PreLogControl
+{
+	border: none;
+	font-weight: bold;
+	text-align: left;
+	color: #005C99;
+	background-color: #D9FFFF;
+	width: 100%;
+}
+
+
+
+.InvHead
+{
+	border-style: solid solid double solid;
+	border-width: 1px 1px 6px 1px;
+	font-weight: bold; 
+	font-style:italic;
+	text-align: center;
+	cursor: default;
+}
+
+.InvSelRow
+{
+	border-style: none solid solid solid;
+	border-width: 0px 1px 2px 1px;
+	font-weight: bold; 
+	padding-left: 2px;
+}
+.InvRow
+{
+	border-style: none solid solid solid;
+	/*border-width: 0px 1px 2px 1px;*/
+	border-width: 0px 1px 1px 1px;
+	font-weight: bold; 
+	padding-left: 2px;
+	/*!!!
+	background-color: #D9FFFF;*/
+}
+.InvRowNum
+{
+	border-style: none solid solid solid;
+	/*border-width: 0px 1px 2px 1px;*/
+	border-width: 0px 1px 1px 1px;
+	font-weight: bold; 
+	padding-right: 2px;
+	text-align: right;
+	/*!!!
+	background-color: #D9FFFF;*/
+}
+.InvRowBillDet
+{
+	padding-top: 1px;
+	border-style: none solid none solid; 
+	border-width: 1px; 
+	border-collapse: collapse;
+	padding-bottom: 3px;
+}
+.InvRowSel
+{
+	border-style: none solid solid solid;
+	/*border-width: 0px 1px 2px 1px;*/
+	border-width: 0px 1px 1px 1px;
+	font-weight: bold; 
+	padding-left: 2px;
+	background-color: #D9FFFF;
+	/*!!!
+    background-image: url('../../Images/BlueWashOut.GIF');*/
+}
+.InvRowNumSel
+{
+	border-style: none solid solid solid;
+	/*border-width: 0px 1px 2px 1px;*/
+	border-width: 0px 1px 1px 1px;
+	font-weight: bold; 
+	padding-right: 2px;
+	text-align: right;
+	background-color: #D9FFFF;
+	/*!!!
+    background-image: url('../../Images/BlueWashOut.GIF');*/
+}
+.InvRowBillDetSel
+{
+	padding-top: 1px; 
+	border-style: none solid none solid; 
+	border-width: 1px; 
+	border-collapse: collapse;
+	/*background-color: #D9FFFF;*/
+}
+.InvRowAdd
+{
+	border-style: none solid solid solid;
+	border-width: 0px 1px 2px 1px;
+	text-align: right; 
+	font-style: italic; 
+	font-weight: bold; 
+	padding-left: 2px;
+	padding-bottom: 4px; 
+	padding-right: 4px; 
+	/*background-color: #D9FFFF;*/
+}
+.InvRowDet
+{
+	border-style: none none solid none ;
+	border-width: 0px 0px 2px 0px;
+}
+
+.InvHeadBill
+{
+	border-style: solid solid double solid;
+	border-width: 1px 1px 3px 1px;
+	font-style:italic;
+	text-align: center;
+}
+
+.InvRowBill
+{
+	border: solid 1px;
+	/*border-style: none solid solid solid;
+	border-width: 0px 1px 1px 1px;*/
+	padding-left: 2px;
+}
+.InvRowBillNum
+{
+	border: solid 1px;
+	/*border-style: none solid solid solid;
+	border-width: 0px 1px 1px 1px;*/
+	padding-right: 2px;
+	text-align: right;
+}
+.InvRowBillSel
+{
+	border-style: none solid solid solid;
+	border-width: 0px 1px 1px 1px;
+	padding-left: 2px;
+}
+.InvRowBillNumSel
+{
+	border-style: none solid solid solid;
+	border-width: 0px 1px 1px 1px;
+	padding-right: 2px;
+	text-align: right;
+}
+
+.InvButton
+{
+	width: auto;
+	height: auto;
+	padding: 0px 5px 0px 5px;
+	vertical-align: middle;
+}
+
+.InvStayRates
+{
+	border: solid 2px;
+	padding: 3px;
+	background-color: White;
+}
+
+
+.ButtonBlue
+{
+	background-image: url(../../Images/BlueSmall.gif);
+    background-repeat: repeat;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	width: auto;
+	border: none;
+	color: White;
+	margin-left: 5px;
+}
+.ButtonRed
+{
+	background-image: url('../../Images/RedSmall.gif');
+    background-repeat: repeat;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	width: auto;
+	border: none;
+	color: White;
+	margin-left: 5px;
+}
+.ButtonGreen
+{
+	background-image: url('../../Images/GreenSmall.gif');
+    background-repeat: repeat;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	width: auto;
+	border: none;
+	color: White;
+	margin-left: 5px;
+}
+
+
+/* Blue */
+
+.Blue
+{
+	color: #005C99;
+	border-color: #005C99;
+	background-color: #FFFFFF;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.Blue a
+{
+	color: #005C99;
+}
+.Blue .GridLabelBG
+{
+	background-image: url(../../Images/BlueFullSmall.gif);
+	background-position: bottom;
+	background-repeat: repeat-x;
+	padding-left: 30px;
+	height:30px;
+}
+.Blue .GridLabel 
+{
+	padding:0px 3px 0px 3px; 
+	font-size: 11pt;
+	font-weight:bold; 
+	vertical-align: bottom;
+	background-color: #FFFFFF; 
+	height:30px;
+}
+.Blue .GridBorder 
+{
+	padding: 5px; 
+	border-style: solid;
+	border-width: 2px;
+}
+
+.Blue .GridRowClear
+{
+	border-style: none;
+	font-size: 10pt;
+	color: #005C99;
+}
+/* .GridRowLast */
+.Blue .GridRow1T		/* single top */
+{
+	font-size: 10pt;
+	border-style: solid none none none;
+	border-width: 2px;
+	color: #005C99;
+	border-color: #005C99;
+}
+/* .GridRowFirst */
+.Blue .GridRow1B		/* single bottom */
+{
+	font-size: 10pt;
+	border-style: none none solid none;
+	border-width: 2px;
+	color: #005C99;
+	border-color: #005C99;
+}
+/* .GridRow */
+.Blue .GridRow1TB		/* single top-bottom */
+{
+	font-size: 10pt;
+	border-style: solid  none solid none;
+	border-width: 2px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .SelectRowClear
+{
+    font-size: 10pt;
+    border-style: none;
+    background-image: url('../../Images/BlueWashOut.GIF');
+    background-repeat: repeat;
+    color: #005C99;
+    border-color: #005C99;
+}
+.Blue .SelectRow1T
+{
+	font-size: 10pt;
+	border-style: solid none none none;
+	border-width: 2px;
+	background-image: url('../../Images/BlueWashOut.GIF');
+    background-repeat: repeat;
+	color: #005C99;
+	border-color: #005C99;
+}
+.Blue .SelectRow1B		/* single bottom */
+{
+	font-size: 10pt;
+	border-style: none none solid none;
+	border-width: 2px;
+	background-image: url('../../Images/BlueWashOut.GIF');
+    background-repeat: repeat;
+	color: #005C99;
+	border-color: #005C99;
+}
+/* .SelectedRow */
+.Blue .SelectRow1TB		/* single top-bottom */
+{
+	font-size: 10pt;
+	border-style: solid none solid none;
+	border-width: 2px;
+	background-image: url('../../Images/BlueWashOut.GIF');
+    background-repeat: repeat;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .GridRow2T		/* double top */
+{
+	font-size: 10pt;
+	border-style: double none none none;
+	border-width: 6px;
+	color: #005C99;
+	border-color: #005C99;
+}
+/* .FirstHeaderRow */
+/* .HeaderRow */
+.Blue .GridRow2B		/* double bottom */
+{
+	font-size: 10pt;
+	border-style: none none double none;
+	border-width: 6px;
+	color: #005C99;
+	border-color: #005C99;
+}
+/* .FooterRow */
+.Blue .GridRow2TB		/* double top-bottom */
+{
+	font-size: 10pt;
+	border-style: double none double none;
+	border-width: 6px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+/* SearchComandRow */
+.Blue .ComandRow2T
+{
+	border-style: double none none none;
+	border-width: 6px;
+	text-align: right;
+	color: #005C99;
+	font-size: 10pt;
+	height: 30px;
+	vertical-align: middle;
+}
+/* SearchRow */
+.Blue .ComandRow2b
+{
+	border-style: none none double none;
+	border-width: 6px;
+	text-align: right;
+	color: #005C99;
+	font-size: 10pt;
+	height: 30px;
+	vertical-align: middle;
+}
+
+
+.Blue .NewButton
+{
+	font-weight: bold;
+	text-align: center;
+	border: solid 2px #005C99;
+	color: #005C99;
+	margin: 2px;
+	padding: 0px 10px 0px 10px;
+	background-color: Transparent;
+    }
+.Blue .Button
+{
+	background-image: url(../../Images/BlueSmall.gif);
+    background-repeat: repeat;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	width: auto;
+    }
+.Blue .TextBox
+{
+	border: dotted 1px #005C99;
+	margin: 2px 1px 2px 0px;
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: left;
+	color: #005C99;
+	width: 98%;
+}
+.Blue .WaterMark
+{
+	border: dotted 1px #005C99;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: left;
+	color: #005C99;
+	width: 98%;
+	font-style: italic;
+	font-variant: small-caps;
+	background-color: #D9FFFF;
+}
+.Blue .RowTitle
+{
+    background-image: url(../../Images/BlueFullSmall.gif);
+    background-position: bottom;
+    background-repeat: repeat;
+    padding-left: 30px;
+    height: 30px;
+    text-indent: 10px;
+    text-align:left;
+    vertical-align: top;
+    color: #FFFFFF;
+}
+.Blue .RowRoom
+{
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+    text-indent: 2px;
+    text-align: right;
+    border-style: solid none double none;
+    border-width: 2px 0px 6px 0px;
+    color: #005C99;
+    border-color: #005C99;
+}
+.Blue .RowMP
+{
+	border: dotted 1px #005C99;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: center;
+	color: #005C99;
+	font-style: italic;
+	font-variant: small-caps;
+	background-color: #D9FFFF;
+}
+
+/*-----------------*/
+/* --- T R B L --- */
+/*-----------------*/
+
+.Blue .GridRow1BL
+{
+	font-size: 10pt;
+	border-style: none none solid solid;
+	border-width: 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .GridRow1TBL
+{
+	font-size: 10pt;
+	border-style: solid none solid solid;
+	border-width: 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .GridRow1RBL
+{
+	font-size: 10pt;
+	border-style: none solid solid solid;
+	border-width: 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .GridRow1TRBL
+{
+	font-size: 10pt;
+	border-style: solid;
+	border-width: 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+
+.Blue .GridRow2B1L
+{
+	font-size: 10pt;
+	border-style: none none solid solid;
+	border-width: 1px 1px 2px 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .GridRow1R2B1L
+{
+	font-size: 10pt;
+	border-style: none solid solid solid;
+	border-width: 1px 1px 2px 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+
+.Blue .GridRow6B1L
+{
+	font-size: 10pt;
+	border-style: none none double solid;
+	border-width: 1px 1px 6px 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .GridRow1T6B1L
+{
+	font-size: 10pt;
+	border-style: solid none double solid;
+	border-width: 1px 1px 6px 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+.Blue .GridRow1R6B1L
+{
+	font-size: 10pt;
+	border-style: none solid double solid;
+	border-width: 1px 1px 6px 1px;
+	color: #005C99;
+	border-color: #005C99;
+}
+
+/*********** Tab Control ***********/
+/*Body*/
+.MyTab .ajax__tab_body
+{ 
+    font-size: 10pt;
+ }
+
+/*Header*/
+.Tab .ajax__tab_header
+{
+	border-style: none none solid none;
+	border-width: 2px;
+    /*font-size:medium;*/
+    font-weight: bold;
+    height: 30px;
+    vertical-align: baseline;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+/*Body*/
+.Tab .ajax__tab_body
+{ 
+    font-size: 10pt;
+    padding: 0px 25px 0px 25px;
+ }
+
+/*Tab Active*/
+.Tab .ajax__tab_active .ajax__tab_tab,
+.Tab .ajax__tab_active .ajax__tab_inner,
+.Tab .ajax__tab_active .ajax__tab_outer
+{
+    color: #ffffff;
+	/*background: url('../../Images/BlueSmall.gif') repeat-x;*/
+    height: 30px;
+    margin-right: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+/*Tab Inactive*/
+.Tab .ajax__tab_tab,
+.Tab .ajax__tab_inner,
+.Tab .ajax__tab_outer
+{
+    color: #005C99;
+    background-color: #ffffff;
+    height: 30px;
+    margin-right: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+/*Tab Hover*/
+.Tab .ajax__tab_hover .ajax__tab_tab,
+.Tab .ajax__tab_hover .ajax__tab_inner,
+.Tab .ajax__tab_hover .ajax__tab_outer
+{
+    color: #005C99;
+    background: url("../../Images/BlueWashOut.gif") repeat-x;
+    background-color: #8cd6f9;
+    margin-right: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+
+/*-----------------*/
+
+
+/* Red */
+
+.Red
+{
+	color: #D54E08;
+	border-color: #D54E08;
+	background-color: #FFFFFF;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.Red a
+{
+	color: #D54E08;
+}
+.Red .GridLabelBG
+{
+	background-image: url(../../Images/RedFullSmall.gif);
+	background-position: bottom;
+    background-repeat: repeat;
+	padding-left: 30px;
+	height:30px;
+}
+.Red .GridLabel 
+{
+	padding:0px 3px 0px 3px; 
+	font-size: 11pt;
+	font-weight:bold; 
+	vertical-align: bottom;
+	background-color: #FFFFFF; 
+	height:30px;
+}
+.Red .GridBorder 
+{
+	padding: 5px; 
+	border-style: solid;
+	border-width: 2px;
+}
+
+.Red .GridBorderThin 
+{
+	padding: 5px; 
+	border-style: solid;
+	border-width: 1px;
+	border-color: #D54E08;
+}
+
+.Red .GridRowClear
+{
+	border-style: none;
+	font-size: 10pt;
+	color: #D54E08;
+}
+/* .GridRowLast */
+.Red .GridRow1T		/* single top */
+{
+	font-size: 10pt;
+	border-style: solid none none none;
+	border-width: 2px;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+/* .GridRowFirst */
+.Red .GridRow1B		/* single bottom */
+{
+	font-size: 10pt;
+	border-style: none none solid none;
+	border-width: 2px;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+/* .GridRow */
+.Red .GridRow1TB		/* single top-bottom */
+{
+	font-size: 10pt;
+	border-style: solid none solid none;
+	border-width: 2px;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+.Red .BillRow1TB
+{
+    font-size: 10pt;
+    border-style: solid solid solid none;
+    border-width: 2px 1px 2px 1px;
+    color: #D54E08;
+    border-color: #D54E08;
+}
+
+.Red .SelectRowClear
+{
+	font-size: 10pt;
+	border-style: none;
+	background-image: url('../../Images/RedWashOut.GIF');
+    background-repeat: repeat;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+.Red .SelectRow1T
+{
+	font-size: 10pt;
+	border-style: solid none none none;
+	border-width: 2px;
+	background-image: url('../../Images/RedWashOut.GIF');
+    background-repeat: repeat;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+.Red .SelectRow1B		/* single bottom */
+{
+	font-size: 10pt;
+	border-style: none none solid none;
+	border-width: 2px;
+	background-image: url('../../Images/RedWashOut.GIF');
+    background-repeat: repeat;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+.Red .SelectRow		/* border free */
+{
+	font-size: 10pt;
+	background-image: url('../../Images/RedWashOut.GIF');
+    background-repeat: repeat;
+	color: #D54E08;
+}
+
+/* .SelectedRow */
+.Red .SelectRow1TB		/* single top-bottom */
+{
+	font-size: 10pt;
+	border-style: solid none solid none;
+	border-width: 2px;
+	background-image: url('../../Images/RedWashOut.GIF');
+    background-repeat: repeat;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+
+.Red .GridRow2T		/* double top */
+{
+	font-size: 10pt;
+	border-style: double none none none;
+	border-width: 6px;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+/* .FirstHeaderRow */
+/* .HeaderRow */
+.Red .GridRow2B		/* double bottom */
+{
+	font-size: 10pt;
+	border-style: none none double none;
+	border-width: 6px;
+	color: #D54E08;
+	border-color: #D54E08;
+	text-align: left;
+}
+/* .FooterRow */
+.Red .GridRow2TB		/* double top-bottom */
+{
+	font-size: 10pt;
+	border-style: double none double none;
+	border-width: 6px;
+	color: #D54E08;
+	border-color: #D54E08;
+}
+
+/* SearchComandRow */
+.Red .ComandRow2T
+{
+	border-style: double none none none;
+	border-width: 6px;
+	text-align: right;
+	color: #D54E08;
+	font-size: 10pt;
+	height: 30px;
+	vertical-align: middle;
+}
+/* SearchRow */
+.Red .ComandRow2b
+{
+	border-style: none none double none;
+	border-width: 6px;
+	text-align: right;
+	color: #D54E08;
+	font-size: 10pt;
+	height: 30px;
+	vertical-align: middle;
+}
+
+
+.Red .NewButton
+{
+	font-weight: bold;
+	text-align: center;
+	border: solid 2px #D54E08;
+	color: #D54E08;
+	margin: 2px;
+	padding: 0px 10px 0px 10px;
+	background-color: Transparent;
+    }
+.Red .Button
+{
+	background-image: url('../../Images/RedSmall.gif');
+    background-repeat: repeat;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	width: auto;
+}
+.Red .TextBox
+{
+	border: dotted 1px #D54E08;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: left;
+	color: #D54E08;
+	width: 98%;
+}
+.Red .WaterMark
+{
+	border: dotted 1px #D54E08;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: left;
+	color: #D54E08;
+	width: 98%;
+	font-style: italic;
+	font-variant: small-caps;
+	background-color: #FFDFDF;
+}
+
+.Red .RowTitle
+{
+    background-image: url(../../Images/RedFullSmall.gif);
+    background-position: bottom;
+    background-repeat: repeat;
+    padding-left: 30px;
+    height: 30px;
+    text-indent: 10px;
+    text-align:left;
+    vertical-align: top;
+    color: #FFFFFF;
+}
+.Red .RowRoom
+{
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+    text-indent: 2px;
+    text-align: right;
+    border-style: solid none double none;
+    border-width: 2px 0px 6px 0px;
+    color: #D54E08;
+    border-color: #D54E08;
+}
+.Red .RowMP
+{
+	border: dotted 1px #D54E08;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: center;
+	color: #D54E08;
+	font-style: italic;
+	font-variant: small-caps;
+	background-color: #FFDFDF;
+}
+
+
+/* Green */
+
+.Green
+{
+	color: #658C00;
+	border-color: #658C00;
+	background-color: #FFFFFF;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.Green a
+{
+	color: #658C00;
+}
+.Green .GridLabelBG
+{
+	background-image: url(../../Images/GreenFullSmall.gif);
+	background-position: bottom;
+    background-repeat: repeat;
+	padding-left: 30px;
+	height:30px;
+}
+.Green .GridLabel 
+{
+	padding:0px 3px 0px 3px; 
+	font-size: 11pt;
+	font-weight:bold; 
+	vertical-align: bottom;
+	background-color: #FFFFFF; 
+	height:30px;
+}
+.Green .GridBorder 
+{
+	padding: 5px; 
+	border-style: solid;
+	border-width: 2px;
+}
+
+.Green .GridRowClear
+{
+	border-style: none;
+	font-size: 10pt;
+	color: #658C00;
+}
+/* .GridRowLast */
+.Green .GridRow1T		/* single top */
+{
+	font-size: 10pt;
+	border-style: solid none none none;
+	border-width: 2px;
+	color: #658C00;
+	border-color: #658C00;
+}
+/* .GridRowFirst */
+.Green .GridRow1B		/* single bottom */
+{
+	font-size: 10pt;
+	border-style: none none solid none;
+	border-width: 2px;
+	color: #658C00;
+	border-color: #658C00;
+}
+/* .GridRow */
+.Green .GridRow1TB		/* single top-bottom */
+{
+	font-size: 10pt;
+	border-style: solid none solid none;
+	border-width: 2px;
+	color: #658C00;
+	border-color: #658C00;
+}
+
+.Green .SelectRowClear
+{
+	font-size: 10pt;
+	border-style: none;
+	background-image: url('../../Images/GreenWashOut.GIF');
+    background-repeat: repeat;
+	color: #658C00;
+	border-color: #658C00;
+}
+
+.Green .SelectRowClear50
+{
+	font-size: 10pt;
+	border: solid 1px;
+	background-image: url('../../Images/GreenWashOut50.PNG');
+    background-repeat: repeat;
+	color: #658C00;
+	border-color: #658C00;
+}
+.Green .SelectRow1T
+{
+	font-size: 10pt;
+	border-style: solid none none none;
+	border-width: 2px;
+	background-image: url('../../Images/GreenWashOut.GIF');
+    background-repeat: repeat;
+	color: #658C00;
+	border-color: #658C00;
+}
+.Green .SelectRow1B		/* single bottom */
+{
+	font-size: 10pt;
+	border-style: none none solid none;
+	border-width: 2px;
+	background-image: url('../../Images/GreenWashOut.GIF');
+    background-repeat: repeat;
+	color: #658C00;
+	border-color: #658C00;
+}
+
+.Green .CheckedRow
+{
+	background-image: url('../../Images/RedWashOut.GIF');
+    background-repeat: repeat;
+	color: #D54E08;
+}
+
+/* .SelectedRow */
+.Green .SelectRow1TB		/* single top-bottom */
+{
+	font-size: 10pt;
+	border-style: solid none solid none;
+	border-width: 2px;
+	background-image: url('../../Images/GreenWashOut.GIF');
+    background-repeat: repeat;
+	color: #658C00;
+	border-color: #658C00;
+}
+
+.Green .GridRow2T		/* double top */
+{
+	font-size: 10pt;
+	border-style: double none none none;
+	border-width: 6px;
+	color: #658C00;
+	border-color: #658C00;
+}
+/* .FirstHeaderRow */
+/* .HeaderRow */
+.Green .GridRow2B		/* double bottom */
+{
+	font-size: 10pt;
+	border-style: none none double none;
+	border-width: 6px;
+	color: #658C00;
+	border-color: #658C00;
+}
+/* .FooterRow */
+.Green .GridRow2TB		/* double top-bottom */
+{
+	font-size: 10pt;
+	border-style: double none double none;
+	border-width: 6px;
+	color: #658C00;
+	border-color: #658C00;
+}
+
+/* SearchComandRow */
+.Green .ComandRow2T
+{
+	/*border-style: double none none none;*/
+	border-style: double none none none;
+	border-width: 6px;
+	text-align: right;
+	color: #658C00;
+	font-size: 10pt;
+	height: 30px;
+	vertical-align: middle;
+}
+/* SearchRow */
+.Green .ComandRow2b
+{
+	border-style: none none double none;
+	border-width: 6px;
+	text-align: right;
+	color: #658C00;
+	font-size: 10pt;
+	height: 30px;
+	vertical-align: middle;
+}
+
+
+.Red .NewButton
+{
+	font-weight: bold;
+	text-align: center;
+	border: solid 2px #658C00;
+	color: #658C00;
+	margin: 2px;
+	padding: 0px 10px 0px 10px;
+	background-color: Transparent;
+    }
+.Green .Button
+{
+	background-image: url('../../Images/GreenSmall.gif');
+    background-repeat: repeat;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	width: auto;
+}
+.Green .TextBox
+{
+	border: dotted 1px #005C99;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: left;
+	color: #658C00;
+	width: 98%;
+}
+.Green .WaterMark
+{
+	border: dotted 1px #658C00;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri,Arial;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: left;
+	color: #658C00;
+	width: 98%;
+	font-style: italic;
+	font-variant: small-caps;
+	background-color: #DFFFDF;
+}
+
+.Green .RowTitle
+{
+    background-image: url(../../Images/GreenFullSmall.gif);
+    background-position: bottom;
+    background-repeat: repeat;
+    padding-left: 30px;
+    height: 30px;
+    text-indent: 10px;
+    text-align:left;
+    vertical-align: top;
+    color: #FFFFFF;
+}
+.Green .RowRoom
+{
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+    text-indent: 2px;
+    text-align: right;
+    border-style: solid none double none;
+    border-width: 2px 0px 6px 0px;
+    color: #658C00;
+    border-color: #658C00;
+}
+.Green .RowMP
+{
+	border: dotted 1px #658C00;
+	margin: 2px 1px 2px 1px;
+	font-family: Calibri;
+	font-size: 10pt;
+	font-weight: normal;
+	text-align: center;
+	color: #658C00;
+	font-style: italic;
+	font-variant: small-caps;
+	background-color: #DFFFDF;
+}
+
+
+/* Local Menu */
+.Blue .LocalMenuRow
+{
+	font-size: 12pt;
+	border-style: none none solid none;
+	border-width: 2px;
+	color: #005C99;
+	border-color: #005C99;
+}
+.Blue .LocalMenuItem
+{
+	padding: 0px 5px 0px 5px;
+	font-size: 12pt;
+	font-weight: bold;
+	border-style: none;
+	color: #005C99;
+}
+.Blue .LocalMenuHover
+{
+	font-size: 12pt;
+	font-weight:bold;
+	border-style: none;
+	background-image: url('../../Images/BlueWashOut.GIF');
+	background-repeat: repeat-x;
+	color: #005C99;
+}
+.Blue .LocalMenuSelected
+{
+	font-size: 12pt;
+	font-weight: bold;
+	border-style: none;
+	background-repeat: repeat-x;
+	color: #FFFFFF;
+	background-color: #005C99;
+}
+
+
+
+/* Logon form */
+
+.LogonLabel
+{
+	background-image: url(../../Images/BlueFull.gif);
+	background-repeat: repeat-x;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+
+/* Main Menu */
+
+.MenuBacground
+{
+	background-position: bottom;
+	height: 50px;
+	width: 100%;
+	padding-left: 10px;
+	background-image: url(../../Images/BlueFull.gif);
+	background-repeat: repeat-x;
+}
+
+.Logo
+{
+	padding-bottom: 15px;
+}
+
+.StaticMenu
+{
+	background-image: url(../../Images/BlueFull.gif);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+
+.StaticMenuItem
+{
+	background-color: Transparent; 
+	color: #FFFFFF;
+}
+
+.StaticHoverMenuItem
+{
+	background-color: Transparent; 
+	background-image: url(../../Images/RedFull.gif);
+	background-repeat: repeat-x;
+}
+
+.DinamicMenu
+{
+	background-color: Transparent; 
+	border: solid 3px #005C99;
+	z-index: 100;
+}
+
+.DinamicHoverMenuItem
+{
+	background-color: Transparent; 
+	background-image: url(../../Images/Red.gif);
+	background-repeat: repeat-x;
+	z-index: 100;
+}
+
+
+
+
+/**** Wizard ****/
+.wizard
+{
+	border: #005C99 2px solid;
+	padding: 10px;
+}
+.wizardHeader
+{
+	background-image: url(../../Images/BlueFullSmall.gif);
+	background-position: bottom;
+	background-repeat: repeat-x;
+	padding-left: 30px;
+	height: 40px;
+	font-weight: bold;
+	font-size: small;
+}
+.wizardStep 
+{
+	vertical-align:top;	
+}
+
+.wizardNavigation
+{
+	height: 30px;
+	padding: 0px;
+	background-image: url('../../Images/BlueWashOut.GIF');
+	background-repeat:repeat-x;	
+	background-position:bottom left;
+	BORDER-TOP: #1C5E55 1px solid;	/* ???? */
+	text-align:center;
+}
+
+
+/**** Navigation bar - NavBarWiz ****/
+.NavBarWiz
+{
+	font-weight: bold;
+	color: #005C99;
+	text-decoration: none;
+}
+.NavBarWiz A:link
+{
+	color: #005C99;
+	text-decoration: none;	/* ???? */
+}
+.NavBarWiz A:visited
+{
+	color: #005C99;
+	text-decoration: none;	/* ???? */
+}
+.NavBarWiz A:hover 
+{
+	color: #005C99;
+	text-decoration: underline;	/* ???? */
+}
+
+
+/*** SideBarStyle - SideWizardButton***/
+.SideWizardButton
+{
+ width :150px; 
+ height:50px; 
+ FONT-SIZE: 13px; 
+ COLOR: #1C5E55; 
+ FONT-FAMILY: verdana; 
+ TEXT-DECORATION: none	
+}  
+
+    
+.SideWizardBar
+{
+ width :150px; 
+ height:200px; 
+ /*background-color:#8cdeff;*/
+ background-color:#c5e5f5;
+ border-color:Teal;
+ border:solid;
+ border-width:1px;
+ vertical-align:top;
+ FONT-SIZE: 13px; 
+ COLOR: #1C5E55; 
+ FONT-FAMILY: verdana; 
+ TEXT-DECORATION: none	
+} 
+
+.SideWizardBar A:hover 
+{
+	/*width :130px; 
+	height:40px;*/
+	background: transparent;
+	background-image: url(../../Images/GreenSmall.gif);
+	background-repeat: repeat-x;
+	/*BORDER-TOP: #1C5E55 1px solid;*/
+	COLOR: #336600; 
+	/*TEXT-DECORATION: underline*/
+}
+
+.WizardStepTable
+{
+	font-family:Verdana;
+	font-size:small;
+	color:SaddleBrown;
+} 
+
+
+
+
+/* Content in master */
+
+.ContentTable
+{
+	padding-top: 5px;
+	padding-right: 5px;
+	text-align: left;
+	vertical-align: top;
+}
+
+
+/* GridView Layout */
+.grid 
+{ 
+	width:700px; 
+	font-family:Tahoma;
+}
+.grid H2 
+{ 
+	margin:0; padding:0; 
+	color:#ffffff;
+	height:20px;
+	line-height:20px;
+	font-size:14px;
+}
+.grid .mid
+{
+	padding:3px 0px 0px 0px;
+}
+.grid .datatable
+{
+	width:100%;
+	color:#666;
+    border-bottom:solid 1px #bbd9ee;
+}        
+.grid .datatable TH
+{
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:0px;
+    text-align:left;
+    padding:2px 4px;
+    color:#333333;
+    border-bottom:solid 2px #bbd9ee;
+}
+.grid .datatable TH A
+{ 
+	text-decoration:none;
+	padding-right:18px; 
+	color:#0066cc;
+}
+.grid .datatable TH.sortasc A { background:url(../img/asc.gif) right center no-repeat; }
+.grid .datatable TH.sortdesc A { background:url(../img/desc.gif) right center no-repeat; }
+.grid .datatable TD
+{
+    font-size:11px;
+    text-align:left;
+    padding:6px 4px;
+    border-bottom:solid 1px #bbd9ee;
+}      
+.grid .datatable .row:hover
+{
+	background-color:#fffacd;
+	color:#000;
+}
+.grid .datatable .first { padding-left:10px; }
+.grid .datatable .row:hover .first
+{
+    background-repeat:no-repeat;   
+	background-image:url(../img/bullet.gif);
+}  
+/* Data Pager Styles */
+.grid .pager
+{
+    font-family:arial,sans-serif;
+    text-align:center;
+    padding:6px;	                
+} 
+.grid .pager SPAN.command,        
+.grid .pager SPAN.current,        
+.grid .pager A.command
+{
+    color:#5a90ce;
+    padding:0px 5px;
+    text-decoration:none;
+    border:none;
+}
+.grid .pager A.command:hover
+{
+    border:solid 2px #408BB6;
+    background-color:#59A5D1;
+    color:#fff;
+    padding:0px 3px;
+    text-decoration:none;
+}        
+.grid .pager SPAN.current
+{
+	border:none;
+    font-weight:bold;
+    color:#3e3e3e;
+    padding:0px 6px;
+    font-size:18px;
+}
+
+/* FormViewTitle */
+
+.formviewTitle
+{
+    font-size:small;
+    background-color:Transparent;
+    text-align:left;
+    vertical-align:middle;
+   
+}
+
+/* panelUpload */
+
+.pnlUpl
+{
+    font-size:small;
+    background-color:#99CCFF;
+    text-align:left;
+    vertical-align:middle;
+}
+
+.ButtonLogin
+{
+    background-position: bottom;
+	background-image: url(../../Images/BlueSmall.gif);
+	background-repeat: repeat-x;
+	height: 25px;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: top;
+	width: auto;
+}
+
+
+/* Calendar */
+.cal_Theme1 .ajax__calendar_container   {
+    background-color: #005C99;
+    border:solid 1px #005C99;
+}
+
+.cal_Theme1 .ajax__calendar_header  {
+    background-color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.cal_Theme1 .ajax__calendar_title,
+.cal_Theme1 .ajax__calendar_next,
+.cal_Theme1 .ajax__calendar_prev    {
+    color: #005C99;
+    padding-top: 3px;
+}
+
+.cal_Theme1 .ajax__calendar_body    {
+    background-color: White;
+    border: solid 1px #cccccc;
+}
+
+.cal_Theme1 .ajax__calendar_dayname {
+    text-align:center;
+    font-weight:bold;
+    margin-bottom: 4px;
+    margin-top: 2px;
+}
+
+.cal_Theme1 .ajax__calendar_day {
+    text-align:center;
+}
+
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_day,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_month,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_year,
+.cal_Theme1 .ajax__calendar_active  {
+    color: #004080;
+    font-weight: bold;
+    background-color: #ffffff;
+}
+
+.cal_Theme1 .ajax__calendar_today   {
+    font-weight:bold;
+    color:White;
+}
+
+.cal_Theme1 .ajax__calendar_other,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_today,
+.cal_Theme1 .ajax__calendar_hover .ajax__calendar_title {
+    color: #bbbbbb;
+}
+
+
+.SmartTab .ajax__tab_header
+{
+    font-weight:bold;
+    display: block;
+	background-image: url(../../Images/BlueFullSmall.gif);
+	background-position: bottom;
+	background-repeat: repeat-x;
+	height:30px;
+	border-bottom: solid 2px #005C99;
+}
+.SmartTab .ajax__tab_tab
+{
+	border-left: solid 2px #005C99;
+	/*border-right: solid 2px #FFFFFF;*/
+	border-top: solid 2px #005C99;
+    padding-left: 8px;
+    padding-right: 8px;
+	color: #FFFFFF;
+	height:30px;
+}
+.SmartTab .ajax__tab_active .ajax__tab_tab
+{
+	border-left: solid 2px #005C99;
+	/*border-right: solid 2px #FFFFFF;*/
+	border-top: solid 2px #005C99;
+	color: #005C99;
+	background-color: #FFFFFF; 
+	height:30px;
+}
+.SmartTab .ajax__tab_hover .ajax__tab_tab
+{
+	border-left: solid 2px #005C99;
+	/*border-right: solid 2px #FFFFFF;*/
+	border-top: solid 2px #005C99;
+	color: #005C99;
+    background-image: url('../../Images/BlueWashOut.GIF');
+}
+.SmartTab .ajax__tab_body
+{
+    border: solid 2px;
+    padding: 8px;
+    border-top: 0;
+}
+
+/* ComboBox */
+.SmartStyle .ajax__combobox_inputcontainer
+{
+    margin-right: 2px; 
+    height: 17px;
+}
+.SmartStyle .ajax__combobox_inputcontainer .ajax__combobox_textboxcontainer input
+{
+    margin: 0;
+    padding: 0px 2px 0px 2px;
+    border-left: solid 1px Silver;
+    border-top: solid 1px Silver;
+    border-right: none 0px;
+    border-bottom:solid 1px Silver;
+    color: inherit; 
+    position: inherit;
+    background-color: Transparent;
+    /*text-align: center;*/
+}
+.SmartStyle .ajax__combobox_inputcontainer .ajax__combobox_buttoncontainer button
+{
+    margin: 0;
+    padding: 0;
+    border-top: solid 1px Silver;
+    border-bottom: solid 1px Silver;
+    border-right: solid 1px Silver;
+    border-left: none 0;
+    background-image: url('../../Images/dwn.gif');
+    background-color: Transparent;
+    background-position: center;
+}
+.SmartStyle .ajax__combobox_itemlist
+{
+    border: solid 1px Silver;
+    color: inherit;
+	text-overflow: ellipsis;
+}
+
+.FilterBox
+{
+    margin: 0;
+    padding: 0px 2px 0px 4px;
+    /*border: solid 1px Silver;*/
+    border: solid 1px Silver;
+    color: inherit;
+    width: 100%;
+    display: block;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.FilterMark
+{
+    text-align: center;
+}
+
+.FilterButton
+{
+	background-image: url(../../Images/Blue.gif);
+	padding: 5px;
+}
+
+/*.FilterButton
+{
+    background-image: url('../../Images/BlueWashOut.GIF');
+    padding: 1px 2px 1px 2px;
+    text-decoration: none;
+    width: 100%;
+}*/
+
+
+.FilterRow
+{
+    background-image: url('../../Images/BlueWashOut.GIF');
+}
+.Blue .FilterRow1B
+{
+	font-size: 10pt;
+	border-style: solid solid solid none;
+	border-width: 1px 1px 2px 0;
+	color: #005C99;
+	border-color: #005C99;
+}
+.FilterCtrl
+{
+	padding: 3px 0px 3px 2px;
+}
+
+.processdiv
+{
+	position: fixed; 
+	text-align: center;
+	vertical-align: middle;
+	left: 0; 
+    width: 100%;
+    height: 95%; 
+	top: 53px; 
+	padding-top: 103px;
+	visibility: visible; 
+	border: none; 
+	z-index: 100; 
+    background: White; 
+    filter: alpha(opacity=55); 
+    -moz-opacity:.55; 
+    opacity:.55;
+}
+
+.ProdHead
+{
+	border-style: solid none none solid;
+	border-width: 1px 0px 0px 1px;
+}
+
+.ProdHeadR
+{
+	border-right-style: solid !important;
+	border-right-width: 1px !important;
+}
+
+.ProdHeadB
+{
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+}

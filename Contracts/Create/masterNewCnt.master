@@ -1,0 +1,46 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="masterNewCnt.master.vb" Inherits="Contracts_Create_masterNewCnt" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="Title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" 
+                        NavigateUrl="~/Contracts/Contracts.aspx" Text = "&lt;&lt; Back to Contracts" />                
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="New Contract" 
+                                NavigateUrl="~/Contracts/Create/CreateCnt.aspx" 
+                                ToolTip="Create new contract" />
+                            <asp:MenuItem Text="New From Contract"  
+                                NavigateUrl="~/Contracts/Create/CreateFromContract.aspx" 
+                                ToolTip="Create new contract from existing for specified tour operater" />
+                            <asp:MenuItem Text="New From Template"
+                                NavigateUrl="~/Contracts/Create/CreatefromTemplate.aspx" 
+                                ToolTip="Create new contract from template" />
+                            <asp:MenuItem Text="Change Year"
+                                NavigateUrl="~/Contracts/Create/CreateFromContactYear.aspx" 
+                                ToolTip="Create new contract from existing for same tour operator and specified year and title." />
+                            <asp:MenuItem Text="New Template"
+                                NavigateUrl="~/Contracts/Create/CreateTemplate.aspx" 
+                                ToolTip="Create new contract template" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+  </div>
+  
+<asp:ContentPlaceHolder ID="CreateCntContent" runat="server">
+</asp:ContentPlaceHolder>
+
+
+</asp:Content>
+

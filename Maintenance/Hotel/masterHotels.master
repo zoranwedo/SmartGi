@@ -1,0 +1,54 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="masterHotels.master.vb" Inherits="Maintenance_Hotel_masterHotels" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 135px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" NavigateUrl="~/Maintenance/Hotel/Hotels.aspx" Text = "<< Back to Hotels" />                
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Details" Value="Selected hotel's data" NavigateUrl="~/Maintenance/Hotel/HotelDetail.aspx" />
+                            <asp:MenuItem Text="Contacts" Value="Selected hotel's contacts" NavigateUrl="~/Maintenance/Hotel/HotelContacts.aspx" />
+                            <asp:MenuItem Text="Children policy" Value="Selected hotel's children policy" NavigateUrl="~/Maintenance/Hotel/HotelPolicy.aspx" />
+                            <asp:MenuItem Text="Rooms" Value="Selected hotel's room types" NavigateUrl="~/Maintenance/Hotel/HotelRooms.aspx" />
+                            <asp:MenuItem Text="Sections" Value="Selected hotel's sections" NavigateUrl="~/Maintenance/Hotel/HotelSections.aspx" />
+                            <asp:MenuItem Text="Rates" Value="Selected hotel's rates" NavigateUrl="~/Maintenance/Hotel/HotelPeriods.aspx" />
+                            <asp:MenuItem NavigateUrl="~/Maintenance/Hotel/HotelMPAdd.aspx" Text="Meal plan Taxes" 
+                                Value="MPAddOn"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Maintenance/Hotel/HotelsOrder.aspx" 
+                                Text="Sort Priority" Value="Set sort prioritu for reports"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+          <asp:FormView ID="fvHotel" runat="server" DataKeyNames="HotelID" DataSourceID="dsHotel" Width="100%">
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td style="height: 30px;" class="GridLabelBG">
+                            <asp:Label ID="lblHotelTitle" runat="server" SkinID="skGridLabel" Text='<%# "[" & Eval("HotelID") & "] "& Eval("Hotel") %>' />
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+  </div>
+    <asp:ObjectDataSource ID="dsHotel" runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetDataByHotelID" TypeName="dsMaintHotelTableAdapters.HotelTableAdapter">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="HotelID" QueryStringField="HotelID" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ContentPlaceHolder ID="HotelContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

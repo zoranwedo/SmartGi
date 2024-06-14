@@ -1,0 +1,31 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="MapSihot.master.vb" Inherits="Maintenance_SihotMap_MapSihot" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue"> 
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 135px;">&nbsp;</td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Hotels" Value="SMART 2 SIHOT Hotels Mapping" NavigateUrl="~/Maintenance/SihotMap/MapHotel.aspx" />
+                            <asp:MenuItem Text="Children" Value="SMART 2 SIHOT Children Categories Mapping" NavigateUrl="~/Maintenance/SihotMap/MapChildSet.aspx" />
+                            <asp:MenuItem Text="Complimentary" Value="SMART 2 SIHOT Complimentary Categories Mapping" NavigateUrl="~/Maintenance/SihotMap/MapComplementary.aspx" />
+                            <asp:MenuItem Text="Meal Plans" Value="SMART 2 SIHOT Meal Plans Mapping" NavigateUrl="~/Maintenance/SihotMap/MapMealPlan.aspx" />
+                            <asp:MenuItem Text="Add On Supplements" Value="SMART 2 SIHOT Add On Supplements Mapping" NavigateUrl="~/Maintenance/SihotMap/MapAddOns.aspx" />
+                            <%--<asp:MenuItem Text="Rooms" Value="SMART 2 SIHOT Room Types Mapping" NavigateUrl="~/Maintenance/SihotMap/MapRoom.aspx" />--%>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div> 
+    <br />
+    <asp:ContentPlaceHolder ID="PageContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

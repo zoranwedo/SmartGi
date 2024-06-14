@@ -1,0 +1,138 @@
+<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false"
+    CodeFile="masterAppContracts.master.vb" Inherits="Contracts_Approve_masterAppContracts" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" NavigateUrl="~/Contracts/ApproveContracts.aspx"
+                        Text="&lt;&lt; Back to Contracts" />
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Overview" NavigateUrl="~/Contracts/Approve/AppContractOverview.aspx" />
+                            <asp:MenuItem Text="Rates" 
+                                NavigateUrl="~/Contracts/Approve/AppContractRates.aspx" />
+                            <asp:MenuItem Text="Validation" Value="Validation"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:FormView ID="fvContract" runat="server" DataKeyNames="ContractID" DataSourceID="dsContractByID"
+            Width="100%">
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG" colspan="5">
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" Text='<%# "[" & Eval("ContractID") & "][" & Eval("RateCodeId") & "] " & Eval("Title") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;" rowspan="7">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow1B" style="text-align: left; width: 80px; padding-right: 5px;"
+                            nowrap="nowrap">
+                            Rate Code:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; width: 350px; padding-right: 5px;">
+                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("RateCodeId") & " (" & Eval("RateTypeId") & ")" %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: center; width: 100px; padding-right: 5px;">
+                            <%--Base Rate:--%>
+                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("BaseRate") %>' />
+                        </td>
+                        <td style="vertical-align: middle; text-align: left; text-indent: 10px;" rowspan="6">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRow1B" style="text-align: left; padding-right: 5px;"
+                            nowrap="nowrap">
+                            Title:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; padding-right: 5px;" colspan="2">
+                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("Title") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRow1B" style="text-align: left; padding-right: 5px;"
+                            nowrap="nowrap">
+                            Duration:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("Start", "{0:d}") & " - " & Eval("Finish", "{0:d}") %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: center; padding-right: 5px;">
+                            <asp:Label ID="Label3" runat="server" Style="font-style: italic" Text='<%# Eval("ImportState") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            Hotel:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("Hotel") %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: center; padding-left: 5px;">
+                            <asp:Label ID="Label4" runat="server" Style="font-style: italic" Text='<%# Eval("StateDate", "{0:d}") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            TO:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="TourOpHeader" runat="server" Text='<%# Eval("TourOp") %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: center; padding-left: 5px;">
+                            <asp:Label ID="Label9" runat="server" Style="font-style: italic" Text='<%# Eval("ContractState") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRow1B" style="text-align: left; padding-right: 5px;"
+                            nowrap="nowrap">
+                            Booking:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label10" runat="server" Text='<%# Eval("BkStart", "{0:d}") & " - " & Eval("BkFinish", "{0:d}") %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: center; padding-right: 5px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRow2B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            Description:
+                        </td>
+                        <td class="GridRow2B" style="text-align: left; padding-right: 5px;"  colspan="2">
+                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("Description") %>' />
+                        </td>
+                        <td class="GridRow2B" nowrap="nowrap">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+        <asp:ObjectDataSource ID="dsContractByID" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetDataByID" TypeName="dsApproveContractTableAdapters.cpFilterUserContractTableAdapter">
+            <SelectParameters>
+                <asp:Parameter Name="UserName" Type="String" />
+                <asp:QueryStringParameter Name="ContractID" QueryStringField="ContractID" Type="Int32" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
+    </div>
+    <div style="margin-top: 0px; margin-left: 32px; margin-bottom: 5px">
+        <asp:ContentPlaceHolder ID="ContractContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>

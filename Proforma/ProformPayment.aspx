@@ -1,0 +1,348 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ProformPayment.aspx.vb" Inherits="Proforma_ProformPayment" %>
+<%@ Register src="~/App_UserControls/MessagePop.ascx" tagname="MessagePop" tagprefix="uc" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Proforma Payments</title>
+
+    <script language="javascript" type="text/javascript">
+        function okay() {
+            window.parent.document.getElementById('dummyPaymentOk').click();
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ToolkitScriptManager ID="tkScriptManager" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true" />
+    <div class="Blue" style="background-color: Transparent; vertical-align: top;" >
+        <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+            <ProgressTemplate>
+                <div id="Div1" runat="server"
+                    style="z-index: 100; 
+                           position: fixed;
+                           top: 50%; left: 50%;
+                           transform: translate(-50%, -50%);
+                           -webkit-transform: translate(-50%, -50%);
+                           -moz-transform: translate(-50%, -50%);
+                           -o-transform: translate(-50%, -50%);
+                           -ms-transform: translate(-50%, -50%);
+                           text-align: center;
+                           width: 90%; height: 50px; padding-top: 20px;
+                           border: dotted 1px; border-radius: 10px; 
+                           background: White; filter: alpha(opacity=20); 
+                           -moz-opacity:.8; opacity:.8;">
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/status_anim.gif" />
+                    <b>Processing...</b>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="GridLabelBG" >
+                    <asp:Label ID="lblFilter" runat="server" SkinID="skGridLabel" Text="Proforma Payment" />
+                    <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CssClass="InvButton" 
+                        ImageUrl="~/Images/cancel_big.gif" OnClientClick="okay();" 
+                        style="float: right; background: white; border-radius: 10px; margin: 3px;" />
+                </td>
+            </tr>
+            <tr>
+                <td class="GridBorder" style="background-color: White;">
+                <asp:Panel ID="pnlScroll" runat="server" style="max-height: 450px;" ScrollBars="Auto">
+                <asp:Label ID="lblPlease" runat="server" Font-Size="Larger" Font-Bold="true" >
+                    <p>Please select credit document for payment</p>
+                </asp:Label>
+                
+                <asp:Repeater ID="rptAccDocuments" runat="server" DataSourceID="dsAccDocuments">
+                    <HeaderTemplate>
+                        <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; border: solid 1px;">
+                            <tr>
+                                <td class="PreRowHead" style="width: 120px; text-align: left; padding-left: 10px;">
+                                    Document
+                                </td>
+                                <td class="PreRowHead" style="width: 100px; text-align: right;">
+                                    Effective
+                                </td>
+                                <td class="PreRowHead" style="width: 20px;">&nbsp;</td>
+                                <td class="PreRowHead" style="width: 100px;">&nbsp;</td>
+                            </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Panel ID="pnlHotel" runat="server" Visible='<%# Eval("rHtl")=0 %>'>
+                            <tr>
+                                <td class="PreRowHeadSel" colspan="4" style="text-align: left;">
+                                    <asp:Label ID="lblHotelName" runat="server" Text='<%# Eval("Hotel") %>' />
+                                </td>
+                            </tr>
+                        </asp:Panel>
+                        <asp:Panel ID="Panel3" runat="server" Visible='<%# Eval("rHtl")>0 %>'>
+                            <tr>
+                                <td class="PreRow" style="border-style: none; text-align: left; padding-left: 10px;">
+                                    <asp:LinkButton ID="LinkButton1" runat="server" Text='<%# Eval("DocCode") & " " & Eval("DocNumber") %>' CausesValidation="false" 
+                                        PostBackUrl='<%# "~/Proforma/ProformPayment.aspx?ProformaID=" & Eval("InvDocID") & "&AccDocID=" & Eval("DocumentID") %>' />
+                                </td>
+                                <td class="PreRow" style="border-style: none; text-align: right;">
+                                    <asp:LinkButton ID="LinkButton2" runat="server" Text='<%# Eval("EfectiveAmount","{0:N2}") %>' CausesValidation="false" 
+                                        PostBackUrl='<%# "~/Proforma/ProformPayment.aspx?ProformaID=" & Eval("InvDocID") & "&AccDocID=" & Eval("DocumentID") %>' />
+                                </td>
+                                <td class="PreRow" style="border-style: none;">&nbsp;</td>
+                                <td class="PreRow" style="border-style: none;">&nbsp;</td>
+                            </tr>
+                        </asp:Panel>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <asp:Panel ID="pnlFootNoData" runat="server" Visible='<%# rptAccDocuments.Items.Count < 1 %>'>
+                            <tr>
+                                <td class="PreRowHeadSel" style="height: 25px;" colspan="4">
+                                    There are no suitable credit documents for payment
+                                </td>
+                            </tr>
+                        </asp:Panel>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+                
+                <asp:UpdatePanel ID="upHeader" runat="server">
+                    <ContentTemplate>
+                <asp:Repeater ID="rptPayments" runat="server" DataSourceID="dsPayments" >
+                    <HeaderTemplate>
+                        <table cellpadding="0" cellspacing="0" style="border-collapse: collapse; border: solid 1px;">
+                            <tr>
+                                <td class="PreRowHead" rowspan="2" style="width: 20px;">
+                                    <asp:ImageButton ID="btUpdate" runat="server" ImageUrl="~/Images/prev.gif" 
+                                        PostBackUrl='<%# "~/Proforma/ProformPayment.aspx?ProformaID=" & Request.QueryString("ProformaID") %>'
+                                        CssClass="ImgButton" />
+                                </td>
+                                <td class="PreRowHead" rowspan="2" style="width: 300px;">
+                                    Guest Name
+                                </td>
+                                <td class="PreRowHead" rowspan="2" style="width: 100px;">
+                                    Bk Number
+                                </td>
+                                <td class="PreRowHead" rowspan="2" style="width: 80px;">
+                                    Bill
+                                </td>
+                                <td class="PreRowHead" rowspan="1" style="width: 160px;" colspan="2">
+                                    Payment
+                                </td>
+                                <td class="PreRowHead" rowspan="2" style="width: 80px;">
+                                    Total
+                                </td>
+                                <td class="PreRowHead" rowspan="1" colspan="2" style="width: 170px;">
+                                    <asp:Label ID="lblDocument" runat="server" /><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="PreRowHead" style="width: 80px;">
+                                    Applied
+                                </td>
+                                <td class="PreRowHead" style="width: 80px;">
+                                    Reserved
+                                </td>
+                                <td class="PreRowHead" rowspan="1" colspan="2" style="width: 170px;">
+                                    <asp:Label ID="lblBalance" runat="server" ToolTip="Effective balance" 
+                                        Font-Bold="false" Font-Italic="false" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="PreRowHeadSel" colspan="9" style="text-align: left;">
+                                    <asp:Label ID="lblHotelName" runat="server" />
+                                </td>
+                            </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:Panel ID="Panel3" runat="server" Visible='<%# Eval("rnH")>0 %>'>
+                            <tr>
+                                <td class="PreRow" style="border-style: solid none none solid; text-align: left; padding: 2px;">
+                                    <asp:Image ID="ibSelect" runat="server" Width="17px" Height="17px"
+                                        ImageUrl='<%# BookingStateIcon(Eval("InHouseState")) %>'
+                                        ToolTip='<%# Eval("BookingID") %>' />
+                                </td>
+                                <td class="PreRow" style="border-style: solid solid none none; text-align: left;">
+                                    <asp:Label ID="lbSelect" runat="server" Text='<%# Eval("PreInvText") %>' 
+                                        ToolTip='<%# Eval("FolioFull") %>' />
+                                </td>
+                                <td class="PreRow" style="border-style: solid solid none solid;">
+                                    <%# Eval("BkNumber") %>
+                                </td>
+                                <td class="PreRow" style="text-align: right;">
+                                    <%# Eval("InvResTotal","{0:N2}") %>
+                                </td>
+                                <td class="PreRow" style="text-align: right;">
+                                    <%# Eval("AccAppTotal","{0:N2}") %>
+                                </td>
+                                <td class="PreRow" style="text-align: right;">
+                                    <%# Eval("AccResTotal","{0:N2}") %>
+                                </td>
+                                <td class="PreRow" style="text-align: right;">
+                                    <%# Eval("InvResBalance","{0:N2}") %>
+                                </td>
+                                <td class="PreRow" colspan="2">
+                                <asp:HiddenField ID="hfBooking" runat="server" Value='<%# Eval("BookingID") %>' />
+                                <asp:FormView ID="fvPayment" runat="server" DataKeyNames="AccResID" DataSourceID="dsPayment" 
+                                    OnItemCommand="fvPayment_ItemCommand"> 
+                                    <ItemTemplate>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>                                                                    
+                                                <td style="text-align: right; width: 100px;">
+                                                    <asp:Label ID="lblAmount" runat="server" Text='<%# Bind("AccResAmount","{0:N2}") %>' />
+                                                </td>
+                                                <td style="text-align: left; width: 50px;">
+                                                    <asp:HiddenField ID="hfAccResID" runat="server" Value='<%# Bind("AccResID") %>' />
+                                                    <asp:ImageButton ID="btnDelete" runat="server" CausesValidation="false" 
+                                                        CommandName="payDelete" CommandArgument='<%# Eval("AccResID") %>'
+                                                        ImageUrl="~/Images/delete_inline.gif" CssClass="ImgButton"  style="padding-top:2px;"
+                                                        OnClientClick="return confirm('Are you sure you want to delete the payment?')" 
+                                                        Visible='<%# Eval("AccResAmount") IsNot DbNull.Value And Eval("AccResAmount") > 0.09 %>' />
+                                                    <asp:LinkButton ID="lbEdit" runat="server" Text="Edit" style="float: right;" 
+                                                        CommandName="Edit"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>                                                                    
+                                                <td style="text-align: right; width: 100px;">
+                                                    <asp:TextBox ID="txtAmount" runat="server" CssClass="TextBox" Text='<%# Bind("AccResAmount") %>' 
+                                                        style="text-align: right;" />
+                                                    <asp:CompareValidator ID="dec_txtAmount" runat="server" Display="None" 
+                                                        ErrorMessage="Input a valid amount (group separator is not allowed)!" 
+                                                        Operator="DataTypeCheck" Type="Double"
+                                                        ControlToValidate="txtAmount"/>
+                                                    <asp:ValidatorCalloutExtender ID="ca_dec_txtAmount" runat="server" 
+                                                        TargetControlID="dec_txtAmount" />
+                                                    <asp:RequiredFieldValidator ID="req_txtAmount" runat="server" Display="None"
+                                                        ErrorMessage="Required field"
+                                                        ControlToValidate="txtAmount" />
+                                                    <asp:ValidatorCalloutExtender ID="ca_req_txtAmount" runat="server" 
+                                                        TargetControlID="req_txtAmount" />
+                                                    <asp:CompareValidator ID="gt_txtAmount" runat="server" Display="None" 
+                                                        ErrorMessage="Amount has to be greater than zero" 
+                                                        Operator="GreaterThan" Type="Double" ValueToCompare="0"
+                                                        ControlToValidate="txtAmount"/>
+                                                    <asp:ValidatorCalloutExtender ID="ca_gt_txtAmount" runat="server" 
+                                                        TargetControlID="gt_txtAmount" />
+
+                                                </td>
+                                                <td style="text-align: left; width: 50px;">
+                                                    <asp:HiddenField ID="hfAccResID" runat="server" Value='<%# Bind("AccResID") %>' />
+                                                    <asp:ImageButton ID="btUpdate" runat="server" ImageUrl="~/Images/accept_inline.gif" 
+                                                        CommandName="payUpdate" CommandArgument='<%# Eval("AccResID") %>'
+                                                        CssClass="ImgButton" />
+                                                    <asp:ImageButton ID="btCancel" runat="server" ImageUrl="~/Images/decline_inline.gif"
+                                                        CommandName="Cancel" CausesValidation="false" CssClass="ImgButton" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </EditItemTemplate>
+                                    <InsertItemTemplate>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>                                                                    
+                                                <td style="text-align: right; width: 100px;">
+                                                    <asp:TextBox ID="txtAmount" runat="server" CssClass="TextBox" Text='<%# Bind("AccResAmount") %>' 
+                                                        style="text-align: right;" />
+                                                    <asp:CompareValidator ID="dec_txtAmount" runat="server" Display="None" 
+                                                        ErrorMessage="Input a valid amount (group separator is not allowed)!" 
+                                                        Operator="DataTypeCheck" Type="Double"
+                                                        ControlToValidate="txtAmount"/>
+                                                    <asp:ValidatorCalloutExtender ID="ca_dec_txtAmount" runat="server" 
+                                                        TargetControlID="dec_txtAmount" />
+                                                    <asp:RequiredFieldValidator ID="req_txtAmount" runat="server" Display="None"
+                                                        ErrorMessage="Required field"
+                                                        ControlToValidate="txtAmount" />
+                                                    <asp:ValidatorCalloutExtender ID="ca_req_txtAmount" runat="server" 
+                                                        TargetControlID="req_txtAmount" />
+                                                    <asp:CompareValidator ID="gt_txtAmount" runat="server" Display="None" 
+                                                        ErrorMessage="Amount has to be greater than zero" 
+                                                        Operator="GreaterThan" Type="Double" ValueToCompare="0"
+                                                        ControlToValidate="txtAmount"/>
+                                                    <asp:ValidatorCalloutExtender ID="ca_gt_txtAmount" runat="server" 
+                                                        TargetControlID="gt_txtAmount" />
+                                                </td>
+                                                <td style="text-align: left; width: 50px;">
+                                                    <asp:ImageButton ID="btUpdate" runat="server" ImageUrl="~/Images/accept_inline.gif" 
+                                                        CommandName="payInsert" CssClass="ImgButton" />
+                                                    <asp:ImageButton ID="btCancel" runat="server" ImageUrl="~/Images/decline_inline.gif"
+                                                        CommandName="Cancel" CausesValidation="false" CssClass="ImgButton" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </InsertItemTemplate>
+                                    <EmptyDataTemplate>
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>                                                                    
+                                                <td style="text-align: right; width: 100px;">
+                                                </td>
+                                                <td style="text-align: right; width: 50px;">
+                                                    <asp:LinkButton ID="lbNew" runat="server" Text="Add" CommandName="New"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </EmptyDataTemplate>
+                                </asp:FormView>
+                                <asp:ObjectDataSource ID="dsPayment" runat="server" OldValuesParameterFormatString="{0}"
+                                    SelectMethod="GetDataBy" TypeName="dsProformaApplicationTableAdapters.AccDocReservationTableAdapter"
+                                    DeleteMethod="Delete" InsertMethod="Insert" UpdateMethod="Update" >
+                                    <SelectParameters>
+                                        <asp:QueryStringParameter Name="AccDocID" QueryStringField="AccDocID" Type="Int32" />
+                                        <asp:Parameter Name="BookingID" Type="Int32" />
+                                    </SelectParameters>
+                                    <InsertParameters>
+                                        <asp:QueryStringParameter Name="AccDocID" QueryStringField="AccDocID" Type="Int32" />
+                                        <asp:Parameter Name="BookingID" Type="Int32" />
+                                        <asp:Parameter Name="AccResAmount" Type="Decimal" />
+                                        <asp:Parameter Name="UserName" Type="String" />
+                                    </InsertParameters>
+                                    <UpdateParameters>
+                                        <asp:Parameter Name="AccResID" Type="Int32" />
+                                        <asp:Parameter Name="AccResAmount" Type="Decimal" />
+                                        <asp:Parameter Name="UserName" Type="String" />
+                                    </UpdateParameters>
+                                    <DeleteParameters>
+                                        <asp:Parameter Name="AccResID" Type="Int32" />
+                                        <asp:Parameter Name="AccResAmount" Type="Decimal" />
+                                        <asp:Parameter Name="UserName" Type="String" />
+                                    </DeleteParameters>
+                                </asp:ObjectDataSource>
+                                </td>
+                            </tr>
+                        </asp:Panel>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <asp:Panel ID="pnlFootNoData" runat="server" Visible='<%# rptPayments.Items.Count < 1 %>'>
+                            <tr>
+                                <td class="PreRowHeadSel" style="height: 25px;" colspan="8">
+                                    Proforma has no reservations for this hotel
+                                </td>
+                            </tr>
+                        </asp:Panel>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                </asp:Panel>
+                </td>
+            </tr>
+        </table>
+        <uc:MessagePop ID="msgPop" runat="server" Title="Proforma Payment" />
+    </div>
+    <asp:ObjectDataSource ID="dsAccDocuments" runat="server" 
+        OldValuesParameterFormatString="original_{0}" SelectMethod="GetData" 
+        TypeName="dsProformaApplicationTableAdapters.AccDoc4PaymentTableAdapter">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="InvDocID" QueryStringField="ProformaID" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="dsPayments" runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetDataTotal" TypeName="dsProformaApplicationTableAdapters.ProformaPaymentTableAdapter">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="InvDocID" QueryStringField="ProformaID" Type="Int32" />
+            <asp:QueryStringParameter Name="DocumentID" QueryStringField="AccDocID" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    </form>
+</body>
+</html>

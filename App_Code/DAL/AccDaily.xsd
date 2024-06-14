@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AccDaily" targetNamespace="http://tempuri.org/AccDaily.xsd" xmlns:mstns="http://tempuri.org/AccDaily.xsd" xmlns="http://tempuri.org/AccDaily.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccDocClassTableAdapter" GeneratorDataComponentClassName="AccDocClassTableAdapter" Name="AccDocClass" UserDataComponentName="AccDocClassTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocClass" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT c.TrDocClass,  c.TrDescription
+FROM AccDocClass c
+WHERE c.TrDocClassID &gt; 0
+	AND c.TrTypeClass IS NULL
+ORDER BY c.TrDocClass
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrDocClass" DataSetColumn="TrDocClass" />
+              <Mapping SourceColumn="TrDescription" DataSetColumn="TrDescription" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccClassTableAdapter" GeneratorDataComponentClassName="AccClassTableAdapter" Name="AccClass" UserDataComponentName="AccClassTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocClass" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT c.TrClass, c.TrDocClass, c.TrDescription
+FROM AccDocClass c
+WHERE c.TrDocClassID &gt; 0
+	AND c.TrTypeClass IS NOT NULL
+ORDER BY c.TrClass</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrClass" DataSetColumn="TrClass" />
+              <Mapping SourceColumn="TrDocClass" DataSetColumn="TrDocClass" />
+              <Mapping SourceColumn="TrDescription" DataSetColumn="TrDescription" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccDocumentTableAdapter" GeneratorDataComponentClassName="AccDocumentTableAdapter" Name="AccDocument" UserDataComponentName="AccDocumentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocument" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT d.TrCode, d.TrDocClass, d.TrClass, d.TrDescription 
+FROM AccDocument d
+ORDER BY d.TrCode</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrCode" DataSetColumn="TrCode" />
+              <Mapping SourceColumn="TrDocClass" DataSetColumn="TrDocClass" />
+              <Mapping SourceColumn="TrClass" DataSetColumn="TrClass" />
+              <Mapping SourceColumn="TrDescription" DataSetColumn="TrDescription" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AccDaily" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="AccDaily" msprop:Generator_DataSetName="AccDaily">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AccDocClass" msprop:Generator_UserTableName="AccDocClass" msprop:Generator_RowDeletedName="AccDocClassRowDeleted" msprop:Generator_TableClassName="AccDocClassDataTable" msprop:Generator_RowChangedName="AccDocClassRowChanged" msprop:Generator_RowClassName="AccDocClassRow" msprop:Generator_RowChangingName="AccDocClassRowChanging" msprop:Generator_RowEvArgName="AccDocClassRowChangeEvent" msprop:Generator_RowEvHandlerName="AccDocClassRowChangeEventHandler" msprop:Generator_TablePropName="AccDocClass" msprop:Generator_TableVarName="tableAccDocClass" msprop:Generator_RowDeletingName="AccDocClassRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrDocClass" msprop:Generator_UserColumnName="TrDocClass" msprop:Generator_ColumnPropNameInRow="TrDocClass" msprop:Generator_ColumnVarNameInTable="columnTrDocClass" msprop:Generator_ColumnPropNameInTable="TrDocClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrDescription" msprop:Generator_UserColumnName="TrDescription" msprop:Generator_ColumnPropNameInRow="TrDescription" msprop:Generator_ColumnVarNameInTable="columnTrDescription" msprop:Generator_ColumnPropNameInTable="TrDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccClass" msprop:Generator_UserTableName="AccClass" msprop:Generator_RowDeletedName="AccClassRowDeleted" msprop:Generator_TableClassName="AccClassDataTable" msprop:Generator_RowChangedName="AccClassRowChanged" msprop:Generator_RowClassName="AccClassRow" msprop:Generator_RowChangingName="AccClassRowChanging" msprop:Generator_RowEvArgName="AccClassRowChangeEvent" msprop:Generator_RowEvHandlerName="AccClassRowChangeEventHandler" msprop:Generator_TablePropName="AccClass" msprop:Generator_TableVarName="tableAccClass" msprop:Generator_RowDeletingName="AccClassRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrClass" msprop:Generator_UserColumnName="TrClass" msprop:Generator_ColumnPropNameInRow="TrClass" msprop:Generator_ColumnVarNameInTable="columnTrClass" msprop:Generator_ColumnPropNameInTable="TrClassColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrDocClass" msprop:Generator_UserColumnName="TrDocClass" msprop:Generator_ColumnPropNameInRow="TrDocClass" msprop:Generator_ColumnVarNameInTable="columnTrDocClass" msprop:Generator_ColumnPropNameInTable="TrDocClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrDescription" msprop:Generator_UserColumnName="TrDescription" msprop:Generator_ColumnPropNameInRow="TrDescription" msprop:Generator_ColumnVarNameInTable="columnTrDescription" msprop:Generator_ColumnPropNameInTable="TrDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccDocument" msprop:Generator_UserTableName="AccDocument" msprop:Generator_RowDeletedName="AccDocumentRowDeleted" msprop:Generator_TableClassName="AccDocumentDataTable" msprop:Generator_RowChangedName="AccDocumentRowChanged" msprop:Generator_RowClassName="AccDocumentRow" msprop:Generator_RowChangingName="AccDocumentRowChanging" msprop:Generator_RowEvArgName="AccDocumentRowChangeEvent" msprop:Generator_RowEvHandlerName="AccDocumentRowChangeEventHandler" msprop:Generator_TablePropName="AccDocument" msprop:Generator_TableVarName="tableAccDocument" msprop:Generator_RowDeletingName="AccDocumentRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrCode" msprop:Generator_UserColumnName="TrCode" msprop:Generator_ColumnPropNameInRow="TrCode" msprop:Generator_ColumnVarNameInTable="columnTrCode" msprop:Generator_ColumnPropNameInTable="TrCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrDocClass" msprop:Generator_UserColumnName="TrDocClass" msprop:Generator_ColumnPropNameInRow="TrDocClass" msprop:Generator_ColumnVarNameInTable="columnTrDocClass" msprop:Generator_ColumnPropNameInTable="TrDocClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrClass" msprop:Generator_UserColumnName="TrClass" msprop:Generator_ColumnPropNameInRow="TrClass" msprop:Generator_ColumnVarNameInTable="columnTrClass" msprop:Generator_ColumnPropNameInTable="TrClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrDescription" msprop:Generator_UserColumnName="TrDescription" msprop:Generator_ColumnPropNameInRow="TrDescription" msprop:Generator_ColumnVarNameInTable="columnTrDescription" msprop:Generator_ColumnPropNameInTable="TrDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="AccDocClass_AccClass" msdata:parent="AccDocClass" msdata:child="AccClass" msdata:parentkey="TrDocClass" msdata:childkey="TrDocClass" msprop:Generator_UserRelationName="AccDocClass_AccClass" msprop:Generator_RelationVarName="relationAccDocClass_AccClass" msprop:Generator_UserChildTable="AccClass" msprop:Generator_UserParentTable="AccDocClass" msprop:Generator_ParentPropName="AccDocClassRow" msprop:Generator_ChildPropName="GetAccClassRows" />
+      <msdata:Relationship name="AccClass_AccDocument" msdata:parent="AccClass" msdata:child="AccDocument" msdata:parentkey="TrClass" msdata:childkey="TrClass" msprop:Generator_UserRelationName="AccClass_AccDocument" msprop:Generator_RelationVarName="relationAccClass_AccDocument" msprop:Generator_UserChildTable="AccDocument" msprop:Generator_UserParentTable="AccClass" msprop:Generator_ParentPropName="AccClassRow" msprop:Generator_ChildPropName="GetAccDocumentRows" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsHotelMap" targetNamespace="http://tempuri.org/dsHotelMap.xsd" xmlns:mstns="http://tempuri.org/dsHotelMap.xsd" xmlns="http://tempuri.org/dsHotelMap.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="recursiveHotelMapTableAdapter" GeneratorDataComponentClassName="recursiveHotelMapTableAdapter" Name="recursiveHotelMap" UserDataComponentName="recursiveHotelMapTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.recursiveHotelMap" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        [HOTEL-NO], HID
+FROM            recursiveHotelMap
+ORDER BY [HOTEL-NO]</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="HOTEL-NO" DataSetColumn="HOTEL-NO" />
+              <Mapping SourceColumn="HID" DataSetColumn="HID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsHotelMap" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsHotelMap" msprop:Generator_DataSetName="dsHotelMap">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="recursiveHotelMap" msprop:Generator_UserTableName="recursiveHotelMap" msprop:Generator_RowDeletedName="recursiveHotelMapRowDeleted" msprop:Generator_TableClassName="recursiveHotelMapDataTable" msprop:Generator_RowChangedName="recursiveHotelMapRowChanged" msprop:Generator_RowClassName="recursiveHotelMapRow" msprop:Generator_RowChangingName="recursiveHotelMapRowChanging" msprop:Generator_RowEvArgName="recursiveHotelMapRowChangeEvent" msprop:Generator_RowEvHandlerName="recursiveHotelMapRowChangeEventHandler" msprop:Generator_TablePropName="recursiveHotelMap" msprop:Generator_TableVarName="tablerecursiveHotelMap" msprop:Generator_RowDeletingName="recursiveHotelMapRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HOTEL-NO" msprop:Generator_UserColumnName="HOTEL-NO" msprop:Generator_ColumnPropNameInRow="_HOTEL_NO" msprop:Generator_ColumnVarNameInTable="_columnHOTEL_NO" msprop:Generator_ColumnPropNameInTable="_HOTEL_NOColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="HID" msprop:Generator_ColumnPropNameInRow="HID" msprop:Generator_ColumnVarNameInTable="columnHID" msprop:Generator_ColumnPropNameInTable="HIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="73" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

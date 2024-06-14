@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsResImport" targetNamespace="http://tempuri.org/dsResImport.xsd" xmlns:mstns="http://tempuri.org/dsResImport.xsd" xmlns="http://tempuri.org/dsResImport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSIHOT_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSIHOT_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSIHOT_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ImportTodayTableAdapter" GeneratorDataComponentClassName="ImportTodayTableAdapter" Name="ImportToday" UserDataComponentName="ImportTodayTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSIHOT_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+	q.importUID,
+	f.fileID,
+	q.hotelCode,
+	q.fileDate,
+	q.importState,
+	ISNULL(f.[fileName],q.filePath + '\' + q.fileExpected) AS importName,
+	f.hotelTimeStamp AS fileTimeStamp,
+	ISNULL(f.processDate,q.lastChecked) AS importTime,
+	ISNULL(f.procRes,0) AS procRes,
+	ISNULL(f.procPre,0) AS procPre,
+	ISNULL(f.procInv,0) AS procInv,
+	ISNULL(f.procNoSh,0) AS procNoSh,
+	ISNULL(f.procInvRes,0) AS procInvRes,
+	ISNULL(f.procMsg,q.importResult) AS procResult
+FROM res.importQueue AS q
+	LEFT OUTER JOIN res.[file] AS f
+		ON f.fileID = q.fileID
+WHERE q.importState = 0 OR 
+	CONVERT(DATE,q.importAdded) = CONVERT(DATE,GETDATE()) OR 
+	CONVERT(DATE,q.lastChecked) = CONVERT(DATE,GETDATE()) 
+ORDER BY q.hotelCode,q.fileDate,q.importAdded</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="importUID" DataSetColumn="importUID" />
+              <Mapping SourceColumn="fileID" DataSetColumn="fileID" />
+              <Mapping SourceColumn="hotelCode" DataSetColumn="hotelCode" />
+              <Mapping SourceColumn="fileDate" DataSetColumn="fileDate" />
+              <Mapping SourceColumn="importState" DataSetColumn="importState" />
+              <Mapping SourceColumn="importName" DataSetColumn="importName" />
+              <Mapping SourceColumn="fileTimeStamp" DataSetColumn="fileTimeStamp" />
+              <Mapping SourceColumn="importTime" DataSetColumn="importTime" />
+              <Mapping SourceColumn="procRes" DataSetColumn="procRes" />
+              <Mapping SourceColumn="procPre" DataSetColumn="procPre" />
+              <Mapping SourceColumn="procInv" DataSetColumn="procInv" />
+              <Mapping SourceColumn="procNoSh" DataSetColumn="procNoSh" />
+              <Mapping SourceColumn="procInvRes" DataSetColumn="procInvRes" />
+              <Mapping SourceColumn="procResult" DataSetColumn="procResult" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ImportOnDayTableAdapter" GeneratorDataComponentClassName="ImportOnDayTableAdapter" Name="ImportOnDay" UserDataComponentName="ImportOnDayTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSIHOT_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+	q.importUID,
+	f.fileID,
+	q.hotelCode,
+	q.fileDate,
+	q.importState,
+	ISNULL(f.[fileName],q.filePath + '\' + q.fileExpected) AS importName,
+	f.hotelTimeStamp AS fileTimeStamp,
+	ISNULL(f.processDate,q.lastChecked) AS importTime,
+	f.procRes,
+	f.procPre,
+	f.procInv,
+	f.procNoSh,
+	f.procInvRes,
+	ISNULL(f.procMsg,q.importResult) AS procResult
+FROM res.importQueue AS q
+	INNER JOIN res.[file] AS f
+		ON f.fileID = q.fileID
+WHERE CONVERT(DATE,ISNULL(q.lastChecked,f.processDate)) = @OnDate
+	OR (@OnDate IS NULL AND CONVERT(DATE,ISNULL(q.lastChecked,f.processDate)) = CONVERT(DATE,GETDATE())) 
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="OnDate" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Date" Direction="Input" ParameterName="@OnDate" Precision="0" ProviderType="DateTime" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="importUID" DataSetColumn="importUID" />
+              <Mapping SourceColumn="fileID" DataSetColumn="fileID" />
+              <Mapping SourceColumn="hotelCode" DataSetColumn="hotelCode" />
+              <Mapping SourceColumn="fileDate" DataSetColumn="fileDate" />
+              <Mapping SourceColumn="importState" DataSetColumn="importState" />
+              <Mapping SourceColumn="importName" DataSetColumn="importName" />
+              <Mapping SourceColumn="fileTimeStamp" DataSetColumn="fileTimeStamp" />
+              <Mapping SourceColumn="importTime" DataSetColumn="importTime" />
+              <Mapping SourceColumn="procRes" DataSetColumn="procRes" />
+              <Mapping SourceColumn="procPre" DataSetColumn="procPre" />
+              <Mapping SourceColumn="procInv" DataSetColumn="procInv" />
+              <Mapping SourceColumn="procNoSh" DataSetColumn="procNoSh" />
+              <Mapping SourceColumn="procInvRes" DataSetColumn="procInvRes" />
+              <Mapping SourceColumn="procResult" DataSetColumn="procResult" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="importQueueTableAdapter" GeneratorDataComponentClassName="importQueueTableAdapter" Name="importQueue" UserDataComponentName="importQueueTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSIHOT_SQL (Web.config)" DbObjectName="LIVE_SIHOT_SQL.res.importQueue" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT iq.importUID, iq.importState, iq.hotelCode, iq.fileDate, iq.filePath,
+       iq.fileExpected, iq.lastChecked, iq.fileID, 
+       CONVERT(bit, CASE iq.importState WHEN 1 THEN 1 ELSE 0 END) stateImported, 
+       CONVERT(bit, CASE iq.importState WHEN -1 THEN 1 ELSE 0 END) stateCanceled,
+       iq.importResult
+FROM res.importQueue iq
+WHERE (iq.importState = 0)
+ORDER BY iq.hotelCode, iq.fileDate</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="importUID" DataSetColumn="importUID" />
+              <Mapping SourceColumn="importState" DataSetColumn="importState" />
+              <Mapping SourceColumn="hotelCode" DataSetColumn="hotelCode" />
+              <Mapping SourceColumn="fileDate" DataSetColumn="fileDate" />
+              <Mapping SourceColumn="filePath" DataSetColumn="filePath" />
+              <Mapping SourceColumn="fileExpected" DataSetColumn="fileExpected" />
+              <Mapping SourceColumn="lastChecked" DataSetColumn="lastChecked" />
+              <Mapping SourceColumn="fileID" DataSetColumn="fileID" />
+              <Mapping SourceColumn="stateImported" DataSetColumn="stateImported" />
+              <Mapping SourceColumn="stateCanceled" DataSetColumn="stateCanceled" />
+              <Mapping SourceColumn="importResult" DataSetColumn="importResult" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources>
+          <DbSource ConnectionRef="csSIHOT_SQL (Web.config)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ImportPending" MethodsParameterType="CLR" Modifier="Public" Name="ImportPending" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ImportPending">
+            <SelectCommand>
+              <DbCommand CommandType="Text" ModifiedByUser="true">
+                <CommandText>SELECT COUNT(*) FROM res.importQueue AS iq WHERE iq.importState = 0</CommandText>
+                <Parameters />
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsResImport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsResImport" msprop:Generator_DataSetName="dsResImport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ImportToday" msprop:Generator_UserTableName="ImportToday" msprop:Generator_RowDeletedName="ImportTodayRowDeleted" msprop:Generator_TableClassName="ImportTodayDataTable" msprop:Generator_RowChangedName="ImportTodayRowChanged" msprop:Generator_RowClassName="ImportTodayRow" msprop:Generator_RowChangingName="ImportTodayRowChanging" msprop:Generator_RowEvArgName="ImportTodayRowChangeEvent" msprop:Generator_RowEvHandlerName="ImportTodayRowChangeEventHandler" msprop:Generator_TablePropName="ImportToday" msprop:Generator_TableVarName="tableImportToday" msprop:Generator_RowDeletingName="ImportTodayRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="importUID" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="importUID" msprop:Generator_ColumnPropNameInRow="importUID" msprop:Generator_ColumnVarNameInTable="columnimportUID" msprop:Generator_ColumnPropNameInTable="importUIDColumn" type="xs:string" />
+              <xs:element name="fileID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="fileID" msprop:Generator_ColumnPropNameInRow="fileID" msprop:Generator_ColumnVarNameInTable="columnfileID" msprop:Generator_ColumnPropNameInTable="fileIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="hotelCode" msprop:Generator_UserColumnName="hotelCode" msprop:Generator_ColumnPropNameInRow="hotelCode" msprop:Generator_ColumnVarNameInTable="columnhotelCode" msprop:Generator_ColumnPropNameInTable="hotelCodeColumn" type="xs:int" />
+              <xs:element name="fileDate" msprop:Generator_UserColumnName="fileDate" msprop:Generator_ColumnPropNameInRow="fileDate" msprop:Generator_ColumnVarNameInTable="columnfileDate" msprop:Generator_ColumnPropNameInTable="fileDateColumn" type="xs:dateTime" />
+              <xs:element name="importState" msprop:Generator_UserColumnName="importState" msprop:Generator_ColumnPropNameInRow="importState" msprop:Generator_ColumnVarNameInTable="columnimportState" msprop:Generator_ColumnPropNameInTable="importStateColumn" type="xs:short" />
+              <xs:element name="importName" msdata:ReadOnly="true" msprop:Generator_UserColumnName="importName" msprop:Generator_ColumnPropNameInRow="importName" msprop:Generator_ColumnVarNameInTable="columnimportName" msprop:Generator_ColumnPropNameInTable="importNameColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fileTimeStamp" msprop:Generator_UserColumnName="fileTimeStamp" msprop:Generator_ColumnPropNameInRow="fileTimeStamp" msprop:Generator_ColumnVarNameInTable="columnfileTimeStamp" msprop:Generator_ColumnPropNameInTable="fileTimeStampColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="importTime" msdata:ReadOnly="true" msprop:Generator_UserColumnName="importTime" msprop:Generator_ColumnPropNameInRow="importTime" msprop:Generator_ColumnVarNameInTable="columnimportTime" msprop:Generator_ColumnPropNameInTable="importTimeColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="procRes" msprop:Generator_UserColumnName="procRes" msprop:Generator_ColumnPropNameInRow="procRes" msprop:Generator_ColumnVarNameInTable="columnprocRes" msprop:Generator_ColumnPropNameInTable="procResColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procPre" msprop:Generator_UserColumnName="procPre" msprop:Generator_ColumnPropNameInRow="procPre" msprop:Generator_ColumnVarNameInTable="columnprocPre" msprop:Generator_ColumnPropNameInTable="procPreColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procInv" msprop:Generator_UserColumnName="procInv" msprop:Generator_ColumnPropNameInRow="procInv" msprop:Generator_ColumnVarNameInTable="columnprocInv" msprop:Generator_ColumnPropNameInTable="procInvColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procNoSh" msprop:Generator_UserColumnName="procNoSh" msprop:Generator_ColumnPropNameInRow="procNoSh" msprop:Generator_ColumnVarNameInTable="columnprocNoSh" msprop:Generator_ColumnPropNameInTable="procNoShColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procInvRes" msprop:Generator_UserColumnName="procInvRes" msprop:Generator_ColumnPropNameInRow="procInvRes" msprop:Generator_ColumnVarNameInTable="columnprocInvRes" msprop:Generator_ColumnPropNameInTable="procInvResColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procResult" msdata:ReadOnly="true" msprop:Generator_UserColumnName="procResult" msprop:Generator_ColumnPropNameInRow="procResult" msprop:Generator_ColumnVarNameInTable="columnprocResult" msprop:Generator_ColumnPropNameInTable="procResultColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ImportOnDay" msprop:Generator_UserTableName="ImportOnDay" msprop:Generator_RowDeletedName="ImportOnDayRowDeleted" msprop:Generator_TableClassName="ImportOnDayDataTable" msprop:Generator_RowChangedName="ImportOnDayRowChanged" msprop:Generator_RowClassName="ImportOnDayRow" msprop:Generator_RowChangingName="ImportOnDayRowChanging" msprop:Generator_RowEvArgName="ImportOnDayRowChangeEvent" msprop:Generator_RowEvHandlerName="ImportOnDayRowChangeEventHandler" msprop:Generator_TablePropName="ImportOnDay" msprop:Generator_TableVarName="tableImportOnDay" msprop:Generator_RowDeletingName="ImportOnDayRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="importUID" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="importUID" msprop:Generator_ColumnPropNameInRow="importUID" msprop:Generator_ColumnVarNameInTable="columnimportUID" msprop:Generator_ColumnPropNameInTable="importUIDColumn" type="xs:string" />
+              <xs:element name="fileID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="fileID" msprop:Generator_ColumnPropNameInRow="fileID" msprop:Generator_ColumnVarNameInTable="columnfileID" msprop:Generator_ColumnPropNameInTable="fileIDColumn" type="xs:int" />
+              <xs:element name="hotelCode" msprop:Generator_UserColumnName="hotelCode" msprop:Generator_ColumnPropNameInRow="hotelCode" msprop:Generator_ColumnVarNameInTable="columnhotelCode" msprop:Generator_ColumnPropNameInTable="hotelCodeColumn" type="xs:int" />
+              <xs:element name="fileDate" msprop:Generator_UserColumnName="fileDate" msprop:Generator_ColumnPropNameInRow="fileDate" msprop:Generator_ColumnVarNameInTable="columnfileDate" msprop:Generator_ColumnPropNameInTable="fileDateColumn" type="xs:dateTime" />
+              <xs:element name="importState" msprop:Generator_UserColumnName="importState" msprop:Generator_ColumnPropNameInRow="importState" msprop:Generator_ColumnVarNameInTable="columnimportState" msprop:Generator_ColumnPropNameInTable="importStateColumn" type="xs:short" />
+              <xs:element name="importName" msdata:ReadOnly="true" msprop:Generator_UserColumnName="importName" msprop:Generator_ColumnPropNameInRow="importName" msprop:Generator_ColumnVarNameInTable="columnimportName" msprop:Generator_ColumnPropNameInTable="importNameColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fileTimeStamp" msprop:Generator_UserColumnName="fileTimeStamp" msprop:Generator_ColumnPropNameInRow="fileTimeStamp" msprop:Generator_ColumnVarNameInTable="columnfileTimeStamp" msprop:Generator_ColumnPropNameInTable="fileTimeStampColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="importTime" msdata:ReadOnly="true" msprop:Generator_UserColumnName="importTime" msprop:Generator_ColumnPropNameInRow="importTime" msprop:Generator_ColumnVarNameInTable="columnimportTime" msprop:Generator_ColumnPropNameInTable="importTimeColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="procRes" msprop:Generator_UserColumnName="procRes" msprop:Generator_ColumnPropNameInRow="procRes" msprop:Generator_ColumnVarNameInTable="columnprocRes" msprop:Generator_ColumnPropNameInTable="procResColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procPre" msprop:Generator_UserColumnName="procPre" msprop:Generator_ColumnPropNameInRow="procPre" msprop:Generator_ColumnVarNameInTable="columnprocPre" msprop:Generator_ColumnPropNameInTable="procPreColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procInv" msprop:Generator_UserColumnName="procInv" msprop:Generator_ColumnPropNameInRow="procInv" msprop:Generator_ColumnVarNameInTable="columnprocInv" msprop:Generator_ColumnPropNameInTable="procInvColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procNoSh" msprop:Generator_UserColumnName="procNoSh" msprop:Generator_ColumnPropNameInRow="procNoSh" msprop:Generator_ColumnVarNameInTable="columnprocNoSh" msprop:Generator_ColumnPropNameInTable="procNoShColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procInvRes" msprop:Generator_UserColumnName="procInvRes" msprop:Generator_ColumnPropNameInRow="procInvRes" msprop:Generator_ColumnVarNameInTable="columnprocInvRes" msprop:Generator_ColumnPropNameInTable="procInvResColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="procResult" msdata:ReadOnly="true" msprop:Generator_UserColumnName="procResult" msprop:Generator_ColumnPropNameInRow="procResult" msprop:Generator_ColumnVarNameInTable="columnprocResult" msprop:Generator_ColumnPropNameInTable="procResultColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="importQueue" msprop:Generator_UserTableName="importQueue" msprop:Generator_RowDeletedName="importQueueRowDeleted" msprop:Generator_TableClassName="importQueueDataTable" msprop:Generator_RowChangedName="importQueueRowChanged" msprop:Generator_RowClassName="importQueueRow" msprop:Generator_RowChangingName="importQueueRowChanging" msprop:Generator_RowEvArgName="importQueueRowChangeEvent" msprop:Generator_RowEvHandlerName="importQueueRowChangeEventHandler" msprop:Generator_TablePropName="importQueue" msprop:Generator_TableVarName="tableimportQueue" msprop:Generator_RowDeletingName="importQueueRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="importUID" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="importUID" msprop:Generator_ColumnPropNameInRow="importUID" msprop:Generator_ColumnVarNameInTable="columnimportUID" msprop:Generator_ColumnPropNameInTable="importUIDColumn" type="xs:string" />
+              <xs:element name="importState" msprop:Generator_UserColumnName="importState" msprop:Generator_ColumnPropNameInRow="importState" msprop:Generator_ColumnVarNameInTable="columnimportState" msprop:Generator_ColumnPropNameInTable="importStateColumn" type="xs:short" />
+              <xs:element name="hotelCode" msprop:Generator_UserColumnName="hotelCode" msprop:Generator_ColumnPropNameInRow="hotelCode" msprop:Generator_ColumnVarNameInTable="columnhotelCode" msprop:Generator_ColumnPropNameInTable="hotelCodeColumn" type="xs:int" />
+              <xs:element name="fileDate" msprop:Generator_UserColumnName="fileDate" msprop:Generator_ColumnPropNameInRow="fileDate" msprop:Generator_ColumnVarNameInTable="columnfileDate" msprop:Generator_ColumnPropNameInTable="fileDateColumn" type="xs:dateTime" />
+              <xs:element name="filePath" msprop:Generator_UserColumnName="filePath" msprop:Generator_ColumnPropNameInRow="filePath" msprop:Generator_ColumnVarNameInTable="columnfilePath" msprop:Generator_ColumnPropNameInTable="filePathColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fileExpected" msprop:Generator_UserColumnName="fileExpected" msprop:Generator_ColumnPropNameInRow="fileExpected" msprop:Generator_ColumnVarNameInTable="columnfileExpected" msprop:Generator_ColumnPropNameInTable="fileExpectedColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="lastChecked" msprop:Generator_UserColumnName="lastChecked" msprop:Generator_ColumnPropNameInRow="lastChecked" msprop:Generator_ColumnVarNameInTable="columnlastChecked" msprop:Generator_ColumnPropNameInTable="lastCheckedColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="fileID" msprop:Generator_UserColumnName="fileID" msprop:Generator_ColumnPropNameInRow="fileID" msprop:Generator_ColumnVarNameInTable="columnfileID" msprop:Generator_ColumnPropNameInTable="fileIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="stateImported" msdata:ReadOnly="true" msprop:Generator_UserColumnName="stateImported" msprop:Generator_ColumnPropNameInRow="stateImported" msprop:Generator_ColumnVarNameInTable="columnstateImported" msprop:Generator_ColumnPropNameInTable="stateImportedColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="stateCanceled" msdata:ReadOnly="true" msprop:Generator_UserColumnName="stateCanceled" msprop:Generator_ColumnPropNameInRow="stateCanceled" msprop:Generator_ColumnVarNameInTable="columnstateCanceled" msprop:Generator_ColumnPropNameInTable="stateCanceledColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="importResult" msprop:Generator_UserColumnName="importResult" msprop:Generator_ColumnPropNameInRow="importResult" msprop:Generator_ColumnVarNameInTable="columnimportResult" msprop:Generator_ColumnPropNameInTable="importResultColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ImportOnDay" />
+      <xs:field xpath="mstns:importUID" />
+      <xs:field xpath="mstns:fileID" />
+    </xs:unique>
+    <xs:unique name="importQueue_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:importQueue" />
+      <xs:field xpath="mstns:importUID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

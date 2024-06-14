@@ -1,0 +1,28 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="masterPay.master.vb" Inherits="Maintenance_Pay_masterPay" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px; ">
+                    &nbsp;
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Payment Options" Value="Payment Options" NavigateUrl="~/Maintenance/Pay/PayCondition.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Payment Mode" Value="Payment Mode" NavigateUrl="~/Maintenance/Pay/PayMode.aspx"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <asp:ContentPlaceHolder ID="PayContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

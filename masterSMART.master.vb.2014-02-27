@@ -1,0 +1,46 @@
+﻿
+Partial Class masterSMART
+    Inherits System.Web.UI.MasterPage
+
+    Protected Sub MainMenu_MenuItemClick(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.MenuEventArgs) Handles MainMenu.MenuItemClick
+        If (e.Item.Text = "Logout") Then
+            FormsAuthentication.SignOut()
+            FormsAuthentication.RedirectToLoginPage()
+        End If
+    End Sub
+
+    Protected Sub MainMenu_MenuItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.MenuEventArgs) Handles MainMenu.MenuItemDataBound
+        Select Case e.Item.Text
+            Case "My Logon"
+                Dim user As String = Membership.GetUser.UserName
+                Dim accounting As Boolean = Roles.IsUserInRole(user, "admin") Or _
+                                            Roles.IsUserInRole(user, "accounting") Or _
+                                            Roles.IsUserInRole(user, "accounting_admin")
+
+                MainMenu.Items(0).ChildItems.AddAt(0, New MenuItem("Loged as: " & user))
+                If accounting Then
+                    Try
+                        Dim uTA As New UserTableAdapters.UserTableAdapter
+                        Dim uRow As User.UserRow = uTA.GetByUserName(user).Rows(0)
+
+                        If (Not uRow.IsPeriodMonthNull) And (Not uRow.IsPeriodYearNull) Then
+                            Dim logperiod As String = uRow.PeriodMonth.ToString + "/" + uRow.PeriodYear.ToString
+                            MainMenu.Items(0).ChildItems.AddAt(1, New MenuItem("Acc.Period: " & logperiod))
+                        End If
+                    Catch ex As Exception
+                    End Try
+                End If
+            Case "Change Password"
+                e.Item.NavigateUrl = "Maintenance/Admin/ChangePassword.aspx?UserName=" + Membership.GetUser.UserName
+            Case "Change Period"
+                e.Item.NavigateUrl = "Maintenance/Admin/UserPeriod.aspx?username=" + Membership.GetUser.UserName
+            Case "-"
+                e.Item.Text = "<hr>"
+        End Select
+    End Sub
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        hfUsername.Value = Membership.GetUser.UserName
+    End Sub
+End Class
+

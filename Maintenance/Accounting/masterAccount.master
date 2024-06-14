@@ -1,0 +1,37 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false"
+    CodeFile="masterAccount.master.vb" Inherits="Maintenance_Accounting_masterAccount" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    &nbsp;
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Documents" NavigateUrl="~/Maintenance/Accounting/AccDocument.aspx"
+                                Value="Documents" ToolTip="Accounting Documents" />
+                            <asp:MenuItem Text="Registrations" NavigateUrl="~/Maintenance/Accounting/AccRegistration.aspx"
+                                Value="Registrations" ToolTip="Registration Documents" />
+                            <asp:MenuItem Text="Transfers" NavigateUrl="~/Maintenance/Accounting/AccTransfer.aspx" 
+                                Value="Transfers" ToolTip="Document Transfers" />
+                            <asp:MenuItem Text="Documents For Hotels" NavigateUrl="~/Maintenance/Accounting/AccDocumentHotel.aspx" 
+                                Value="ForHotel" ToolTip="Document visibility for hotels" />
+                            <asp:MenuItem Text="Document Classes" NavigateUrl="~/Maintenance/Accounting/AccDocClass.aspx"
+                                Value="Classes" ToolTip="Document Classes" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:ContentPlaceHolder ID="AccountContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>

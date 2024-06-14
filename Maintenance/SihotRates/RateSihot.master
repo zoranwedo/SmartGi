@@ -1,0 +1,29 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="RateSihot.master.vb" Inherits="Maintenance_SihotRates_RateSihot" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue"> 
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 135px;">&nbsp;</td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Status" Value="SIHOT Import Rate Status" NavigateUrl="~/Maintenance/SihotRates/RateImportReport.aspx" />
+                            <asp:MenuItem Text="Imported" Value="SIHOT Imported Rate Files" NavigateUrl="~/Maintenance/SihotRates/RateImported.aspx" />
+                            <asp:MenuItem Text="Import" Value="SIHOT Reservation Files Manual Import" NavigateUrl="~/Maintenance/SihotRates/RateImport.aspx" />
+                            <asp:MenuItem Text="Parameters" Value="SIHOT Reservation Import Parameters" NavigateUrl="~/Maintenance/SihotRates/RateParams.aspx" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div> 
+    <br />
+    <asp:ContentPlaceHolder ID="PageContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

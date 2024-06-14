@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title="Hotel" description="">
+    <siteMapNode url="" title="Details" description="Maintenance of selected hotel data" />
+    <siteMapNode url="" title="Contacts" description="Maintenance of contacts form selected" />
+    <siteMapNode url="" title="Children policy" description="Maintenance of selected hotel children poicy" />
+    <siteMapNode url="" title="Rooms" description="Maintenance of selected hotel room types and occupancies" />
+    <siteMapNode url="" title="Hotel Sections" description="Maintenance of selected hotel sections" />
+    <siteMapNode url="" title="Rates"  description="Maintenance of selected hotel rate periods" />
+  </siteMapNode>
+</siteMap>
+				

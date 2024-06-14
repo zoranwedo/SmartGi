@@ -1,0 +1,1840 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsProformaApplication" targetNamespace="http://tempuri.org/dsProformaApplication.xsd" xmlns:mstns="http://tempuri.org/dsProformaApplication.xsd" xmlns="http://tempuri.org/dsProformaApplication.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccAppDocumentTableAdapter" GeneratorDataComponentClassName="AccAppDocumentTableAdapter" Name="AccAppDocument" UserDataComponentName="AccAppDocumentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="SELECT d.TrDocID, d.TrCode, d.AccountType FROM AccDocument d WHERE d.TrSign = 'C' AND d.AccountType = 'AR' UNION SELECT DISTINCT d.TrDocID, d.TrCode, t.AccountType FROM AccDocument d INNER JOIN AccTransfer t ON (t.TrDocClass IS NULL OR t.TrDocClass = d.TrDocClass) AND (t.TrTypeClass IS NULL OR t.TrTypeClass = d.TrTypeClass) AND (t.TrClass IS NULL OR t.TrClass = d.TrClass) AND (t.TrCode IS NULL OR t.TrCode = d.TrCode) AND (t.TrSign = d.TrSign) WHERE d.TrSign = 'C' AND d.AccountType != 'AR' AND t.CreditType = 'AR'" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT q.TrDocID, q.TrCode, q.AccountType
+FROM (
+	SELECT d.TrDocID, d.TrCode, d.AccountType
+	FROM AccDocument d
+	WHERE d.TrSign = 'C'
+		AND d.AccountType = 'AR'
+	UNION
+	SELECT DISTINCT d.TrDocID, d.TrCode, t.AccountType
+	FROM AccDocument d
+		INNER JOIN AccTransfer t
+			ON (t.TrDocClass IS NULL OR t.TrDocClass = d.TrDocClass)
+			AND (t.TrTypeClass IS NULL OR t.TrTypeClass = d.TrTypeClass)
+			AND (t.TrClass IS NULL OR t.TrClass = d.TrClass)
+			AND (t.TrCode IS NULL OR t.TrCode = d.TrCode)
+			AND (t.TrSign = d.TrSign)
+	WHERE d.TrSign = 'C'
+		AND d.AccountType != 'AR'
+		AND t.CreditType = 'AR'
+) q LEFT OUTER JOIN AccDocProforma AS p
+	ON p.TrDocID = q.TrDocID
+WHERE p.TrDocID IS NULL
+ORDER BY 2</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrDocID" DataSetColumn="TrDocID" />
+              <Mapping SourceColumn="TrCode" DataSetColumn="TrCode" />
+              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccAppTransferTableAdapter" GeneratorDataComponentClassName="AccAppTransferTableAdapter" Name="AccAppTransfer" UserDataComponentName="AccAppTransferTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT d.TrDocID, 
+	t.TransferID, 
+	t.CreditCode
+FROM AccDocument d
+	INNER JOIN AccTransfer t
+		ON (t.TrDocClass IS NULL OR t.TrDocClass = d.TrDocClass)
+		AND (t.TrTypeClass IS NULL OR t.TrTypeClass = d.TrTypeClass)
+		AND (t.TrClass IS NULL OR t.TrClass = d.TrClass)
+		AND (t.TrCode IS NULL OR t.TrCode = d.TrCode)
+		AND (t.TrSign = d.TrSign)
+WHERE d.TrSign = 'C'
+	AND d.AccountType != 'AR'
+	AND t.CreditType = 'AR'
+	AND d.TrDocID = @TrDocID
+ORDER BY 1,3</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="TrDocID" ColumnName="TrDocID" DataSourceName="LIVE_SMART_SQL.dbo.AccDocument" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TrDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TrDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrDocID" DataSetColumn="TrDocID" />
+              <Mapping SourceColumn="TransferID" DataSetColumn="TransferID" />
+              <Mapping SourceColumn="CreditCode" DataSetColumn="CreditCode" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccDocProformaTableAdapter" GeneratorDataComponentClassName="AccDocProformaTableAdapter" Name="AccDocProforma" UserDataComponentName="AccDocProformaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT dp.TrDocID, dp.TrCode, d.AccountType,
+	dp.TransferID, t.CreditCode
+FROM AccDocProforma AS dp
+	INNER JOIN AccDocument AS d
+		ON d.TrDocID = dp.TrDocID
+	LEFT OUTER JOIN AccTransfer AS t
+		ON t.TransferID = dp.TransferID
+ORDER BY dp.TrCode</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrDocID" DataSetColumn="TrDocID" />
+              <Mapping SourceColumn="TrCode" DataSetColumn="TrCode" />
+              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
+              <Mapping SourceColumn="TransferID" DataSetColumn="TransferID" />
+              <Mapping SourceColumn="CreditCode" DataSetColumn="CreditCode" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteQuery" Modifier="Public" Name="DeleteQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteQuery">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM AccDocProforma WHERE TrDocID = @TrDocID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="TrDocID" ColumnName="TrDocID" DataSourceName="LIVE_SMART_SQL.dbo.AccDocProforma" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TrDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TrDocID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertQuery" Modifier="Public" Name="InsertQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="InsertQuery">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO AccDocProforma(TrDocID, TrCode, TransferID)
+VALUES(@TrDocID, @TrCode, @TransferID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="TrDocID" ColumnName="TrDocID" DataSourceName="LIVE_SMART_SQL.dbo.AccDocProforma" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TrDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TrDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="TrCode" ColumnName="TrCode" DataSourceName="LIVE_SMART_SQL.dbo.AccDocProforma" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@TrCode" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="TrCode" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="TransferID" ColumnName="TransferID" DataSourceName="LIVE_SMART_SQL.dbo.AccDocProforma" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TransferID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="TransferID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProformaItemTableAdapter" GeneratorDataComponentClassName="ProformaItemTableAdapter" Name="ProformaItem" UserDataComponentName="ProformaItemTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.vwInvResDocItems" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT i.InvDocID, 
+	i.HotelID, 
+	i.Hotel,
+	i.BookingID, 
+	i.FolioFull, 
+	i.InvDocItemState, 
+	i.BookingState, 
+	i.InHouseState, 
+	i.ChangeSuppress,
+	i.BkDate, 
+	i.BkNumber,
+	i.MealPlanID, 
+	i.RoomNum, 
+	i.RoomTypeID, 
+	i.PreInvText,
+	ISNULL(SUM(i.InvResAmount),0) InvResAmount, 
+	ISNULL(SUM(r.AccAppAmount),0) AccAppAmount,
+	ISNULL(SUM(r.AccResAmount),0) AccResAmount,
+	rnH
+FROM vwInvResDocItems i
+	LEFT OUTER JOIN AccDocReservation r
+		ON r.InvDocID = i.InvDocID
+		AND r.BookingID = i.BookingID
+		AND r.FolioFull = i.FolioFull
+WHERE i.InvDocID = @InvDocID
+GROUP BY i.InvDocID, 
+	i.HotelID, 
+	i.Hotel,
+	i.BookingID, 
+	i.FolioFull, 
+	i.InvDocItemState, 
+	i.BookingState, 
+	i.InHouseState, 
+	i.ChangeSuppress,
+	i.BkDate, 
+	i.BkNumber,
+	i.MealPlanID, 
+	i.RoomNum, 
+	i.RoomTypeID, 
+	i.PreInvText,
+	rnh
+--HAVING ISNULL(SUM(i.InvResAmount),0) + 
+--	ISNULL(SUM(r.AccAppAmount),0) +
+--	ISNULL(SUM(r.AccResAmount),0) &lt;&gt; 0
+UNION 
+SELECT i.InvDocID, 
+	i.HotelID, 
+	i.Hotel,
+	i.BookingID, 
+	i.FolioFull, 
+	i.InvDocItemState, 
+	i.BookingState, 
+	i.InHouseState, 
+	i.ChangeSuppress,
+	i.BkDate, 
+	i.BkNumber,
+	i.MealPlanID, 
+	i.RoomNum, 
+	i.RoomTypeID, 
+	i.PreInvText,
+	ISNULL(SUM(i.InvResAmount),0) InvResAmount, 
+	ISNULL(SUM(r.AccAppAmount),0) AccAppAmount,
+	ISNULL(SUM(r.AccResAmount),0) AccResAmount,
+	0 rnH
+FROM vwInvResDocItems i
+	LEFT OUTER JOIN AccDocReservation r
+		ON r.InvDocID = i.InvDocID
+		AND r.BookingID = i.BookingID
+		AND r.FolioFull = i.FolioFull
+WHERE i.InvDocID = @InvDocID
+	AND i.rnH = 1
+GROUP BY i.InvDocID, 
+	i.HotelID, 
+	i.Hotel,
+	i.BookingID, 
+	i.FolioFull, 
+	i.InvDocItemState, 
+	i.BookingState, 
+	i.InHouseState, 
+	i.ChangeSuppress,
+	i.BkDate, 
+	i.BkNumber,
+	i.MealPlanID, 
+	i.RoomNum, 
+	i.RoomTypeID, 
+	i.PreInvText,
+	rnh
+ORDER BY InvDocID, HotelID, rnH</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="InvDocID" DataSourceName="LIVE_SMART_SQL.dbo.vwInvResDocItems" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="InvDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="HotelID" DataSetColumn="HotelID" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+              <Mapping SourceColumn="FolioFull" DataSetColumn="FolioFull" />
+              <Mapping SourceColumn="InvDocItemState" DataSetColumn="InvDocItemState" />
+              <Mapping SourceColumn="BookingState" DataSetColumn="BookingState" />
+              <Mapping SourceColumn="InHouseState" DataSetColumn="InHouseState" />
+              <Mapping SourceColumn="ChangeSuppress" DataSetColumn="ChangeSuppress" />
+              <Mapping SourceColumn="BkDate" DataSetColumn="BkDate" />
+              <Mapping SourceColumn="BkNumber" DataSetColumn="BkNumber" />
+              <Mapping SourceColumn="MealPlanID" DataSetColumn="MealPlanID" />
+              <Mapping SourceColumn="RoomNum" DataSetColumn="RoomNum" />
+              <Mapping SourceColumn="RoomTypeID" DataSetColumn="RoomTypeID" />
+              <Mapping SourceColumn="PreInvText" DataSetColumn="PreInvText" />
+              <Mapping SourceColumn="InvResAmount" DataSetColumn="InvResAmount" />
+              <Mapping SourceColumn="AccAppAmount" DataSetColumn="AccAppAmount" />
+              <Mapping SourceColumn="AccResAmount" DataSetColumn="AccResAmount" />
+              <Mapping SourceColumn="rnH" DataSetColumn="rnH" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProformaItemPaymentTableAdapter" GeneratorDataComponentClassName="ProformaItemPaymentTableAdapter" Name="ProformaItemPayment" UserDataComponentName="ProformaItemPaymentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT i.InvDocID, 
+	i.BookingID, 
+	i.FolioFull, 
+	d.DocumentID,
+	d.DocCode, 
+	d.DocNumber,
+	i.InvResAmount, 
+	isnull(r.AccAppAmount,0) AccAppAmount,
+	isnull(r.AccResAmount,0) AccResAmount
+FROM vwInvResDocItems i
+	LEFT OUTER JOIN AccDocReservation r
+		ON r.InvDocID = i.InvDocID
+		AND r.BookingID = i.BookingID
+		AND r.FolioFull = i.FolioFull
+	LEFT OUTER JOIN AccTransDocument d
+		ON d.DocumentID = r.AccDocID
+WHERE i.BookingID = @BookingID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="BookingID" ColumnName="BookingID" DataSourceName="LIVE_SMART_SQL.dbo.vwInvResDocItems" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@BookingID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="BookingID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+              <Mapping SourceColumn="FolioFull" DataSetColumn="FolioFull" />
+              <Mapping SourceColumn="DocumentID" DataSetColumn="DocumentID" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="InvResAmount" DataSetColumn="InvResAmount" />
+              <Mapping SourceColumn="AccAppAmount" DataSetColumn="AccAppAmount" />
+              <Mapping SourceColumn="AccResAmount" DataSetColumn="AccResAmount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProformaPaymentTableAdapter" GeneratorDataComponentClassName="ProformaPaymentTableAdapter" Name="ProformaPayment" UserDataComponentName="ProformaPaymentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, p.rnH, r.AccResID, r.AccResDate, r.AccDocID, d.DocCode, d.DocNumber, ISNULL(r.AccAppAmount,0) AccAppAmount, ISNULL(r.AccResAmount,0) AccResAmount FROM vwInvResDocPayments p /*LEFT OUTER JOIN AccDocReservation r*/ INNER JOIN AccDocReservation r ON r.InvDocID = p.InvDocID AND r.BookingID = p.BookingID AND r.FolioFull = p.FolioFull LEFT OUTER JOIN AccTransDocument d ON d.DocumentID = r.AccDocID UNION SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, p.rnH, 0 AccResID, NULL AccResDate, NULL AccDocID, NULL DocCode, NULL DocNumber, NULL AccAppAmount, NULL AccResAmount FROM vwInvResDocPayments p UNION SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, 0 rnH, 0 AccResID, NULL AccResDate, NULL AccDocID, NULL DocCode, NULL DocNumber, NULL AccAppAmount, NULL AccResAmount FROM vwInvResDocPayments p WHERE p.rnH = 1" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT *
+FROM (
+SELECT p.InvDocID, 
+	p.HotelID, 
+	p.Hotel,
+	p.BookingID, 
+	p.FolioFull, 
+	p.InvDocItemState, 
+	p.BookingState, 
+	p.InHouseState, 
+	p.ChangeSuppress,
+	p.BkDate, 
+	p.BkNumber,
+	p.MealPlanID, 
+	p.RoomNum, 
+	p.RoomTypeID, 
+	p.PreInvText,
+	p.InvResAmount InvResTotal, 
+	p.AccAppAmount AccAppTotal,
+	p.AccResAmount AccResTotal,
+	p.rnH,
+	r.AccResID, 
+	r.AccResDate, 
+	r.AccDocID,
+	d.DocCode, 
+	d.DocNumber, 
+	ISNULL(r.AccAppAmount,0) AccAppAmount, 
+	ISNULL(r.AccResAmount,0) AccResAmount
+FROM vwInvResDocPayments p
+	--LEFT OUTER JOIN AccDocReservation r
+	INNER JOIN AccDocReservation r
+		ON r.InvDocID = p.InvDocID
+		AND r.BookingID = p.BookingID
+		AND r.FolioFull = p.FolioFull
+	LEFT OUTER JOIN AccTransDocument d
+		ON d.DocumentID = r.AccDocID
+UNION
+SELECT p.InvDocID, 
+	p.HotelID, 
+	p.Hotel,
+	p.BookingID, 
+	p.FolioFull, 
+	p.InvDocItemState, 
+	p.BookingState, 
+	p.InHouseState, 
+	p.ChangeSuppress,
+	p.BkDate, 
+	p.BkNumber,
+	p.MealPlanID, 
+	p.RoomNum, 
+	p.RoomTypeID, 
+	p.PreInvText,
+	p.InvResAmount InvResTotal, 
+	p.AccAppAmount AccAppTotal,
+	p.AccResAmount AccResTotal,
+	p.rnH,
+	0 AccResID, 
+	NULL AccResDate, 
+	NULL AccDocID,
+	NULL DocCode, 
+	NULL DocNumber, 
+	NULL AccAppAmount, 
+	NULL AccResAmount
+FROM vwInvResDocPayments p
+UNION
+SELECT p.InvDocID, 
+	p.HotelID, 
+	p.Hotel,
+	p.BookingID, 
+	p.FolioFull, 
+	p.InvDocItemState, 
+	p.BookingState, 
+	p.InHouseState, 
+	p.ChangeSuppress,
+	p.BkDate, 
+	p.BkNumber,
+	p.MealPlanID, 
+	p.RoomNum, 
+	p.RoomTypeID, 
+	p.PreInvText,
+	p.InvResAmount InvResTotal, 
+	p.AccAppAmount AccAppTotal,
+	p.AccResAmount AccResTotal,
+	0 rnH,
+	0 AccResID, 
+	NULL AccResDate, 
+	NULL AccDocID,
+	NULL DocCode, 
+	NULL DocNumber, 
+	NULL AccAppAmount, 
+	NULL AccResAmount
+FROM vwInvResDocPayments p
+WHERE p.rnH = 1
+) q
+WHERE InvDocID = @InvDocID
+ORDER BY InvDocID, HotelID, rnh, AccResID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="InvDocID" DataSourceName="SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, p.rnH, r.AccResID, r.AccResDate, r.AccDocID, d.DocCode, d.DocNumber, ISNULL(r.AccAppAmount,0) AccAppAmount, ISNULL(r.AccResAmount,0) AccResAmount FROM vwInvResDocPayments p /*LEFT OUTER JOIN AccDocReservation r*/ INNER JOIN AccDocReservation r ON r.InvDocID = p.InvDocID AND r.BookingID = p.BookingID AND r.FolioFull = p.FolioFull LEFT OUTER JOIN AccTransDocument d ON d.DocumentID = r.AccDocID UNION SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, p.rnH, 0 AccResID, NULL AccResDate, NULL AccDocID, NULL DocCode, NULL DocNumber, NULL AccAppAmount, NULL AccResAmount FROM vwInvResDocPayments p UNION SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, 0 rnH, 0 AccResID, NULL AccResDate, NULL AccDocID, NULL DocCode, NULL DocNumber, NULL AccAppAmount, NULL AccResAmount FROM vwInvResDocPayments p WHERE p.rnH = 1" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" Scale="0" Size="4" SourceColumn="InvDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="HotelID" DataSetColumn="HotelID" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+              <Mapping SourceColumn="FolioFull" DataSetColumn="FolioFull" />
+              <Mapping SourceColumn="InvDocItemState" DataSetColumn="InvDocItemState" />
+              <Mapping SourceColumn="BookingState" DataSetColumn="BookingState" />
+              <Mapping SourceColumn="InHouseState" DataSetColumn="InHouseState" />
+              <Mapping SourceColumn="ChangeSuppress" DataSetColumn="ChangeSuppress" />
+              <Mapping SourceColumn="BkDate" DataSetColumn="BkDate" />
+              <Mapping SourceColumn="BkNumber" DataSetColumn="BkNumber" />
+              <Mapping SourceColumn="MealPlanID" DataSetColumn="MealPlanID" />
+              <Mapping SourceColumn="RoomNum" DataSetColumn="RoomNum" />
+              <Mapping SourceColumn="RoomTypeID" DataSetColumn="RoomTypeID" />
+              <Mapping SourceColumn="PreInvText" DataSetColumn="PreInvText" />
+              <Mapping SourceColumn="InvResTotal" DataSetColumn="InvResTotal" />
+              <Mapping SourceColumn="AccAppTotal" DataSetColumn="AccAppTotal" />
+              <Mapping SourceColumn="AccResTotal" DataSetColumn="AccResTotal" />
+              <Mapping SourceColumn="rnH" DataSetColumn="rnH" />
+              <Mapping SourceColumn="AccResID" DataSetColumn="AccResID" />
+              <Mapping SourceColumn="AccResDate" DataSetColumn="AccResDate" />
+              <Mapping SourceColumn="AccDocID" DataSetColumn="AccDocID" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="AccAppAmount" DataSetColumn="AccAppAmount" />
+              <Mapping SourceColumn="AccResAmount" DataSetColumn="AccResAmount" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, p.rnH, r.AccResID, r.AccResDate, r.AccDocID, d.DocCode, d.DocNumber, ISNULL(r.AccAppAmount,0) AccAppAmount, ISNULL(r.AccResAmount,0) AccResAmount FROM vwInvResDocPayments p INNER JOIN AccDocReservation r ON r.InvDocID = p.InvDocID AND r.BookingID = p.BookingID AND r.FolioFull = p.FolioFull LEFT OUTER JOIN AccTransDocument d ON d.DocumentID = r.AccDocID UNION SELECT DISTINCT d.InvDocID, p.HotelID, d.InvDocNum Hotel, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0 rnH, 0 AccResID, NULL, r.AccDocID, NULL, NULL, NULL, NULL FROM vwInvResDocPayments p INNER JOIN InvDocument d ON d.InvDocID = p.InvDocID INNER JOIN AccDocReservation r ON r.InvDocID = p.InvDocID AND r.BookingID = p.BookingID AND r.FolioFull = p.FolioFull" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByAccDoc" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataByAccDoc" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByAccDoc" UserSourceName="GetDataByAccDoc">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT *
+FROM (
+SELECT p.InvDocID, 
+	p.HotelID, 
+	p.Hotel,
+	p.BookingID, 
+	p.FolioFull, 
+	p.InvDocItemState, 
+	p.BookingState, 
+	p.InHouseState, 
+	p.ChangeSuppress,
+	p.BkDate, 
+	p.BkNumber,
+	p.MealPlanID, 
+	p.RoomNum, 
+	p.RoomTypeID, 
+	p.PreInvText,
+	p.InvResAmount InvResTotal, 
+	p.AccAppAmount AccAppTotal,
+	p.AccResAmount AccResTotal,
+	p.rnH,
+	r.AccResID, 
+	r.AccResDate, 
+	r.AccDocID,
+	d.DocCode, 
+	d.DocNumber, 
+	ISNULL(r.AccAppAmount,0) AccAppAmount, 
+	ISNULL(r.AccResAmount,0) AccResAmount
+FROM vwInvResDocPayments p
+	INNER JOIN AccDocReservation r
+		ON r.InvDocID = p.InvDocID
+		AND r.BookingID = p.BookingID
+		AND r.FolioFull = p.FolioFull
+	LEFT OUTER JOIN AccTransDocument d
+		ON d.DocumentID = r.AccDocID
+UNION
+SELECT DISTINCT 
+	d.InvDocID, 
+	p.HotelID, 
+	d.InvDocNum Hotel,
+	0,
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL, 
+	0 rnH,
+	0 AccResID, 
+	NULL, 
+	r.AccDocID,
+	NULL, 
+	NULL, 
+	NULL, 
+	NULL
+FROM vwInvResDocPayments p
+	INNER JOIN InvDocument d
+		ON d.InvDocID = p.InvDocID
+	INNER JOIN AccDocReservation r
+		ON r.InvDocID = p.InvDocID
+		AND r.BookingID = p.BookingID
+		AND r.FolioFull = p.FolioFull
+) q
+WHERE AccDocID = @AccDocID
+ORDER BY InvDocID, HotelID, rnh, AccResID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="AccDocID" ColumnName="AccDocID" DataSourceName="SELECT p.InvDocID, p.HotelID, p.Hotel, p.BookingID, p.FolioFull, p.InvDocItemState, p.BookingState, p.InHouseState, p.ChangeSuppress, p.BkDate, p.BkNumber, p.MealPlanID, p.RoomNum, p.RoomTypeID, p.PreInvText, p.InvResAmount InvResTotal, p.AccAppAmount AccAppTotal, p.AccResAmount AccResTotal, p.rnH, r.AccResID, r.AccResDate, r.AccDocID, d.DocCode, d.DocNumber, ISNULL(r.AccAppAmount,0) AccAppAmount, ISNULL(r.AccResAmount,0) AccResAmount FROM vwInvResDocPayments p INNER JOIN AccDocReservation r ON r.InvDocID = p.InvDocID AND r.BookingID = p.BookingID AND r.FolioFull = p.FolioFull LEFT OUTER JOIN AccTransDocument d ON d.DocumentID = r.AccDocID UNION SELECT DISTINCT d.InvDocID, p.HotelID, d.InvDocNum Hotel, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0 rnH, 0 AccResID, NULL, r.AccDocID, NULL, NULL, NULL, NULL FROM vwInvResDocPayments p INNER JOIN InvDocument d ON d.InvDocID = p.InvDocID INNER JOIN AccDocReservation r ON r.InvDocID = p.InvDocID AND r.BookingID = p.BookingID AND r.FolioFull = p.FolioFull" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AccDocID" Precision="0" Scale="0" Size="4" SourceColumn="AccDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.vwInvResDocPayments" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataTotal" GetMethodModifier="Public" GetMethodName="GetDataTotal" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataTotal" UserSourceName="GetDataTotal">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT p.InvDocID, 
+	p.HotelID, 
+	p.Hotel,
+	p.BookingID, 
+	p.FolioFull, 
+	p.InvDocItemState, 
+	p.BookingState, 
+	p.InHouseState, 
+	p.ChangeSuppress,
+	p.BkDate, 
+	p.BkNumber,
+	p.MealPlanID, 
+	p.RoomNum, 
+	p.RoomTypeID, 
+	p.PreInvText,
+	p.InvResAmount InvResTotal, 
+	p.AccAppAmount AccAppTotal,
+	p.AccResAmount AccResTotal,
+	p.rnH,
+	0 AccResID, 
+	NULL AccResDate, 
+	NULL AccDocID,
+	NULL DocCode, 
+	NULL DocNumber, 
+	NULL AccAppAmount, 
+	NULL AccResAmount
+FROM vwInvResDocPayments p
+	INNER JOIN AccTransDocument d
+		ON d.HotelID = p.HotelID
+WHERE InvDocID = @InvDocID 
+	AND d.DocumentID = @DocumentID
+ORDER BY p.InvDocID, p.HotelID, p.rnh</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="InvDocID" DataSourceName="LIVE_SMART_SQL.dbo.vwInvResDocPayments" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="InvDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="DocumentID" ColumnName="DocumentID" DataSourceName="LIVE_SMART_SQL.dbo.AccTransDocument" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@DocumentID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="DocumentID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProformaTotalTableAdapter" GeneratorDataComponentClassName="ProformaTotalTableAdapter" Name="ProformaTotal" UserDataComponentName="ProformaTotalTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.vwInvResDocTotal" DbObjectType="View" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT          
+    InvDocID, 
+    InvDocNum, 
+    BookingAmount, 
+    ResAmount, 
+    AppAmount, 
+    Underpayment, 
+    Overpayment
+FROM vwInvResDocTotal
+WHERE (InvDocID = @InvDocID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="InvDocID" DataSourceName="LIVE_SMART_SQL.dbo.vwInvResDocTotal" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="InvDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="InvDocNum" DataSetColumn="InvDocNum" />
+              <Mapping SourceColumn="BookingAmount" DataSetColumn="BookingAmount" />
+              <Mapping SourceColumn="ResAmount" DataSetColumn="ResAmount" />
+              <Mapping SourceColumn="AppAmount" DataSetColumn="AppAmount" />
+              <Mapping SourceColumn="Underpayment" DataSetColumn="Underpayment" />
+              <Mapping SourceColumn="Overpayment" DataSetColumn="Overpayment" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ProformaAccdocumentTableAdapter" GeneratorDataComponentClassName="ProformaAccdocumentTableAdapter" Name="ProformaAccdocument" UserDataComponentName="ProformaAccdocumentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT r.InvDocID,
+	a.DocumentID,
+	a.DocCode,
+	a.DocNumber,
+	ISNULL(SUM(r.AccResAmount),0) AccResAmount,
+	ISNULL(SUM(r.AccAppAmount),0) AccAppAmount
+FROM InvDocumentItem i
+	INNER JOIN InvResBooking b
+	    ON b.BookingID = i.BookingID
+	INNER JOIN AccDocReservation r
+		ON r.InvDocID = i.InvDocID 
+		AND r.BookingID = i.BookingID
+	INNER JOIN AccTransDocument a
+		ON a.DocumentID = r.AccDocID
+WHERE i.InvDocID=@InvDocID
+GROUP BY r.InvDocID,
+	a.DocumentID,
+	a.DocCode,
+	a.DocNumber</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="InvDocID" DataSourceName="LIVE_SMART_SQL.dbo.InvDocumentItem" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="InvDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="DocumentID" DataSetColumn="DocumentID" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="AccResAmount" DataSetColumn="AccResAmount" />
+              <Mapping SourceColumn="AccAppAmount" DataSetColumn="AccAppAmount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccDocReservationTableAdapter" GeneratorDataComponentClassName="AccDocReservationTableAdapter" Name="AccDocReservation" UserDataComponentName="AccDocReservationTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocReservation" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <DeleteCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="true">
+                    <CommandText>AccDocReservationEdit</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AccResID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="money" DbType="Currency" Direction="Input" ParameterName="@AccResAmount" Precision="19" ProviderType="Money" Scale="4" Size="8" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@UserName" Precision="0" ProviderType="NVarChar" Scale="0" Size="250" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="true">
+                    <CommandText>AccDocReservationInsert</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AccDocID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@BookingID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="money" DbType="Currency" Direction="Input" ParameterName="@AccResAmount" Precision="19" ProviderType="Money" Scale="4" Size="8" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@UserName" Precision="0" ProviderType="NVarChar" Scale="0" Size="250" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT          AccResID, AccDocID, AccDocTransID, TransID, InvDocID, BookingID, FolioFull, AccInvoiceID, InvoiceD, DetailID, AccResDate, AccResAmount, AccResHAmount, AccAppAmount, 
+                            AccAppHAmount
+FROM              AccDocReservation</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="true">
+                    <CommandText>AccDocReservationEdit</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AccResID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="money" DbType="Currency" Direction="Input" ParameterName="@AccResAmount" Precision="19" ProviderType="Money" Scale="4" Size="8" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@UserName" Precision="0" ProviderType="NVarChar" Scale="0" Size="250" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccResID" DataSetColumn="AccResID" />
+              <Mapping SourceColumn="AccDocID" DataSetColumn="AccDocID" />
+              <Mapping SourceColumn="AccDocTransID" DataSetColumn="AccDocTransID" />
+              <Mapping SourceColumn="TransID" DataSetColumn="TransID" />
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+              <Mapping SourceColumn="FolioFull" DataSetColumn="FolioFull" />
+              <Mapping SourceColumn="AccInvoiceID" DataSetColumn="AccInvoiceID" />
+              <Mapping SourceColumn="InvoiceD" DataSetColumn="InvoiceD" />
+              <Mapping SourceColumn="DetailID" DataSetColumn="DetailID" />
+              <Mapping SourceColumn="AccResDate" DataSetColumn="AccResDate" />
+              <Mapping SourceColumn="AccResAmount" DataSetColumn="AccResAmount" />
+              <Mapping SourceColumn="AccResHAmount" DataSetColumn="AccResHAmount" />
+              <Mapping SourceColumn="AccAppAmount" DataSetColumn="AccAppAmount" />
+              <Mapping SourceColumn="AccAppHAmount" DataSetColumn="AccAppHAmount" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocReservation" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetDataBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT          AccResID, AccDocID, AccDocTransID, TransID, InvDocID, BookingID, FolioFull, AccInvoiceID, InvoiceD, DetailID, AccResDate, AccResAmount, AccResHAmount, AccAppAmount, 
+                            AccAppHAmount
+FROM              AccDocReservation
+WHERE          (AccDocID = @AccDocID) AND (BookingID = @BookingID)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="AccDocID" ColumnName="AccDocID" DataSourceName="LIVE_SMART_SQL.dbo.AccDocReservation" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@AccDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="AccDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="BookingID" ColumnName="BookingID" DataSourceName="LIVE_SMART_SQL.dbo.AccDocReservation" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@BookingID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="BookingID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccVwDocEfectiveTableAdapter" GeneratorDataComponentClassName="AccVwDocEfectiveTableAdapter" Name="AccVwDocEfective" UserDataComponentName="AccVwDocEfectiveTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT e.DocumentID,
+	e.DocCode,
+	e.DocNumber,
+	e.DocOrd,
+	e.DocDate,
+	e.BalanceDate,
+	e.TourOpId,
+	e.HotelId,
+	e.Amount,
+	e.HAmount,
+	e.AppAmount,
+	e.AppHAmount,
+	e.Balance,
+	e.HBalance,
+	e.ResAmount,
+	e.EfectiveAmount,
+	h.Hotel
+FROM AccVwDocEfective e
+	INNER JOIN Hotel h
+		ON h.HotelId = e.HotelId
+WHERE DocumentID = @DocumentID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="DocumentID" ColumnName="DocumentID" DataSourceName="LIVE_SMART_SQL.dbo.AccVwDocEfective" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@DocumentID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="DocumentID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DocumentID" DataSetColumn="DocumentID" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="DocOrd" DataSetColumn="DocOrd" />
+              <Mapping SourceColumn="DocDate" DataSetColumn="DocDate" />
+              <Mapping SourceColumn="BalanceDate" DataSetColumn="BalanceDate" />
+              <Mapping SourceColumn="TourOpId" DataSetColumn="TourOpId" />
+              <Mapping SourceColumn="HotelId" DataSetColumn="HotelId" />
+              <Mapping SourceColumn="Amount" DataSetColumn="Amount" />
+              <Mapping SourceColumn="HAmount" DataSetColumn="HAmount" />
+              <Mapping SourceColumn="AppAmount" DataSetColumn="AppAmount" />
+              <Mapping SourceColumn="AppHAmount" DataSetColumn="AppHAmount" />
+              <Mapping SourceColumn="Balance" DataSetColumn="Balance" />
+              <Mapping SourceColumn="HBalance" DataSetColumn="HBalance" />
+              <Mapping SourceColumn="ResAmount" DataSetColumn="ResAmount" />
+              <Mapping SourceColumn="EfectiveAmount" DataSetColumn="EfectiveAmount" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccDoc4PaymentTableAdapter" GeneratorDataComponentClassName="AccDoc4PaymentTableAdapter" Name="AccDoc4Payment" UserDataComponentName="AccDoc4PaymentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+	d.InvDocID,
+	h.HotelID,
+	h.Hotel,
+	1 rHtl,
+	e.DocumentID, 
+	e.DocCode, 
+	e.DocNumber, 
+	e.EfectiveAmount
+FROM InvDocument d
+	INNER JOIN InvDocumentHotel dh
+		ON dh.InvDocID = d.InvDocID
+	INNER JOIN Hotel AS h
+	    ON h.HotelID = dh.HotelID
+	INNER JOIN AccVwDocEfective e
+		ON e.TourOpId = d.TourOpID
+		AND e.HotelId = dh.HotelID
+	INNER JOIN AccDocProforma p
+		ON p.TrCode = e.DocCode
+	--LEFT OUTER JOIN AccDocReservation r
+	--	ON r.AccDocID = e.DocumentID
+WHERE e.EfectiveAmount &gt; 0
+	AND e.Approved = 1
+	--AND r.AccResID IS NULL
+	AND d.InvDocID = @InvDocID
+UNION
+SELECT 
+	d.InvDocID,
+	h.HotelID,
+	h.Hotel,
+	0 rHtl,
+	NULL DocumentID, 
+	NULL DocCode, 
+	NULL DocNumber, 
+	NULL EfectiveAmount
+FROM InvDocument d
+	INNER JOIN InvDocumentHotel dh
+		ON dh.InvDocID = d.InvDocID
+	INNER JOIN Hotel AS h
+	    ON h.HotelID = dh.HotelID
+WHERE d.InvDocID = @InvDocID
+ORDER BY 3, 5, 6
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="InvDocID" DataSourceName="LIVE_SMART_SQL.dbo.InvDocument" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="InvDocID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="HotelID" DataSetColumn="HotelID" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="rHtl" DataSetColumn="rHtl" />
+              <Mapping SourceColumn="DocumentID" DataSetColumn="DocumentID" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="EfectiveAmount" DataSetColumn="EfectiveAmount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvDocStatementTableAdapter" GeneratorDataComponentClassName="InvDocStatementTableAdapter" Name="InvDocStatement" UserDataComponentName="InvDocStatementTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.InvDocStatement" DbObjectType="Function" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT InvDocID, 
+	InvDocNum, 
+	TourOpID, 
+	TourOp, 
+	BookingAmount, 
+	ResAmount, 
+	AppAmount, 
+	Overpayment, 
+	Underpayment, 
+	DocumentID, 
+	DocCode, 
+	DocNumber, 
+	AccAppAmount, 
+	AccResAmount,
+	rnk
+FROM dbo.InvDocStatement(
+	@HotelID, 
+	@HotelGroupID, 
+	@TourOpID, 
+	@TourOpGroupID, 
+	@MarketID, 
+	@PayCondID, 
+	@TourOpKind, 
+	@NumberFrom, 
+	@NumberTo,
+	@CheckInFrom, 
+	@CheckInTo, 
+	@ProformaType, 
+	@GroupName)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="HotelID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@HotelID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="HotelGroupID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@HotelGroupID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="TourOpID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TourOpID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="TourOpGroupID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TourOpGroupID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="MarketID" ColumnName="" DataSourceName="" DataTypeServer="char(2)" DbType="AnsiString" Direction="Input" ParameterName="@MarketID" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="PayCondID" ColumnName="" DataSourceName="" DataTypeServer="char(4)" DbType="AnsiString" Direction="Input" ParameterName="@PayCondID" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="TourOpKind" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TourOpKind" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="NumberFrom" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@NumberFrom" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="NumberTo" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@NumberTo" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="CheckInFrom" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@CheckInFrom" Precision="0" ProviderType="DateTime" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="CheckInTo" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@CheckInTo" Precision="0" ProviderType="DateTime" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ProformaType" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ProformaType" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="GroupName" ColumnName="" DataSourceName="" DataTypeServer="varchar(50)" DbType="AnsiString" Direction="Input" ParameterName="@GroupName" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="InvDocNum" DataSetColumn="InvDocNum" />
+              <Mapping SourceColumn="TourOpID" DataSetColumn="TourOpID" />
+              <Mapping SourceColumn="TourOp" DataSetColumn="TourOp" />
+              <Mapping SourceColumn="BookingAmount" DataSetColumn="BookingAmount" />
+              <Mapping SourceColumn="ResAmount" DataSetColumn="ResAmount" />
+              <Mapping SourceColumn="AppAmount" DataSetColumn="AppAmount" />
+              <Mapping SourceColumn="Overpayment" DataSetColumn="Overpayment" />
+              <Mapping SourceColumn="Underpayment" DataSetColumn="Underpayment" />
+              <Mapping SourceColumn="DocumentID" DataSetColumn="DocumentID" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="AccAppAmount" DataSetColumn="AccAppAmount" />
+              <Mapping SourceColumn="AccResAmount" DataSetColumn="AccResAmount" />
+              <Mapping SourceColumn="rnk" DataSetColumn="rnk" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvDocStatementDetailTableAdapter" GeneratorDataComponentClassName="InvDocStatementDetailTableAdapter" Name="InvDocStatementDetail" UserDataComponentName="InvDocStatementDetailTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.InvDocStatementDetail" DbObjectType="Function" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT InvDocID, InvDocNum, GroupName, 
+	TourOpID, TourOp, 
+	HotelID, Hotel, 
+	InvResAmount, 
+	BookingID, FolioFull, InvDocItemState, 
+	BookingState, InHouseState, ChangeSuppress, 
+	BkDate, BkNumber, 
+	MealPlanID, RoomNum, RoomTypeID, 
+	PreInvText, CheckIn, CheckOut,
+	BookTotalAmount, BookAppAmount, BookResAmount, 
+	rnH, 
+	Underpayment, Overpayment, 
+	DocumentID, DocCode, DocNumber, DocDate, 
+	DocAmount, DocAppAmount, DocAppDate, DocResAmount, 
+	DocTotalAppAmount, DocTotalResAmount,
+	rnHb
+FROM InvDocStatementDetail (
+	@HotelID,
+	@HotelGroupID,
+	@TourOpID,
+	@TourOpGroupID,
+	@MarketID,
+	@PayCondID,
+	@TourOpKind,
+	@NumberFrom,
+	@NumberTo,
+	@CheckInFrom,
+	@CheckInTo,
+	@ProformaType,
+	@GroupName,
+	@PayStatus)
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="HotelID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@HotelID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="HotelGroupID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@HotelGroupID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="TourOpID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TourOpID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="TourOpGroupID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TourOpGroupID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="MarketID" ColumnName="" DataSourceName="" DataTypeServer="char(2)" DbType="AnsiString" Direction="Input" ParameterName="@MarketID" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="PayCondID" ColumnName="" DataSourceName="" DataTypeServer="char(4)" DbType="AnsiString" Direction="Input" ParameterName="@PayCondID" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="TourOpKind" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TourOpKind" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="NumberFrom" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@NumberFrom" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="NumberTo" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@NumberTo" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="CheckInFrom" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@CheckInFrom" Precision="0" ProviderType="DateTime" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="CheckInTo" ColumnName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@CheckInTo" Precision="0" ProviderType="DateTime" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="ProformaType" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ProformaType" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="GroupName" ColumnName="" DataSourceName="" DataTypeServer="varchar(50)" DbType="AnsiString" Direction="Input" ParameterName="@GroupName" Precision="0" Scale="0" Size="1024" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="PayStatus" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@PayStatus" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="InvDocNum" DataSetColumn="InvDocNum" />
+              <Mapping SourceColumn="GroupName" DataSetColumn="GroupName" />
+              <Mapping SourceColumn="TourOpID" DataSetColumn="TourOpID" />
+              <Mapping SourceColumn="TourOp" DataSetColumn="TourOp" />
+              <Mapping SourceColumn="HotelID" DataSetColumn="HotelID" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="InvResAmount" DataSetColumn="InvResAmount" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+              <Mapping SourceColumn="FolioFull" DataSetColumn="FolioFull" />
+              <Mapping SourceColumn="InvDocItemState" DataSetColumn="InvDocItemState" />
+              <Mapping SourceColumn="BookingState" DataSetColumn="BookingState" />
+              <Mapping SourceColumn="InHouseState" DataSetColumn="InHouseState" />
+              <Mapping SourceColumn="ChangeSuppress" DataSetColumn="ChangeSuppress" />
+              <Mapping SourceColumn="BkDate" DataSetColumn="BkDate" />
+              <Mapping SourceColumn="BkNumber" DataSetColumn="BkNumber" />
+              <Mapping SourceColumn="MealPlanID" DataSetColumn="MealPlanID" />
+              <Mapping SourceColumn="RoomNum" DataSetColumn="RoomNum" />
+              <Mapping SourceColumn="RoomTypeID" DataSetColumn="RoomTypeID" />
+              <Mapping SourceColumn="PreInvText" DataSetColumn="PreInvText" />
+              <Mapping SourceColumn="CheckIn" DataSetColumn="CheckIn" />
+              <Mapping SourceColumn="CheckOut" DataSetColumn="CheckOut" />
+              <Mapping SourceColumn="BookTotalAmount" DataSetColumn="BookTotalAmount" />
+              <Mapping SourceColumn="BookAppAmount" DataSetColumn="BookAppAmount" />
+              <Mapping SourceColumn="BookResAmount" DataSetColumn="BookResAmount" />
+              <Mapping SourceColumn="rnH" DataSetColumn="rnH" />
+              <Mapping SourceColumn="Underpayment" DataSetColumn="Underpayment" />
+              <Mapping SourceColumn="Overpayment" DataSetColumn="Overpayment" />
+              <Mapping SourceColumn="DocumentID" DataSetColumn="DocumentID" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="DocDate" DataSetColumn="DocDate" />
+              <Mapping SourceColumn="DocAmount" DataSetColumn="DocAmount" />
+              <Mapping SourceColumn="DocAppAmount" DataSetColumn="DocAppAmount" />
+              <Mapping SourceColumn="DocResAmount" DataSetColumn="DocResAmount" />
+              <Mapping SourceColumn="DocTotalAppAmount" DataSetColumn="DocTotalAppAmount" />
+              <Mapping SourceColumn="DocTotalResAmount" DataSetColumn="DocTotalResAmount" />
+              <Mapping SourceColumn="rnHb" DataSetColumn="rnHb" />
+              <Mapping SourceColumn="DocAppDate" DataSetColumn="DocAppDate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvDocBatch_ProformaTableAdapter" GeneratorDataComponentClassName="InvDocBatch_ProformaTableAdapter" Name="InvDocBatch_Proforma" UserDataComponentName="InvDocBatch_ProformaTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.InvDocBatch_Proforma" DbObjectType="Function" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT
+	idbp.InvDocID,
+	idbp.TourOpID,
+	idbp.TourOp,
+	idbp.HotelID,
+	idbp.Hotel,
+	idbp.InvDocNum,
+	idbp.InvDocGroupName,
+	idbp.InvDocSourcePMS,
+	idbp.InvDocDate,
+	idbp.InvDocStateID,
+	idbp.InvDocStateText,
+	idbp.InvDocReviewDate,
+	idbp.InvDocDeliveryDate,
+	idbp.InvDocComment,
+	idbp.BookingID,
+	idbp.BkNumber,
+	idbp.BkGuest,
+	idbp.BkAmount,
+	idbp.BkAppAmount,
+	idbp.BkResAmount,
+	idbp.BkUnderpayment,
+	idbp.BkOverpayment,
+	idbp.BkOrder
+FROM InvDocBatch_Proforma(@InvDocID) AS idbp </CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="TourOpID" DataSetColumn="TourOpID" />
+              <Mapping SourceColumn="TourOp" DataSetColumn="TourOp" />
+              <Mapping SourceColumn="HotelID" DataSetColumn="HotelID" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="InvDocNum" DataSetColumn="InvDocNum" />
+              <Mapping SourceColumn="InvDocGroupName" DataSetColumn="InvDocGroupName" />
+              <Mapping SourceColumn="InvDocSourcePMS" DataSetColumn="InvDocSourcePMS" />
+              <Mapping SourceColumn="InvDocDate" DataSetColumn="InvDocDate" />
+              <Mapping SourceColumn="InvDocStateID" DataSetColumn="InvDocStateID" />
+              <Mapping SourceColumn="InvDocStateText" DataSetColumn="InvDocStateText" />
+              <Mapping SourceColumn="InvDocReviewDate" DataSetColumn="InvDocReviewDate" />
+              <Mapping SourceColumn="InvDocDeliveryDate" DataSetColumn="InvDocDeliveryDate" />
+              <Mapping SourceColumn="InvDocComment" DataSetColumn="InvDocComment" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+              <Mapping SourceColumn="BkNumber" DataSetColumn="BkNumber" />
+              <Mapping SourceColumn="BkGuest" DataSetColumn="BkGuest" />
+              <Mapping SourceColumn="BkAmount" DataSetColumn="BkAmount" />
+              <Mapping SourceColumn="BkAppAmount" DataSetColumn="BkAppAmount" />
+              <Mapping SourceColumn="BkResAmount" DataSetColumn="BkResAmount" />
+              <Mapping SourceColumn="BkUnderpayment" DataSetColumn="BkUnderpayment" />
+              <Mapping SourceColumn="BkOverpayment" DataSetColumn="BkOverpayment" />
+              <Mapping SourceColumn="BkOrder" DataSetColumn="BkOrder" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="InvDocBatch_PaymentsTableAdapter" GeneratorDataComponentClassName="InvDocBatch_PaymentsTableAdapter" Name="InvDocBatch_Payments" UserDataComponentName="InvDocBatch_PaymentsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.InvDocBatch_Payments" DbObjectType="Function" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT
+	idbp.DocumentID,
+	idbp.TourOpId,
+	idbp.TourOp,
+	idbp.HotelId,
+	idbp.Hotel,
+	idbp.DocCode,
+	idbp.DocNumber,
+	idbp.DocDate,
+	idbp.DocAmount,
+	idbp.DocAppAmount,
+	idbp.DocResAmount,
+	idbp.DocEfectiveAmount,
+	idbp.DocReference,
+	idbp.InvDocID,
+	idbp.InvDocNum,
+	idbp.BookingID,
+	idbp.BkNumber,
+	idbp.BkGuest,
+	idbp.BkDocAppDate,
+	idbp.BkDocAppAmount,
+	idbp.BkDocResAmount
+FROM
+	dbo.InvDocBatch_Payments(@InvDocID) AS idbp</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="InvDocID" ColumnName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@InvDocID" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="DocumentID" DataSetColumn="DocumentID" />
+              <Mapping SourceColumn="TourOpId" DataSetColumn="TourOpId" />
+              <Mapping SourceColumn="TourOp" DataSetColumn="TourOp" />
+              <Mapping SourceColumn="HotelId" DataSetColumn="HotelId" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="DocCode" DataSetColumn="DocCode" />
+              <Mapping SourceColumn="DocNumber" DataSetColumn="DocNumber" />
+              <Mapping SourceColumn="DocDate" DataSetColumn="DocDate" />
+              <Mapping SourceColumn="DocAmount" DataSetColumn="DocAmount" />
+              <Mapping SourceColumn="DocAppAmount" DataSetColumn="DocAppAmount" />
+              <Mapping SourceColumn="DocResAmount" DataSetColumn="DocResAmount" />
+              <Mapping SourceColumn="DocEfectiveAmount" DataSetColumn="DocEfectiveAmount" />
+              <Mapping SourceColumn="DocReference" DataSetColumn="DocReference" />
+              <Mapping SourceColumn="InvDocID" DataSetColumn="InvDocID" />
+              <Mapping SourceColumn="InvDocNum" DataSetColumn="InvDocNum" />
+              <Mapping SourceColumn="BookingID" DataSetColumn="BookingID" />
+              <Mapping SourceColumn="BkNumber" DataSetColumn="BkNumber" />
+              <Mapping SourceColumn="BkGuest" DataSetColumn="BkGuest" />
+              <Mapping SourceColumn="BkDocAppDate" DataSetColumn="BkDocAppDate" />
+              <Mapping SourceColumn="BkDocAppAmount" DataSetColumn="BkDocAppAmount" />
+              <Mapping SourceColumn="BkDocResAmount" DataSetColumn="BkDocResAmount" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsProformaApplication" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsProformaApplication" msprop:Generator_DataSetName="dsProformaApplication">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AccAppDocument" msprop:Generator_UserTableName="AccAppDocument" msprop:Generator_RowDeletedName="AccAppDocumentRowDeleted" msprop:Generator_RowChangedName="AccAppDocumentRowChanged" msprop:Generator_RowClassName="AccAppDocumentRow" msprop:Generator_RowChangingName="AccAppDocumentRowChanging" msprop:Generator_RowEvArgName="AccAppDocumentRowChangeEvent" msprop:Generator_RowEvHandlerName="AccAppDocumentRowChangeEventHandler" msprop:Generator_TableClassName="AccAppDocumentDataTable" msprop:Generator_TableVarName="tableAccAppDocument" msprop:Generator_RowDeletingName="AccAppDocumentRowDeleting" msprop:Generator_TablePropName="AccAppDocument">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrDocID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TrDocID" msprop:Generator_ColumnVarNameInTable="columnTrDocID" msprop:Generator_ColumnPropNameInRow="TrDocID" msprop:Generator_ColumnPropNameInTable="TrDocIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="TrCode" msdata:ReadOnly="true" msprop:Generator_UserColumnName="TrCode" msprop:Generator_ColumnVarNameInTable="columnTrCode" msprop:Generator_ColumnPropNameInRow="TrCode" msprop:Generator_ColumnPropNameInTable="TrCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AccountType" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccAppTransfer" msprop:Generator_UserTableName="AccAppTransfer" msprop:Generator_RowDeletedName="AccAppTransferRowDeleted" msprop:Generator_RowChangedName="AccAppTransferRowChanged" msprop:Generator_RowClassName="AccAppTransferRow" msprop:Generator_RowChangingName="AccAppTransferRowChanging" msprop:Generator_RowEvArgName="AccAppTransferRowChangeEvent" msprop:Generator_RowEvHandlerName="AccAppTransferRowChangeEventHandler" msprop:Generator_TableClassName="AccAppTransferDataTable" msprop:Generator_TableVarName="tableAccAppTransfer" msprop:Generator_RowDeletingName="AccAppTransferRowDeleting" msprop:Generator_TablePropName="AccAppTransfer">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrDocID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TrDocID" msprop:Generator_ColumnVarNameInTable="columnTrDocID" msprop:Generator_ColumnPropNameInRow="TrDocID" msprop:Generator_ColumnPropNameInTable="TrDocIDColumn" type="xs:int" />
+              <xs:element name="TransferID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TransferID" msprop:Generator_ColumnVarNameInTable="columnTransferID" msprop:Generator_ColumnPropNameInRow="TransferID" msprop:Generator_ColumnPropNameInTable="TransferIDColumn" type="xs:int" />
+              <xs:element name="CreditCode" msprop:Generator_UserColumnName="CreditCode" msprop:Generator_ColumnVarNameInTable="columnCreditCode" msprop:Generator_ColumnPropNameInRow="CreditCode" msprop:Generator_ColumnPropNameInTable="CreditCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccDocProforma" msprop:Generator_UserTableName="AccDocProforma" msprop:Generator_RowDeletedName="AccDocProformaRowDeleted" msprop:Generator_RowChangedName="AccDocProformaRowChanged" msprop:Generator_RowClassName="AccDocProformaRow" msprop:Generator_RowChangingName="AccDocProformaRowChanging" msprop:Generator_RowEvArgName="AccDocProformaRowChangeEvent" msprop:Generator_RowEvHandlerName="AccDocProformaRowChangeEventHandler" msprop:Generator_TableClassName="AccDocProformaDataTable" msprop:Generator_TableVarName="tableAccDocProforma" msprop:Generator_RowDeletingName="AccDocProformaRowDeleting" msprop:Generator_TablePropName="AccDocProforma">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrDocID" msprop:Generator_UserColumnName="TrDocID" msprop:Generator_ColumnVarNameInTable="columnTrDocID" msprop:Generator_ColumnPropNameInRow="TrDocID" msprop:Generator_ColumnPropNameInTable="TrDocIDColumn" type="xs:int" />
+              <xs:element name="TrCode" msprop:Generator_UserColumnName="TrCode" msprop:Generator_ColumnVarNameInTable="columnTrCode" msprop:Generator_ColumnPropNameInRow="TrCode" msprop:Generator_ColumnPropNameInTable="TrCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AccountType" msprop:Generator_UserColumnName="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TransferID" msprop:Generator_UserColumnName="TransferID" msprop:Generator_ColumnVarNameInTable="columnTransferID" msprop:Generator_ColumnPropNameInRow="TransferID" msprop:Generator_ColumnPropNameInTable="TransferIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="CreditCode" msprop:Generator_UserColumnName="CreditCode" msprop:Generator_ColumnVarNameInTable="columnCreditCode" msprop:Generator_ColumnPropNameInRow="CreditCode" msprop:Generator_ColumnPropNameInTable="CreditCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProformaItem" msprop:Generator_UserTableName="ProformaItem" msprop:Generator_RowDeletedName="ProformaItemRowDeleted" msprop:Generator_RowChangedName="ProformaItemRowChanged" msprop:Generator_RowClassName="ProformaItemRow" msprop:Generator_RowChangingName="ProformaItemRowChanging" msprop:Generator_RowEvArgName="ProformaItemRowChangeEvent" msprop:Generator_RowEvHandlerName="ProformaItemRowChangeEventHandler" msprop:Generator_TableClassName="ProformaItemDataTable" msprop:Generator_TableVarName="tableProformaItem" msprop:Generator_RowDeletingName="ProformaItemRowDeleting" msprop:Generator_TablePropName="ProformaItem">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="HotelID" msprop:Generator_UserColumnName="HotelID" msprop:Generator_ColumnVarNameInTable="columnHotelID" msprop:Generator_ColumnPropNameInRow="HotelID" msprop:Generator_ColumnPropNameInTable="HotelIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="Hotel" msprop:Generator_UserColumnName="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BookingID" msprop:Generator_UserColumnName="BookingID" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" type="xs:int" />
+              <xs:element name="FolioFull" msprop:Generator_UserColumnName="FolioFull" msprop:Generator_ColumnVarNameInTable="columnFolioFull" msprop:Generator_ColumnPropNameInRow="FolioFull" msprop:Generator_ColumnPropNameInTable="FolioFullColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocItemState" msprop:Generator_UserColumnName="InvDocItemState" msprop:Generator_ColumnVarNameInTable="columnInvDocItemState" msprop:Generator_ColumnPropNameInRow="InvDocItemState" msprop:Generator_ColumnPropNameInTable="InvDocItemStateColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="BookingState" msprop:Generator_UserColumnName="BookingState" msprop:Generator_ColumnVarNameInTable="columnBookingState" msprop:Generator_ColumnPropNameInRow="BookingState" msprop:Generator_ColumnPropNameInTable="BookingStateColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InHouseState" msprop:Generator_UserColumnName="InHouseState" msprop:Generator_ColumnVarNameInTable="columnInHouseState" msprop:Generator_ColumnPropNameInRow="InHouseState" msprop:Generator_ColumnPropNameInTable="InHouseStateColumn" type="xs:short" minOccurs="0" />
+              <xs:element name="ChangeSuppress" msprop:Generator_UserColumnName="ChangeSuppress" msprop:Generator_ColumnVarNameInTable="columnChangeSuppress" msprop:Generator_ColumnPropNameInRow="ChangeSuppress" msprop:Generator_ColumnPropNameInTable="ChangeSuppressColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="BkDate" msprop:Generator_UserColumnName="BkDate" msprop:Generator_ColumnVarNameInTable="columnBkDate" msprop:Generator_ColumnPropNameInRow="BkDate" msprop:Generator_ColumnPropNameInTable="BkDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BkNumber" msprop:Generator_UserColumnName="BkNumber" msprop:Generator_ColumnVarNameInTable="columnBkNumber" msprop:Generator_ColumnPropNameInRow="BkNumber" msprop:Generator_ColumnPropNameInTable="BkNumberColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MealPlanID" msprop:Generator_UserColumnName="MealPlanID" msprop:Generator_ColumnVarNameInTable="columnMealPlanID" msprop:Generator_ColumnPropNameInRow="MealPlanID" msprop:Generator_ColumnPropNameInTable="MealPlanIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomNum" msprop:Generator_UserColumnName="RoomNum" msprop:Generator_ColumnVarNameInTable="columnRoomNum" msprop:Generator_ColumnPropNameInRow="RoomNum" msprop:Generator_ColumnPropNameInTable="RoomNumColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="RoomTypeID" msprop:Generator_UserColumnName="RoomTypeID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeID" msprop:Generator_ColumnPropNameInRow="RoomTypeID" msprop:Generator_ColumnPropNameInTable="RoomTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PreInvText" msprop:Generator_UserColumnName="PreInvText" msprop:Generator_ColumnVarNameInTable="columnPreInvText" msprop:Generator_ColumnPropNameInRow="PreInvText" msprop:Generator_ColumnPropNameInTable="PreInvTextColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="InvResAmount" msprop:Generator_ColumnVarNameInTable="columnInvResAmount" msprop:Generator_ColumnPropNameInRow="InvResAmount" msprop:Generator_ColumnPropNameInTable="InvResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccAppAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccAppAmount" msprop:Generator_ColumnVarNameInTable="columnAccAppAmount" msprop:Generator_ColumnPropNameInRow="AccAppAmount" msprop:Generator_ColumnPropNameInTable="AccAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccResAmount" msprop:Generator_ColumnVarNameInTable="columnAccResAmount" msprop:Generator_ColumnPropNameInRow="AccResAmount" msprop:Generator_ColumnPropNameInTable="AccResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="rnH" msdata:ReadOnly="true" msprop:Generator_UserColumnName="rnH" msprop:Generator_ColumnVarNameInTable="columnrnH" msprop:Generator_ColumnPropNameInRow="rnH" msprop:Generator_ColumnPropNameInTable="rnHColumn" type="xs:long" />
+              <xs:element name="InvResBalance" msdata:ReadOnly="true" msdata:Expression="InvResAmount -AccAppAmount - AccResAmount" msprop:Generator_UserColumnName="InvResBalance" msprop:Generator_ColumnVarNameInTable="columnInvResBalance" msprop:Generator_ColumnPropNameInRow="InvResBalance" msprop:Generator_ColumnPropNameInTable="InvResBalanceColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProformaItemPayment" msprop:Generator_UserTableName="ProformaItemPayment" msprop:Generator_RowDeletedName="ProformaItemPaymentRowDeleted" msprop:Generator_RowChangedName="ProformaItemPaymentRowChanged" msprop:Generator_RowClassName="ProformaItemPaymentRow" msprop:Generator_RowChangingName="ProformaItemPaymentRowChanging" msprop:Generator_RowEvArgName="ProformaItemPaymentRowChangeEvent" msprop:Generator_RowEvHandlerName="ProformaItemPaymentRowChangeEventHandler" msprop:Generator_TableClassName="ProformaItemPaymentDataTable" msprop:Generator_TableVarName="tableProformaItemPayment" msprop:Generator_RowDeletingName="ProformaItemPaymentRowDeleting" msprop:Generator_TablePropName="ProformaItemPayment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="BookingID" msprop:Generator_UserColumnName="BookingID" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" type="xs:int" />
+              <xs:element name="FolioFull" msprop:Generator_UserColumnName="FolioFull" msprop:Generator_ColumnVarNameInTable="columnFolioFull" msprop:Generator_ColumnPropNameInRow="FolioFull" msprop:Generator_ColumnPropNameInTable="FolioFullColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocumentID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DocCode" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="InvResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="InvResAmount" msprop:Generator_ColumnVarNameInTable="columnInvResAmount" msprop:Generator_ColumnPropNameInRow="InvResAmount" msprop:Generator_ColumnPropNameInTable="InvResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccAppAmount" msprop:Generator_UserColumnName="AccAppAmount" msprop:Generator_ColumnVarNameInTable="columnAccAppAmount" msprop:Generator_ColumnPropNameInRow="AccAppAmount" msprop:Generator_ColumnPropNameInTable="AccAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccResAmount" msprop:Generator_UserColumnName="AccResAmount" msprop:Generator_ColumnVarNameInTable="columnAccResAmount" msprop:Generator_ColumnPropNameInRow="AccResAmount" msprop:Generator_ColumnPropNameInTable="AccResAmountColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProformaPayment" msprop:Generator_UserTableName="ProformaPayment" msprop:Generator_RowDeletedName="ProformaPaymentRowDeleted" msprop:Generator_RowChangedName="ProformaPaymentRowChanged" msprop:Generator_RowClassName="ProformaPaymentRow" msprop:Generator_RowChangingName="ProformaPaymentRowChanging" msprop:Generator_RowEvArgName="ProformaPaymentRowChangeEvent" msprop:Generator_RowEvHandlerName="ProformaPaymentRowChangeEventHandler" msprop:Generator_TableClassName="ProformaPaymentDataTable" msprop:Generator_TableVarName="tableProformaPayment" msprop:Generator_RowDeletingName="ProformaPaymentRowDeleting" msprop:Generator_TablePropName="ProformaPayment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="HotelID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="HotelID" msprop:Generator_ColumnVarNameInTable="columnHotelID" msprop:Generator_ColumnPropNameInRow="HotelID" msprop:Generator_ColumnPropNameInTable="HotelIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="Hotel" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BookingID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BookingID" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="FolioFull" msdata:ReadOnly="true" msprop:Generator_UserColumnName="FolioFull" msprop:Generator_ColumnVarNameInTable="columnFolioFull" msprop:Generator_ColumnPropNameInRow="FolioFull" msprop:Generator_ColumnPropNameInTable="FolioFullColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocItemState" msdata:ReadOnly="true" msprop:Generator_UserColumnName="InvDocItemState" msprop:Generator_ColumnVarNameInTable="columnInvDocItemState" msprop:Generator_ColumnPropNameInRow="InvDocItemState" msprop:Generator_ColumnPropNameInTable="InvDocItemStateColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="BookingState" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BookingState" msprop:Generator_ColumnVarNameInTable="columnBookingState" msprop:Generator_ColumnPropNameInRow="BookingState" msprop:Generator_ColumnPropNameInTable="BookingStateColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InHouseState" msdata:ReadOnly="true" msprop:Generator_UserColumnName="InHouseState" msprop:Generator_ColumnVarNameInTable="columnInHouseState" msprop:Generator_ColumnPropNameInRow="InHouseState" msprop:Generator_ColumnPropNameInTable="InHouseStateColumn" type="xs:short" minOccurs="0" />
+              <xs:element name="ChangeSuppress" msdata:ReadOnly="true" msprop:Generator_UserColumnName="ChangeSuppress" msprop:Generator_ColumnVarNameInTable="columnChangeSuppress" msprop:Generator_ColumnPropNameInRow="ChangeSuppress" msprop:Generator_ColumnPropNameInTable="ChangeSuppressColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="BkDate" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BkDate" msprop:Generator_ColumnVarNameInTable="columnBkDate" msprop:Generator_ColumnPropNameInRow="BkDate" msprop:Generator_ColumnPropNameInTable="BkDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BkNumber" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BkNumber" msprop:Generator_ColumnVarNameInTable="columnBkNumber" msprop:Generator_ColumnPropNameInRow="BkNumber" msprop:Generator_ColumnPropNameInTable="BkNumberColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MealPlanID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="MealPlanID" msprop:Generator_ColumnVarNameInTable="columnMealPlanID" msprop:Generator_ColumnPropNameInRow="MealPlanID" msprop:Generator_ColumnPropNameInTable="MealPlanIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomNum" msdata:ReadOnly="true" msprop:Generator_UserColumnName="RoomNum" msprop:Generator_ColumnVarNameInTable="columnRoomNum" msprop:Generator_ColumnPropNameInRow="RoomNum" msprop:Generator_ColumnPropNameInTable="RoomNumColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="RoomTypeID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="RoomTypeID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeID" msprop:Generator_ColumnPropNameInRow="RoomTypeID" msprop:Generator_ColumnPropNameInTable="RoomTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PreInvText" msdata:ReadOnly="true" msprop:Generator_UserColumnName="PreInvText" msprop:Generator_ColumnVarNameInTable="columnPreInvText" msprop:Generator_ColumnPropNameInRow="PreInvText" msprop:Generator_ColumnPropNameInTable="PreInvTextColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvResTotal" msdata:ReadOnly="true" msprop:Generator_UserColumnName="InvResTotal" msprop:Generator_ColumnVarNameInTable="columnInvResTotal" msprop:Generator_ColumnPropNameInRow="InvResTotal" msprop:Generator_ColumnPropNameInTable="InvResTotalColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccAppTotal" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccAppTotal" msprop:Generator_ColumnVarNameInTable="columnAccAppTotal" msprop:Generator_ColumnPropNameInRow="AccAppTotal" msprop:Generator_ColumnPropNameInTable="AccAppTotalColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccResTotal" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccResTotal" msprop:Generator_ColumnVarNameInTable="columnAccResTotal" msprop:Generator_ColumnPropNameInRow="AccResTotal" msprop:Generator_ColumnPropNameInTable="AccResTotalColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="rnH" msdata:ReadOnly="true" msprop:Generator_UserColumnName="rnH" msprop:Generator_ColumnVarNameInTable="columnrnH" msprop:Generator_ColumnPropNameInRow="rnH" msprop:Generator_ColumnPropNameInTable="rnHColumn" type="xs:long" minOccurs="0" />
+              <xs:element name="AccResID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccResID" msprop:Generator_ColumnVarNameInTable="columnAccResID" msprop:Generator_ColumnPropNameInRow="AccResID" msprop:Generator_ColumnPropNameInTable="AccResIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="AccResDate" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccResDate" msprop:Generator_ColumnVarNameInTable="columnAccResDate" msprop:Generator_ColumnPropNameInRow="AccResDate" msprop:Generator_ColumnPropNameInTable="AccResDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="AccDocID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccDocID" msprop:Generator_ColumnVarNameInTable="columnAccDocID" msprop:Generator_ColumnPropNameInRow="AccDocID" msprop:Generator_ColumnPropNameInTable="AccDocIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DocCode" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="AccAppAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccAppAmount" msprop:Generator_ColumnVarNameInTable="columnAccAppAmount" msprop:Generator_ColumnPropNameInRow="AccAppAmount" msprop:Generator_ColumnPropNameInTable="AccAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccResAmount" msprop:Generator_ColumnVarNameInTable="columnAccResAmount" msprop:Generator_ColumnPropNameInRow="AccResAmount" msprop:Generator_ColumnPropNameInTable="AccResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="InvResBalance" msdata:ReadOnly="true" msdata:Expression="ISNULL(InvResTotal - AccAppTotal - AccResTotal,0)" msprop:Generator_UserColumnName="InvResBalance" msprop:Generator_ColumnVarNameInTable="columnInvResBalance" msprop:Generator_ColumnPropNameInRow="InvResBalance" msprop:Generator_ColumnPropNameInTable="InvResBalanceColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProformaTotal" msprop:Generator_UserTableName="ProformaTotal" msprop:Generator_RowDeletedName="ProformaTotalRowDeleted" msprop:Generator_RowChangedName="ProformaTotalRowChanged" msprop:Generator_RowClassName="ProformaTotalRow" msprop:Generator_RowChangingName="ProformaTotalRowChanging" msprop:Generator_RowEvArgName="ProformaTotalRowChangeEvent" msprop:Generator_RowEvHandlerName="ProformaTotalRowChangeEventHandler" msprop:Generator_TableClassName="ProformaTotalDataTable" msprop:Generator_TableVarName="tableProformaTotal" msprop:Generator_RowDeletingName="ProformaTotalRowDeleting" msprop:Generator_TablePropName="ProformaTotal">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="InvDocNum" msprop:Generator_UserColumnName="InvDocNum" msprop:Generator_ColumnVarNameInTable="columnInvDocNum" msprop:Generator_ColumnPropNameInRow="InvDocNum" msprop:Generator_ColumnPropNameInTable="InvDocNumColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BookingAmount" msprop:Generator_UserColumnName="BookingAmount" msprop:Generator_ColumnVarNameInTable="columnBookingAmount" msprop:Generator_ColumnPropNameInRow="BookingAmount" msprop:Generator_ColumnPropNameInTable="BookingAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ResAmount" msprop:Generator_UserColumnName="ResAmount" msprop:Generator_ColumnVarNameInTable="columnResAmount" msprop:Generator_ColumnPropNameInRow="ResAmount" msprop:Generator_ColumnPropNameInTable="ResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AppAmount" msprop:Generator_UserColumnName="AppAmount" msprop:Generator_ColumnVarNameInTable="columnAppAmount" msprop:Generator_ColumnPropNameInRow="AppAmount" msprop:Generator_ColumnPropNameInTable="AppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Underpayment" msprop:Generator_UserColumnName="Underpayment" msprop:Generator_ColumnVarNameInTable="columnUnderpayment" msprop:Generator_ColumnPropNameInRow="Underpayment" msprop:Generator_ColumnPropNameInTable="UnderpaymentColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Overpayment" msprop:Generator_UserColumnName="Overpayment" msprop:Generator_ColumnVarNameInTable="columnOverpayment" msprop:Generator_ColumnPropNameInRow="Overpayment" msprop:Generator_ColumnPropNameInTable="OverpaymentColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ProformaAccdocument" msprop:Generator_UserTableName="ProformaAccdocument" msprop:Generator_RowDeletedName="ProformaAccdocumentRowDeleted" msprop:Generator_RowChangedName="ProformaAccdocumentRowChanged" msprop:Generator_RowClassName="ProformaAccdocumentRow" msprop:Generator_RowChangingName="ProformaAccdocumentRowChanging" msprop:Generator_RowEvArgName="ProformaAccdocumentRowChangeEvent" msprop:Generator_RowEvHandlerName="ProformaAccdocumentRowChangeEventHandler" msprop:Generator_TableClassName="ProformaAccdocumentDataTable" msprop:Generator_TableVarName="tableProformaAccdocument" msprop:Generator_RowDeletingName="ProformaAccdocumentRowDeleting" msprop:Generator_TablePropName="ProformaAccdocument">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="DocumentID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" type="xs:int" />
+              <xs:element name="DocCode" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" />
+              <xs:element name="AccResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccResAmount" msprop:Generator_ColumnVarNameInTable="columnAccResAmount" msprop:Generator_ColumnPropNameInRow="AccResAmount" msprop:Generator_ColumnPropNameInTable="AccResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccAppAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AccAppAmount" msprop:Generator_ColumnVarNameInTable="columnAccAppAmount" msprop:Generator_ColumnPropNameInRow="AccAppAmount" msprop:Generator_ColumnPropNameInTable="AccAppAmountColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccDocReservation" msprop:Generator_UserTableName="AccDocReservation" msprop:Generator_RowDeletedName="AccDocReservationRowDeleted" msprop:Generator_RowChangedName="AccDocReservationRowChanged" msprop:Generator_RowClassName="AccDocReservationRow" msprop:Generator_RowChangingName="AccDocReservationRowChanging" msprop:Generator_RowEvArgName="AccDocReservationRowChangeEvent" msprop:Generator_RowEvHandlerName="AccDocReservationRowChangeEventHandler" msprop:Generator_TableClassName="AccDocReservationDataTable" msprop:Generator_TableVarName="tableAccDocReservation" msprop:Generator_RowDeletingName="AccDocReservationRowDeleting" msprop:Generator_TablePropName="AccDocReservation">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccResID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="AccResID" msprop:Generator_ColumnVarNameInTable="columnAccResID" msprop:Generator_ColumnPropNameInRow="AccResID" msprop:Generator_ColumnPropNameInTable="AccResIDColumn" type="xs:int" />
+              <xs:element name="AccDocID" msprop:Generator_UserColumnName="AccDocID" msprop:Generator_ColumnVarNameInTable="columnAccDocID" msprop:Generator_ColumnPropNameInRow="AccDocID" msprop:Generator_ColumnPropNameInTable="AccDocIDColumn" type="xs:int" />
+              <xs:element name="AccDocTransID" msprop:Generator_UserColumnName="AccDocTransID" msprop:Generator_ColumnVarNameInTable="columnAccDocTransID" msprop:Generator_ColumnPropNameInRow="AccDocTransID" msprop:Generator_ColumnPropNameInTable="AccDocTransIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="TransID" msprop:Generator_UserColumnName="TransID" msprop:Generator_ColumnVarNameInTable="columnTransID" msprop:Generator_ColumnPropNameInRow="TransID" msprop:Generator_ColumnPropNameInTable="TransIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="BookingID" msprop:Generator_UserColumnName="BookingID" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" type="xs:int" />
+              <xs:element name="FolioFull" msprop:Generator_UserColumnName="FolioFull" msprop:Generator_ColumnVarNameInTable="columnFolioFull" msprop:Generator_ColumnPropNameInRow="FolioFull" msprop:Generator_ColumnPropNameInTable="FolioFullColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AccInvoiceID" msprop:Generator_UserColumnName="AccInvoiceID" msprop:Generator_ColumnVarNameInTable="columnAccInvoiceID" msprop:Generator_ColumnPropNameInRow="AccInvoiceID" msprop:Generator_ColumnPropNameInTable="AccInvoiceIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="InvoiceD" msprop:Generator_UserColumnName="InvoiceD" msprop:Generator_ColumnVarNameInTable="columnInvoiceD" msprop:Generator_ColumnPropNameInRow="InvoiceD" msprop:Generator_ColumnPropNameInTable="InvoiceDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DetailID" msprop:Generator_UserColumnName="DetailID" msprop:Generator_ColumnVarNameInTable="columnDetailID" msprop:Generator_ColumnPropNameInRow="DetailID" msprop:Generator_ColumnPropNameInTable="DetailIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="AccResDate" msprop:Generator_UserColumnName="AccResDate" msprop:Generator_ColumnVarNameInTable="columnAccResDate" msprop:Generator_ColumnPropNameInRow="AccResDate" msprop:Generator_ColumnPropNameInTable="AccResDateColumn" type="xs:dateTime" />
+              <xs:element name="AccResAmount" msprop:Generator_UserColumnName="AccResAmount" msprop:Generator_ColumnVarNameInTable="columnAccResAmount" msprop:Generator_ColumnPropNameInRow="AccResAmount" msprop:Generator_ColumnPropNameInTable="AccResAmountColumn" type="xs:decimal" />
+              <xs:element name="AccResHAmount" msprop:Generator_UserColumnName="AccResHAmount" msprop:Generator_ColumnVarNameInTable="columnAccResHAmount" msprop:Generator_ColumnPropNameInRow="AccResHAmount" msprop:Generator_ColumnPropNameInTable="AccResHAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccAppAmount" msprop:Generator_UserColumnName="AccAppAmount" msprop:Generator_ColumnVarNameInTable="columnAccAppAmount" msprop:Generator_ColumnPropNameInRow="AccAppAmount" msprop:Generator_ColumnPropNameInTable="AccAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccAppHAmount" msprop:Generator_UserColumnName="AccAppHAmount" msprop:Generator_ColumnVarNameInTable="columnAccAppHAmount" msprop:Generator_ColumnPropNameInRow="AccAppHAmount" msprop:Generator_ColumnPropNameInTable="AccAppHAmountColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccVwDocEfective" msprop:Generator_UserTableName="AccVwDocEfective" msprop:Generator_RowDeletedName="AccVwDocEfectiveRowDeleted" msprop:Generator_RowChangedName="AccVwDocEfectiveRowChanged" msprop:Generator_RowClassName="AccVwDocEfectiveRow" msprop:Generator_RowChangingName="AccVwDocEfectiveRowChanging" msprop:Generator_RowEvArgName="AccVwDocEfectiveRowChangeEvent" msprop:Generator_RowEvHandlerName="AccVwDocEfectiveRowChangeEventHandler" msprop:Generator_TableClassName="AccVwDocEfectiveDataTable" msprop:Generator_TableVarName="tableAccVwDocEfective" msprop:Generator_RowDeletingName="AccVwDocEfectiveRowDeleting" msprop:Generator_TablePropName="AccVwDocEfective">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DocumentID" msprop:Generator_UserColumnName="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" type="xs:int" />
+              <xs:element name="DocCode" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" />
+              <xs:element name="DocOrd" msprop:Generator_UserColumnName="DocOrd" msprop:Generator_ColumnVarNameInTable="columnDocOrd" msprop:Generator_ColumnPropNameInRow="DocOrd" msprop:Generator_ColumnPropNameInTable="DocOrdColumn" type="xs:int" />
+              <xs:element name="DocDate" msprop:Generator_UserColumnName="DocDate" msprop:Generator_ColumnVarNameInTable="columnDocDate" msprop:Generator_ColumnPropNameInRow="DocDate" msprop:Generator_ColumnPropNameInTable="DocDateColumn" type="xs:dateTime" />
+              <xs:element name="BalanceDate" msprop:Generator_UserColumnName="BalanceDate" msprop:Generator_ColumnVarNameInTable="columnBalanceDate" msprop:Generator_ColumnPropNameInRow="BalanceDate" msprop:Generator_ColumnPropNameInTable="BalanceDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TourOpId" msprop:Generator_UserColumnName="TourOpId" msprop:Generator_ColumnVarNameInTable="columnTourOpId" msprop:Generator_ColumnPropNameInRow="TourOpId" msprop:Generator_ColumnPropNameInTable="TourOpIdColumn" type="xs:int" />
+              <xs:element name="HotelId" msprop:Generator_UserColumnName="HotelId" msprop:Generator_ColumnVarNameInTable="columnHotelId" msprop:Generator_ColumnPropNameInRow="HotelId" msprop:Generator_ColumnPropNameInTable="HotelIdColumn" type="xs:int" />
+              <xs:element name="Amount" msprop:Generator_UserColumnName="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="HAmount" msprop:Generator_UserColumnName="HAmount" msprop:Generator_ColumnVarNameInTable="columnHAmount" msprop:Generator_ColumnPropNameInRow="HAmount" msprop:Generator_ColumnPropNameInTable="HAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AppAmount" msprop:Generator_UserColumnName="AppAmount" msprop:Generator_ColumnVarNameInTable="columnAppAmount" msprop:Generator_ColumnPropNameInRow="AppAmount" msprop:Generator_ColumnPropNameInTable="AppAmountColumn" type="xs:decimal" />
+              <xs:element name="AppHAmount" msprop:Generator_UserColumnName="AppHAmount" msprop:Generator_ColumnVarNameInTable="columnAppHAmount" msprop:Generator_ColumnPropNameInRow="AppHAmount" msprop:Generator_ColumnPropNameInTable="AppHAmountColumn" type="xs:decimal" />
+              <xs:element name="Balance" msprop:Generator_UserColumnName="Balance" msprop:Generator_ColumnVarNameInTable="columnBalance" msprop:Generator_ColumnPropNameInRow="Balance" msprop:Generator_ColumnPropNameInTable="BalanceColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="HBalance" msprop:Generator_UserColumnName="HBalance" msprop:Generator_ColumnVarNameInTable="columnHBalance" msprop:Generator_ColumnPropNameInRow="HBalance" msprop:Generator_ColumnPropNameInTable="HBalanceColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="ResAmount" msprop:Generator_ColumnVarNameInTable="columnResAmount" msprop:Generator_ColumnPropNameInRow="ResAmount" msprop:Generator_ColumnPropNameInTable="ResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="EfectiveAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="EfectiveAmount" msprop:Generator_ColumnVarNameInTable="columnEfectiveAmount" msprop:Generator_ColumnPropNameInRow="EfectiveAmount" msprop:Generator_ColumnPropNameInTable="EfectiveAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Hotel" msprop:Generator_UserColumnName="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccDoc4Payment" msprop:Generator_UserTableName="AccDoc4Payment" msprop:Generator_RowDeletedName="AccDoc4PaymentRowDeleted" msprop:Generator_RowChangedName="AccDoc4PaymentRowChanged" msprop:Generator_RowClassName="AccDoc4PaymentRow" msprop:Generator_RowChangingName="AccDoc4PaymentRowChanging" msprop:Generator_RowEvArgName="AccDoc4PaymentRowChangeEvent" msprop:Generator_RowEvHandlerName="AccDoc4PaymentRowChangeEventHandler" msprop:Generator_TableClassName="AccDoc4PaymentDataTable" msprop:Generator_TableVarName="tableAccDoc4Payment" msprop:Generator_RowDeletingName="AccDoc4PaymentRowDeleting" msprop:Generator_TablePropName="AccDoc4Payment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="HotelID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="HotelID" msprop:Generator_ColumnVarNameInTable="columnHotelID" msprop:Generator_ColumnPropNameInRow="HotelID" msprop:Generator_ColumnPropNameInTable="HotelIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="Hotel" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="rHtl" msdata:ReadOnly="true" msprop:Generator_UserColumnName="rHtl" msprop:Generator_ColumnVarNameInTable="columnrHtl" msprop:Generator_ColumnPropNameInRow="rHtl" msprop:Generator_ColumnPropNameInTable="rHtlColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DocumentID" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DocCode" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="EfectiveAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="EfectiveAmount" msprop:Generator_ColumnVarNameInTable="columnEfectiveAmount" msprop:Generator_ColumnPropNameInRow="EfectiveAmount" msprop:Generator_ColumnPropNameInTable="EfectiveAmountColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvDocStatement" msprop:Generator_UserTableName="InvDocStatement" msprop:Generator_RowDeletedName="InvDocStatementRowDeleted" msprop:Generator_RowChangedName="InvDocStatementRowChanged" msprop:Generator_RowClassName="InvDocStatementRow" msprop:Generator_RowChangingName="InvDocStatementRowChanging" msprop:Generator_RowEvArgName="InvDocStatementRowChangeEvent" msprop:Generator_RowEvHandlerName="InvDocStatementRowChangeEventHandler" msprop:Generator_TableClassName="InvDocStatementDataTable" msprop:Generator_TableVarName="tableInvDocStatement" msprop:Generator_RowDeletingName="InvDocStatementRowDeleting" msprop:Generator_TablePropName="InvDocStatement">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="InvDocNum" msprop:Generator_UserColumnName="InvDocNum" msprop:Generator_ColumnPropNameInRow="InvDocNum" msprop:Generator_ColumnVarNameInTable="columnInvDocNum" msprop:Generator_ColumnPropNameInTable="InvDocNumColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TourOpID" msprop:Generator_UserColumnName="TourOpID" msprop:Generator_ColumnPropNameInRow="TourOpID" msprop:Generator_ColumnVarNameInTable="columnTourOpID" msprop:Generator_ColumnPropNameInTable="TourOpIDColumn" type="xs:int" />
+              <xs:element name="TourOp" msprop:Generator_UserColumnName="TourOp" msprop:Generator_ColumnPropNameInRow="TourOp" msprop:Generator_ColumnVarNameInTable="columnTourOp" msprop:Generator_ColumnPropNameInTable="TourOpColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BookingAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BookingAmount" msprop:Generator_ColumnPropNameInRow="BookingAmount" msprop:Generator_ColumnVarNameInTable="columnBookingAmount" msprop:Generator_ColumnPropNameInTable="BookingAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="ResAmount" msprop:Generator_ColumnPropNameInRow="ResAmount" msprop:Generator_ColumnVarNameInTable="columnResAmount" msprop:Generator_ColumnPropNameInTable="ResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AppAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="AppAmount" msprop:Generator_ColumnPropNameInRow="AppAmount" msprop:Generator_ColumnVarNameInTable="columnAppAmount" msprop:Generator_ColumnPropNameInTable="AppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Overpayment" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Overpayment" msprop:Generator_ColumnPropNameInRow="Overpayment" msprop:Generator_ColumnVarNameInTable="columnOverpayment" msprop:Generator_ColumnPropNameInTable="OverpaymentColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Underpayment" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Underpayment" msprop:Generator_ColumnPropNameInRow="Underpayment" msprop:Generator_ColumnVarNameInTable="columnUnderpayment" msprop:Generator_ColumnPropNameInTable="UnderpaymentColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocumentID" msprop:Generator_UserColumnName="DocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DocCode" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="AccAppAmount" msprop:Generator_UserColumnName="AccAppAmount" msprop:Generator_ColumnPropNameInRow="AccAppAmount" msprop:Generator_ColumnVarNameInTable="columnAccAppAmount" msprop:Generator_ColumnPropNameInTable="AccAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AccResAmount" msprop:Generator_UserColumnName="AccResAmount" msprop:Generator_ColumnPropNameInRow="AccResAmount" msprop:Generator_ColumnVarNameInTable="columnAccResAmount" msprop:Generator_ColumnPropNameInTable="AccResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="rnk" msprop:Generator_UserColumnName="rnk" msprop:Generator_ColumnVarNameInTable="columnrnk" msprop:Generator_ColumnPropNameInRow="rnk" msprop:Generator_ColumnPropNameInTable="rnkColumn" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvDocStatementDetail" msprop:Generator_UserTableName="InvDocStatementDetail" msprop:Generator_RowDeletedName="InvDocStatementDetailRowDeleted" msprop:Generator_RowChangedName="InvDocStatementDetailRowChanged" msprop:Generator_RowClassName="InvDocStatementDetailRow" msprop:Generator_RowChangingName="InvDocStatementDetailRowChanging" msprop:Generator_RowEvArgName="InvDocStatementDetailRowChangeEvent" msprop:Generator_RowEvHandlerName="InvDocStatementDetailRowChangeEventHandler" msprop:Generator_TableClassName="InvDocStatementDetailDataTable" msprop:Generator_TableVarName="tableInvDocStatementDetail" msprop:Generator_RowDeletingName="InvDocStatementDetailRowDeleting" msprop:Generator_TablePropName="InvDocStatementDetail">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="InvDocNum" msprop:Generator_UserColumnName="InvDocNum" msprop:Generator_ColumnPropNameInRow="InvDocNum" msprop:Generator_ColumnVarNameInTable="columnInvDocNum" msprop:Generator_ColumnPropNameInTable="InvDocNumColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GroupName" msprop:Generator_UserColumnName="GroupName" msprop:Generator_ColumnPropNameInRow="GroupName" msprop:Generator_ColumnVarNameInTable="columnGroupName" msprop:Generator_ColumnPropNameInTable="GroupNameColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TourOpID" msprop:Generator_UserColumnName="TourOpID" msprop:Generator_ColumnPropNameInRow="TourOpID" msprop:Generator_ColumnVarNameInTable="columnTourOpID" msprop:Generator_ColumnPropNameInTable="TourOpIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="TourOp" msprop:Generator_UserColumnName="TourOp" msprop:Generator_ColumnPropNameInRow="TourOp" msprop:Generator_ColumnVarNameInTable="columnTourOp" msprop:Generator_ColumnPropNameInTable="TourOpColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HotelID" msprop:Generator_UserColumnName="HotelID" msprop:Generator_ColumnPropNameInRow="HotelID" msprop:Generator_ColumnVarNameInTable="columnHotelID" msprop:Generator_ColumnPropNameInTable="HotelIDColumn" type="xs:int" />
+              <xs:element name="Hotel" msprop:Generator_UserColumnName="Hotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInTable="HotelColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvResAmount" msprop:Generator_UserColumnName="InvResAmount" msprop:Generator_ColumnPropNameInRow="InvResAmount" msprop:Generator_ColumnVarNameInTable="columnInvResAmount" msprop:Generator_ColumnPropNameInTable="InvResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BookingID" msprop:Generator_UserColumnName="BookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" type="xs:int" />
+              <xs:element name="FolioFull" msprop:Generator_UserColumnName="FolioFull" msprop:Generator_ColumnPropNameInRow="FolioFull" msprop:Generator_ColumnVarNameInTable="columnFolioFull" msprop:Generator_ColumnPropNameInTable="FolioFullColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocItemState" msprop:Generator_UserColumnName="InvDocItemState" msprop:Generator_ColumnPropNameInRow="InvDocItemState" msprop:Generator_ColumnVarNameInTable="columnInvDocItemState" msprop:Generator_ColumnPropNameInTable="InvDocItemStateColumn" type="xs:int" />
+              <xs:element name="BookingState" msprop:Generator_UserColumnName="BookingState" msprop:Generator_ColumnPropNameInRow="BookingState" msprop:Generator_ColumnVarNameInTable="columnBookingState" msprop:Generator_ColumnPropNameInTable="BookingStateColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InHouseState" msprop:Generator_UserColumnName="InHouseState" msprop:Generator_ColumnPropNameInRow="InHouseState" msprop:Generator_ColumnVarNameInTable="columnInHouseState" msprop:Generator_ColumnPropNameInTable="InHouseStateColumn" type="xs:short" />
+              <xs:element name="ChangeSuppress" msprop:Generator_UserColumnName="ChangeSuppress" msprop:Generator_ColumnPropNameInRow="ChangeSuppress" msprop:Generator_ColumnVarNameInTable="columnChangeSuppress" msprop:Generator_ColumnPropNameInTable="ChangeSuppressColumn" type="xs:boolean" />
+              <xs:element name="BkDate" msprop:Generator_UserColumnName="BkDate" msprop:Generator_ColumnPropNameInRow="BkDate" msprop:Generator_ColumnVarNameInTable="columnBkDate" msprop:Generator_ColumnPropNameInTable="BkDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BkNumber" msprop:Generator_UserColumnName="BkNumber" msprop:Generator_ColumnPropNameInRow="BkNumber" msprop:Generator_ColumnVarNameInTable="columnBkNumber" msprop:Generator_ColumnPropNameInTable="BkNumberColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MealPlanID" msprop:Generator_UserColumnName="MealPlanID" msprop:Generator_ColumnPropNameInRow="MealPlanID" msprop:Generator_ColumnVarNameInTable="columnMealPlanID" msprop:Generator_ColumnPropNameInTable="MealPlanIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomNum" msprop:Generator_UserColumnName="RoomNum" msprop:Generator_ColumnPropNameInRow="RoomNum" msprop:Generator_ColumnVarNameInTable="columnRoomNum" msprop:Generator_ColumnPropNameInTable="RoomNumColumn" type="xs:int" />
+              <xs:element name="RoomTypeID" msprop:Generator_UserColumnName="RoomTypeID" msprop:Generator_ColumnPropNameInRow="RoomTypeID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeID" msprop:Generator_ColumnPropNameInTable="RoomTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PreInvText" msprop:Generator_UserColumnName="PreInvText" msprop:Generator_ColumnPropNameInRow="PreInvText" msprop:Generator_ColumnVarNameInTable="columnPreInvText" msprop:Generator_ColumnPropNameInTable="PreInvTextColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CheckIn" msprop:Generator_UserColumnName="CheckIn" msprop:Generator_ColumnPropNameInRow="CheckIn" msprop:Generator_ColumnVarNameInTable="columnCheckIn" msprop:Generator_ColumnPropNameInTable="CheckInColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CheckOut" msprop:Generator_UserColumnName="CheckOut" msprop:Generator_ColumnPropNameInRow="CheckOut" msprop:Generator_ColumnVarNameInTable="columnCheckOut" msprop:Generator_ColumnPropNameInTable="CheckOutColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BookTotalAmount" msprop:Generator_UserColumnName="BookTotalAmount" msprop:Generator_ColumnPropNameInRow="BookTotalAmount" msprop:Generator_ColumnVarNameInTable="columnBookTotalAmount" msprop:Generator_ColumnPropNameInTable="BookTotalAmountColumn" type="xs:decimal" />
+              <xs:element name="BookAppAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BookAppAmount" msprop:Generator_ColumnPropNameInRow="BookAppAmount" msprop:Generator_ColumnVarNameInTable="columnBookAppAmount" msprop:Generator_ColumnPropNameInTable="BookAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BookResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BookResAmount" msprop:Generator_ColumnPropNameInRow="BookResAmount" msprop:Generator_ColumnVarNameInTable="columnBookResAmount" msprop:Generator_ColumnPropNameInTable="BookResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="rnH" msprop:Generator_UserColumnName="rnH" msprop:Generator_ColumnPropNameInRow="rnH" msprop:Generator_ColumnVarNameInTable="columnrnH" msprop:Generator_ColumnPropNameInTable="rnHColumn" type="xs:long" minOccurs="0" />
+              <xs:element name="Underpayment" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Underpayment" msprop:Generator_ColumnPropNameInRow="Underpayment" msprop:Generator_ColumnVarNameInTable="columnUnderpayment" msprop:Generator_ColumnPropNameInTable="UnderpaymentColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Overpayment" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Overpayment" msprop:Generator_ColumnPropNameInRow="Overpayment" msprop:Generator_ColumnVarNameInTable="columnOverpayment" msprop:Generator_ColumnPropNameInTable="OverpaymentColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocumentID" msprop:Generator_UserColumnName="DocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DocCode" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DocDate" msprop:Generator_UserColumnName="DocDate" msprop:Generator_ColumnPropNameInRow="DocDate" msprop:Generator_ColumnVarNameInTable="columnDocDate" msprop:Generator_ColumnPropNameInTable="DocDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DocAmount" msprop:Generator_UserColumnName="DocAmount" msprop:Generator_ColumnPropNameInRow="DocAmount" msprop:Generator_ColumnVarNameInTable="columnDocAmount" msprop:Generator_ColumnPropNameInTable="DocAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocAppAmount" msprop:Generator_UserColumnName="DocAppAmount" msprop:Generator_ColumnPropNameInRow="DocAppAmount" msprop:Generator_ColumnVarNameInTable="columnDocAppAmount" msprop:Generator_ColumnPropNameInTable="DocAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocResAmount" msprop:Generator_UserColumnName="DocResAmount" msprop:Generator_ColumnPropNameInRow="DocResAmount" msprop:Generator_ColumnVarNameInTable="columnDocResAmount" msprop:Generator_ColumnPropNameInTable="DocResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocTotalAppAmount" msprop:Generator_UserColumnName="DocTotalAppAmount" msprop:Generator_ColumnPropNameInRow="DocTotalAppAmount" msprop:Generator_ColumnVarNameInTable="columnDocTotalAppAmount" msprop:Generator_ColumnPropNameInTable="DocTotalAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocTotalResAmount" msprop:Generator_UserColumnName="DocTotalResAmount" msprop:Generator_ColumnPropNameInRow="DocTotalResAmount" msprop:Generator_ColumnVarNameInTable="columnDocTotalResAmount" msprop:Generator_ColumnPropNameInTable="DocTotalResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="rnHb" msprop:Generator_UserColumnName="rnHb" msprop:Generator_ColumnVarNameInTable="columnrnHb" msprop:Generator_ColumnPropNameInRow="rnHb" msprop:Generator_ColumnPropNameInTable="rnHbColumn" type="xs:long" minOccurs="0" />
+              <xs:element name="DocAppDate" msprop:Generator_UserColumnName="DocAppDate" msprop:Generator_ColumnPropNameInRow="DocAppDate" msprop:Generator_ColumnVarNameInTable="columnDocAppDate" msprop:Generator_ColumnPropNameInTable="DocAppDateColumn" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvDocBatch_Proforma" msprop:Generator_UserTableName="InvDocBatch_Proforma" msprop:Generator_RowDeletedName="InvDocBatch_ProformaRowDeleted" msprop:Generator_RowChangedName="InvDocBatch_ProformaRowChanged" msprop:Generator_RowClassName="InvDocBatch_ProformaRow" msprop:Generator_RowChangingName="InvDocBatch_ProformaRowChanging" msprop:Generator_RowEvArgName="InvDocBatch_ProformaRowChangeEvent" msprop:Generator_RowEvHandlerName="InvDocBatch_ProformaRowChangeEventHandler" msprop:Generator_TableClassName="InvDocBatch_ProformaDataTable" msprop:Generator_TableVarName="tableInvDocBatch_Proforma" msprop:Generator_RowDeletingName="InvDocBatch_ProformaRowDeleting" msprop:Generator_TablePropName="InvDocBatch_Proforma">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="TourOpID" msprop:Generator_UserColumnName="TourOpID" msprop:Generator_ColumnVarNameInTable="columnTourOpID" msprop:Generator_ColumnPropNameInRow="TourOpID" msprop:Generator_ColumnPropNameInTable="TourOpIDColumn" type="xs:int" />
+              <xs:element name="TourOp" msprop:Generator_UserColumnName="TourOp" msprop:Generator_ColumnVarNameInTable="columnTourOp" msprop:Generator_ColumnPropNameInRow="TourOp" msprop:Generator_ColumnPropNameInTable="TourOpColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HotelID" msprop:Generator_UserColumnName="HotelID" msprop:Generator_ColumnVarNameInTable="columnHotelID" msprop:Generator_ColumnPropNameInRow="HotelID" msprop:Generator_ColumnPropNameInTable="HotelIDColumn" type="xs:int" />
+              <xs:element name="Hotel" msprop:Generator_UserColumnName="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocNum" msprop:Generator_UserColumnName="InvDocNum" msprop:Generator_ColumnVarNameInTable="columnInvDocNum" msprop:Generator_ColumnPropNameInRow="InvDocNum" msprop:Generator_ColumnPropNameInTable="InvDocNumColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocGroupName" msprop:Generator_UserColumnName="InvDocGroupName" msprop:Generator_ColumnVarNameInTable="columnInvDocGroupName" msprop:Generator_ColumnPropNameInRow="InvDocGroupName" msprop:Generator_ColumnPropNameInTable="InvDocGroupNameColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocSourcePMS" msprop:Generator_UserColumnName="InvDocSourcePMS" msprop:Generator_ColumnVarNameInTable="columnInvDocSourcePMS" msprop:Generator_ColumnPropNameInRow="InvDocSourcePMS" msprop:Generator_ColumnPropNameInTable="InvDocSourcePMSColumn" type="xs:int" />
+              <xs:element name="InvDocDate" msprop:Generator_UserColumnName="InvDocDate" msprop:Generator_ColumnVarNameInTable="columnInvDocDate" msprop:Generator_ColumnPropNameInRow="InvDocDate" msprop:Generator_ColumnPropNameInTable="InvDocDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="InvDocStateID" msprop:Generator_UserColumnName="InvDocStateID" msprop:Generator_ColumnVarNameInTable="columnInvDocStateID" msprop:Generator_ColumnPropNameInRow="InvDocStateID" msprop:Generator_ColumnPropNameInTable="InvDocStateIDColumn" type="xs:int" />
+              <xs:element name="InvDocStateText" msprop:Generator_UserColumnName="InvDocStateText" msprop:Generator_ColumnVarNameInTable="columnInvDocStateText" msprop:Generator_ColumnPropNameInRow="InvDocStateText" msprop:Generator_ColumnPropNameInTable="InvDocStateTextColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocReviewDate" msprop:Generator_UserColumnName="InvDocReviewDate" msprop:Generator_ColumnVarNameInTable="columnInvDocReviewDate" msprop:Generator_ColumnPropNameInRow="InvDocReviewDate" msprop:Generator_ColumnPropNameInTable="InvDocReviewDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="InvDocDeliveryDate" msprop:Generator_UserColumnName="InvDocDeliveryDate" msprop:Generator_ColumnVarNameInTable="columnInvDocDeliveryDate" msprop:Generator_ColumnPropNameInRow="InvDocDeliveryDate" msprop:Generator_ColumnPropNameInTable="InvDocDeliveryDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="InvDocComment" msprop:Generator_UserColumnName="InvDocComment" msprop:Generator_ColumnVarNameInTable="columnInvDocComment" msprop:Generator_ColumnPropNameInRow="InvDocComment" msprop:Generator_ColumnPropNameInTable="InvDocCommentColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1024" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BookingID" msprop:Generator_UserColumnName="BookingID" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" type="xs:int" />
+              <xs:element name="BkNumber" msprop:Generator_UserColumnName="BkNumber" msprop:Generator_ColumnVarNameInTable="columnBkNumber" msprop:Generator_ColumnPropNameInRow="BkNumber" msprop:Generator_ColumnPropNameInTable="BkNumberColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BkGuest" msprop:Generator_UserColumnName="BkGuest" msprop:Generator_ColumnVarNameInTable="columnBkGuest" msprop:Generator_ColumnPropNameInRow="BkGuest" msprop:Generator_ColumnPropNameInTable="BkGuestColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BkAmount" msprop:Generator_UserColumnName="BkAmount" msprop:Generator_ColumnVarNameInTable="columnBkAmount" msprop:Generator_ColumnPropNameInRow="BkAmount" msprop:Generator_ColumnPropNameInTable="BkAmountColumn" type="xs:decimal" />
+              <xs:element name="BkAppAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BkAppAmount" msprop:Generator_ColumnVarNameInTable="columnBkAppAmount" msprop:Generator_ColumnPropNameInRow="BkAppAmount" msprop:Generator_ColumnPropNameInTable="BkAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BkResAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BkResAmount" msprop:Generator_ColumnVarNameInTable="columnBkResAmount" msprop:Generator_ColumnPropNameInRow="BkResAmount" msprop:Generator_ColumnPropNameInTable="BkResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BkUnderpayment" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BkUnderpayment" msprop:Generator_ColumnVarNameInTable="columnBkUnderpayment" msprop:Generator_ColumnPropNameInRow="BkUnderpayment" msprop:Generator_ColumnPropNameInTable="BkUnderpaymentColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BkOverpayment" msdata:ReadOnly="true" msprop:Generator_UserColumnName="BkOverpayment" msprop:Generator_ColumnVarNameInTable="columnBkOverpayment" msprop:Generator_ColumnPropNameInRow="BkOverpayment" msprop:Generator_ColumnPropNameInTable="BkOverpaymentColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BkOrder" msprop:Generator_UserColumnName="BkOrder" msprop:Generator_ColumnVarNameInTable="columnBkOrder" msprop:Generator_ColumnPropNameInRow="BkOrder" msprop:Generator_ColumnPropNameInTable="BkOrderColumn" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InvDocBatch_Payments" msprop:Generator_UserTableName="InvDocBatch_Payments" msprop:Generator_RowDeletedName="InvDocBatch_PaymentsRowDeleted" msprop:Generator_RowChangedName="InvDocBatch_PaymentsRowChanged" msprop:Generator_RowClassName="InvDocBatch_PaymentsRow" msprop:Generator_RowChangingName="InvDocBatch_PaymentsRowChanging" msprop:Generator_RowEvArgName="InvDocBatch_PaymentsRowChangeEvent" msprop:Generator_RowEvHandlerName="InvDocBatch_PaymentsRowChangeEventHandler" msprop:Generator_TableClassName="InvDocBatch_PaymentsDataTable" msprop:Generator_TableVarName="tableInvDocBatch_Payments" msprop:Generator_RowDeletingName="InvDocBatch_PaymentsRowDeleting" msprop:Generator_TablePropName="InvDocBatch_Payments">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DocumentID" msprop:Generator_UserColumnName="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" type="xs:int" />
+              <xs:element name="TourOpId" msprop:Generator_UserColumnName="TourOpId" msprop:Generator_ColumnVarNameInTable="columnTourOpId" msprop:Generator_ColumnPropNameInRow="TourOpId" msprop:Generator_ColumnPropNameInTable="TourOpIdColumn" type="xs:int" />
+              <xs:element name="TourOp" msprop:Generator_UserColumnName="TourOp" msprop:Generator_ColumnVarNameInTable="columnTourOp" msprop:Generator_ColumnPropNameInRow="TourOp" msprop:Generator_ColumnPropNameInTable="TourOpColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HotelId" msprop:Generator_UserColumnName="HotelId" msprop:Generator_ColumnVarNameInTable="columnHotelId" msprop:Generator_ColumnPropNameInRow="HotelId" msprop:Generator_ColumnPropNameInTable="HotelIdColumn" type="xs:int" />
+              <xs:element name="Hotel" msprop:Generator_UserColumnName="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocCode" msprop:Generator_UserColumnName="DocCode" msprop:Generator_ColumnVarNameInTable="columnDocCode" msprop:Generator_ColumnPropNameInRow="DocCode" msprop:Generator_ColumnPropNameInTable="DocCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocNumber" msprop:Generator_UserColumnName="DocNumber" msprop:Generator_ColumnVarNameInTable="columnDocNumber" msprop:Generator_ColumnPropNameInRow="DocNumber" msprop:Generator_ColumnPropNameInTable="DocNumberColumn" type="xs:int" />
+              <xs:element name="DocDate" msprop:Generator_UserColumnName="DocDate" msprop:Generator_ColumnVarNameInTable="columnDocDate" msprop:Generator_ColumnPropNameInRow="DocDate" msprop:Generator_ColumnPropNameInTable="DocDateColumn" type="xs:dateTime" />
+              <xs:element name="DocAmount" msprop:Generator_UserColumnName="DocAmount" msprop:Generator_ColumnVarNameInTable="columnDocAmount" msprop:Generator_ColumnPropNameInRow="DocAmount" msprop:Generator_ColumnPropNameInTable="DocAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocAppAmount" msprop:Generator_UserColumnName="DocAppAmount" msprop:Generator_ColumnVarNameInTable="columnDocAppAmount" msprop:Generator_ColumnPropNameInRow="DocAppAmount" msprop:Generator_ColumnPropNameInTable="DocAppAmountColumn" type="xs:decimal" />
+              <xs:element name="DocResAmount" msprop:Generator_UserColumnName="DocResAmount" msprop:Generator_ColumnVarNameInTable="columnDocResAmount" msprop:Generator_ColumnPropNameInRow="DocResAmount" msprop:Generator_ColumnPropNameInTable="DocResAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocEfectiveAmount" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DocEfectiveAmount" msprop:Generator_ColumnVarNameInTable="columnDocEfectiveAmount" msprop:Generator_ColumnPropNameInRow="DocEfectiveAmount" msprop:Generator_ColumnPropNameInTable="DocEfectiveAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DocReference" msprop:Generator_UserColumnName="DocReference" msprop:Generator_ColumnVarNameInTable="columnDocReference" msprop:Generator_ColumnPropNameInRow="DocReference" msprop:Generator_ColumnPropNameInTable="DocReferenceColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvDocID" msprop:Generator_UserColumnName="InvDocID" msprop:Generator_ColumnVarNameInTable="columnInvDocID" msprop:Generator_ColumnPropNameInRow="InvDocID" msprop:Generator_ColumnPropNameInTable="InvDocIDColumn" type="xs:int" />
+              <xs:element name="InvDocNum" msprop:Generator_UserColumnName="InvDocNum" msprop:Generator_ColumnVarNameInTable="columnInvDocNum" msprop:Generator_ColumnPropNameInRow="InvDocNum" msprop:Generator_ColumnPropNameInTable="InvDocNumColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BookingID" msprop:Generator_UserColumnName="BookingID" msprop:Generator_ColumnVarNameInTable="columnBookingID" msprop:Generator_ColumnPropNameInRow="BookingID" msprop:Generator_ColumnPropNameInTable="BookingIDColumn" type="xs:int" />
+              <xs:element name="BkNumber" msprop:Generator_UserColumnName="BkNumber" msprop:Generator_ColumnVarNameInTable="columnBkNumber" msprop:Generator_ColumnPropNameInRow="BkNumber" msprop:Generator_ColumnPropNameInTable="BkNumberColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BkGuest" msprop:Generator_UserColumnName="BkGuest" msprop:Generator_ColumnVarNameInTable="columnBkGuest" msprop:Generator_ColumnPropNameInRow="BkGuest" msprop:Generator_ColumnPropNameInTable="BkGuestColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BkDocAppDate" msprop:Generator_UserColumnName="BkDocAppDate" msprop:Generator_ColumnVarNameInTable="columnBkDocAppDate" msprop:Generator_ColumnPropNameInRow="BkDocAppDate" msprop:Generator_ColumnPropNameInTable="BkDocAppDateColumn" type="xs:dateTime" />
+              <xs:element name="BkDocAppAmount" msprop:Generator_UserColumnName="BkDocAppAmount" msprop:Generator_ColumnVarNameInTable="columnBkDocAppAmount" msprop:Generator_ColumnPropNameInRow="BkDocAppAmount" msprop:Generator_ColumnPropNameInTable="BkDocAppAmountColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BkDocResAmount" msprop:Generator_UserColumnName="BkDocResAmount" msprop:Generator_ColumnVarNameInTable="columnBkDocResAmount" msprop:Generator_ColumnPropNameInRow="BkDocResAmount" msprop:Generator_ColumnPropNameInTable="BkDocResAmountColumn" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccAppTransfer" />
+      <xs:field xpath="mstns:TrDocID" />
+      <xs:field xpath="mstns:TransferID" />
+    </xs:unique>
+    <xs:unique name="AccDocProforma_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccDocProforma" />
+      <xs:field xpath="mstns:TrDocID" />
+    </xs:unique>
+    <xs:unique name="ProformaItem_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ProformaItem" />
+      <xs:field xpath="mstns:InvDocID" />
+      <xs:field xpath="mstns:BookingID" />
+      <xs:field xpath="mstns:rnH" />
+    </xs:unique>
+    <xs:unique name="ProformaTotal_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ProformaTotal" />
+      <xs:field xpath="mstns:InvDocID" />
+    </xs:unique>
+    <xs:unique name="ProformaAccdocument_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ProformaAccdocument" />
+      <xs:field xpath="mstns:InvDocID" />
+      <xs:field xpath="mstns:DocumentID" />
+    </xs:unique>
+    <xs:unique name="AccDocReservation_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccDocReservation" />
+      <xs:field xpath="mstns:AccResID" />
+    </xs:unique>
+    <xs:unique name="AccVwDocEfective_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccVwDocEfective" />
+      <xs:field xpath="mstns:DocumentID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

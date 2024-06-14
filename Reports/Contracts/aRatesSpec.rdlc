@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="csSMART_SQL">
+      <rd:DataSourceID>254eed1a-a98f-4572-9529-75e267b8f77f</rd:DataSourceID>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <InteractiveHeight>29.7cm</InteractiveHeight>
+  <ReportParameters>
+    <ReportParameter Name="sid">
+      <DataType>Integer</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Report_Parameter_0</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>21cm</InteractiveWidth>
+  <rd:GridSpacing>0.25cm</rd:GridSpacing>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <RightMargin>2.5cm</RightMargin>
+  <LeftMargin>2.5cm</LeftMargin>
+  <BottomMargin>2.5cm</BottomMargin>
+  <rd:ReportID>a7419599-d14d-4dbc-841a-c0e89b92a64c</rd:ReportID>
+  <PageWidth>21cm</PageWidth>
+  <DataSets>
+    <DataSet Name="CntReports_SpecForRateReport">
+      <Fields>
+        <Field Name="SpecialID">
+          <DataField>SpecialID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="HotelId">
+          <DataField>HotelId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Hotel">
+          <DataField>Hotel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Category">
+          <DataField>Category</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BookingCode">
+          <DataField>BookingCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RateOption">
+          <DataField>RateOption</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="RateOptionDisp">
+          <DataField>RateOptionDisp</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Start">
+          <DataField>Start</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Finish">
+          <DataField>Finish</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="BkStart">
+          <DataField>BkStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="BkFinish">
+          <DataField>BkFinish</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Payment">
+          <DataField>Payment</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="RoomingList">
+          <DataField>RoomingList</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="StayCriteriaMin">
+          <DataField>StayCriteriaMin</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="StayCriteriaMax">
+          <DataField>StayCriteriaMax</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="PrDiscountTypeId">
+          <DataField>PrDiscountTypeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PrType">
+          <DataField>PrType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PrDiscountOn">
+          <DataField>PrDiscountOn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PrOn">
+          <DataField>PrOn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PrDiscount">
+          <DataField>PrDiscount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="PrPropagate">
+          <DataField>PrPropagate</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ScDiscountTypeId">
+          <DataField>ScDiscountTypeId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ScType">
+          <DataField>ScType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ScDiscountOn">
+          <DataField>ScDiscountOn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ScOn">
+          <DataField>ScOn</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ScDiscount">
+          <DataField>ScDiscount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StateId">
+          <DataField>StateId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CtrEBB">
+          <DataField>CtrEBB</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="RateTypeId">
+          <DataField>RateTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RateCodeId">
+          <DataField>RateCodeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RateRecieved">
+          <DataField>RateRecieved</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!SpecialID.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!sid.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+      <Query>
+        <DataSourceName>csSMART_SQL</DataSourceName>
+        <CommandText>SELECT     s.SpecialID, s.HotelId, h.Hotel, s.Category, s.BookingCode, s.RateOption, 
+                      CASE s.RateOption WHEN 0 THEN 'PerArrival' WHEN 1 THEN 'PerStay' ELSE 'Inclusiv' END AS RateOptionDisp, s.Start, s.Finish, s.BkStart, 
+                      s.BkFinish, s.Payment, s.RoomingList, s.StayCriteriaMin, s.StayCriteriaMax, s.PrDiscountTypeId, d1.DiscountType AS PrType, s.PrDiscountOn, 
+                      CASE s.PrDiscountOn WHEN 'F' THEN 'All' WHEN 'A' THEN 'Adults' WHEN 'E' THEN 'ExtraPax' WHEN 'C' THEN 'Children' ELSE '-' END AS PrOn, 
+                      s.PrDiscount, s.PrPropagate, s.ScDiscountTypeId, ISNULL(d2.DiscountType, '-') AS ScType, s.ScDiscountOn, 
+                      CASE s.ScDiscountOn WHEN 'F' THEN 'All' WHEN 'A' THEN 'Adults' WHEN 'E' THEN 'ExtraPax' WHEN 'C' THEN 'Children' ELSE '-' END AS ScOn, 
+                      s.ScDiscount, s.Description, s.StateId, s.CtrEBB, s.RateTypeId, s.RateCodeId, s.Title, s.RateRecieved
+FROM         Special AS s INNER JOIN
+                      Hotel AS h ON s.HotelId = h.HotelID LEFT OUTER JOIN
+                      SpecialDiscountType AS d1 ON s.PrDiscountTypeId = d1.DiscountTypeID LEFT OUTER JOIN
+                      SpecialDiscountType AS d2 ON s.ScDiscountTypeId = d2.DiscountTypeID</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>CntReports</rd:DataSetName>
+        <rd:TableName>SpecForRateReport</rd:TableName>
+        <rd:TableAdapterName>SpecForRateReportTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Width>19.36508cm</Width>
+  <Body>
+    <ColumnSpacing>1cm</ColumnSpacing>
+    <ReportItems>
+      <Table Name="table1">
+        <DataSetName>CntReports_SpecForRateReport</DataSetName>
+        <Width>7.52606in</Width>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>9</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox1">
+                      <rd:DefaultName>textbox1</rd:DefaultName>
+                      <Style>
+                        <FontStyle>Italic</FontStyle>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>700</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>1pt</PaddingTop>
+                        <PaddingBottom>1pt</PaddingBottom>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!Title.Value</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.18in</Height>
+            </TableRow>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>2</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox5">
+                      <rd:DefaultName>textbox5</rd:DefaultName>
+                      <Style>
+                        <FontStyle>Italic</FontStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>1pt</PaddingTop>
+                        <PaddingBottom>1pt</PaddingBottom>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>="Primary Discount: "</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ColSpan>7</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox2">
+                      <rd:DefaultName>textbox2</rd:DefaultName>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>1pt</PaddingTop>
+                        <PaddingBottom>1pt</PaddingBottom>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!PrType.Value &amp; iif(IsNothing(Fields!PrOn.Value),""," on " &amp; Fields!PrOn.Value) &amp; iif(isNothing(Fields!PrDiscount.Value),""," Discount:" &amp; Format(Fields!PrDiscount.Value,"N2"))&amp; iif(Fields!PrPropagate.Value," (Propagate)", "")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.18in</Height>
+            </TableRow>
+            <TableRow>
+              <Visibility>
+                <Hidden>=iif(IsNothing(Fields!ScOn.Value),true,false)</Hidden>
+              </Visibility>
+              <TableCells>
+                <TableCell>
+                  <ColSpan>2</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox8">
+                      <rd:DefaultName>textbox8</rd:DefaultName>
+                      <Style>
+                        <FontStyle>Italic</FontStyle>
+                        <FontSize>8pt</FontSize>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>1pt</PaddingTop>
+                        <PaddingBottom>1pt</PaddingBottom>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>="Secondary Discount:"</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+                <TableCell>
+                  <ColSpan>7</ColSpan>
+                  <ReportItems>
+                    <Textbox Name="textbox3">
+                      <rd:DefaultName>textbox3</rd:DefaultName>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>1pt</PaddingTop>
+                        <PaddingBottom>1pt</PaddingBottom>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>=Fields!ScType.Value &amp; iif(IsNothing(Fields!ScOn.Value),""," on " &amp; Fields!ScOn.Value) &amp; iif(isNothing(Fields!ScDiscount.Value),""," Discount:" &amp; Format(Fields!ScDiscount.Value,"N2"))</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.18in</Height>
+            </TableRow>
+          </TableRows>
+          <Grouping Name="table1_Details_Group">
+            <GroupExpressions>
+              <GroupExpression>=Fields!SpecialID.Value</GroupExpression>
+            </GroupExpressions>
+          </Grouping>
+          <Visibility>
+            <Hidden>=iif(isnothing(Fields!ScDiscountTypeId.Value),false,true)</Hidden>
+          </Visibility>
+        </Details>
+        <Style>
+          <FontFamily>Arial Narrow</FontFamily>
+          <FontSize>7pt</FontSize>
+        </Style>
+        <TableColumns>
+          <TableColumn>
+            <Width>1.93413cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.97508cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.97508cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.93413cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.93413cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.97508cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>3.51791cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.93413cm</Width>
+          </TableColumn>
+          <TableColumn>
+            <Width>1.93413cm</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+    </ReportItems>
+    <Height>1.37143cm</Height>
+  </Body>
+  <Language>en-US</Language>
+  <TopMargin>2.5cm</TopMargin>
+  <PageHeight>29.7cm</PageHeight>
+</Report>

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsUserReport" targetNamespace="http://tempuri.org/dsUserReport.xsd" xmlns:mstns="http://tempuri.org/dsUserReport.xsd" xmlns="http://tempuri.org/dsUserReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_aspnet" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_aspnet (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_aspnet.ConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="UserReportTableAdapter" GeneratorDataComponentClassName="UserReportTableAdapter" Name="UserReport" UserDataComponentName="UserReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_aspnet (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT u.UserId, u.LoweredUserName [UserName], p.PropertyValuesString [FullName],
+	m.LoweredEmail [Email], m.IsApproved, m.IsLockedOut, m.CreateDate, 
+	m.LastLoginDate, u.LastActivityDate, m.LastPasswordChangedDate,
+	DATEDIFF(day, u.LastActivityDate, GETDATE()) DaysPassed, 
+	dbo.aspnet_UserRoles(u.UserId) Roles
+FROM aspnet_Users AS u
+	LEFT OUTER JOIN aspnet_Membership AS m
+		ON m.UserId = u.UserId
+	LEFT OUTER JOIN aspnet_Profile AS p
+		ON p.UserId = u.UserId
+		AND p.PropertyNames LIKE 'UserSignature%'
+ORDER BY u.UserName
+
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="UserId" DataSetColumn="UserId" />
+              <Mapping SourceColumn="UserName" DataSetColumn="UserName" />
+              <Mapping SourceColumn="FullName" DataSetColumn="FullName" />
+              <Mapping SourceColumn="Email" DataSetColumn="Email" />
+              <Mapping SourceColumn="IsApproved" DataSetColumn="IsApproved" />
+              <Mapping SourceColumn="IsLockedOut" DataSetColumn="IsLockedOut" />
+              <Mapping SourceColumn="CreateDate" DataSetColumn="CreateDate" />
+              <Mapping SourceColumn="LastLoginDate" DataSetColumn="LastLoginDate" />
+              <Mapping SourceColumn="LastActivityDate" DataSetColumn="LastActivityDate" />
+              <Mapping SourceColumn="LastPasswordChangedDate" DataSetColumn="LastPasswordChangedDate" />
+              <Mapping SourceColumn="DaysPassed" DataSetColumn="DaysPassed" />
+              <Mapping SourceColumn="Roles" DataSetColumn="Roles" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="csSMART_aspnet (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByUserName" GetMethodModifier="Public" GetMethodName="GetDataByUserName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByUserName" UserSourceName="GetDataByUserName">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT u.UserId, u.LoweredUserName [UserName], p.PropertyValuesString [FullName],
+	m.LoweredEmail [Email], m.IsApproved, m.IsLockedOut, m.CreateDate, 
+	m.LastLoginDate, u.LastActivityDate, m.LastPasswordChangedDate,
+	DATEDIFF(day, u.LastActivityDate, GETDATE()) DaysPassed, 
+	dbo.aspnet_UserRoles(u.UserId) Roles
+FROM aspnet_Users AS u
+	LEFT OUTER JOIN aspnet_Membership AS m
+		ON m.UserId = u.UserId
+	LEFT OUTER JOIN aspnet_Profile AS p
+		ON p.UserId = u.UserId
+		AND p.PropertyNames LIKE 'UserSignature%'
+WHERE @UserName IS NULL 
+	OR u.LoweredUserName LIKE '%' + LOWER(@UserName) + '%'
+ORDER BY u.UserName
+
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="UserName" ColumnName="LoweredUserName" DataSourceName="LIVE_SMART_aspnet.dbo.aspnet_Users" DataTypeServer="nvarchar(256)" DbType="String" Direction="Input" ParameterName="@UserName" Precision="0" ProviderType="NVarChar" Scale="0" Size="256" SourceColumn="UserName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccApproveLimitTableAdapter" GeneratorDataComponentClassName="AccApproveLimitTableAdapter" Name="AccApproveLimit" UserDataComponentName="AccApproveLimitTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccApproveLimit" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [AccApproveLimit] WHERE (([ApproveRowID] = @Original_ApproveRowID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ApproveRowID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ApproveRowID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [AccApproveLimit] ([ApproveRowID], [ApproveLimit_A], [ApproveLimit_B]) VALUES (@ApproveRowID, @ApproveLimit_A, @ApproveLimit_B)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ApproveRowID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ApproveRowID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Currency" Direction="Input" ParameterName="@ApproveLimit_A" Precision="0" ProviderType="Money" Scale="0" Size="0" SourceColumn="ApproveLimit_A" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Currency" Direction="Input" ParameterName="@ApproveLimit_B" Precision="0" ProviderType="Money" Scale="0" Size="0" SourceColumn="ApproveLimit_B" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ApproveRowID, ApproveLimit_A, ApproveLimit_B
+FROM            AccApproveLimit</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [AccApproveLimit] SET [ApproveRowID] = @ApproveRowID, [ApproveLimit_A] = @ApproveLimit_A, [ApproveLimit_B] = @ApproveLimit_B WHERE (([ApproveRowID] = @Original_ApproveRowID))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ApproveRowID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ApproveRowID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Currency" Direction="Input" ParameterName="@ApproveLimit_A" Precision="0" ProviderType="Money" Scale="0" Size="0" SourceColumn="ApproveLimit_A" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Currency" Direction="Input" ParameterName="@ApproveLimit_B" Precision="0" ProviderType="Money" Scale="0" Size="0" SourceColumn="ApproveLimit_B" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ApproveRowID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ApproveRowID" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ApproveRowID" DataSetColumn="ApproveRowID" />
+              <Mapping SourceColumn="ApproveLimit_A" DataSetColumn="ApproveLimit_A" />
+              <Mapping SourceColumn="ApproveLimit_B" DataSetColumn="ApproveLimit_B" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsUserReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsUserReport" msprop:Generator_DataSetName="dsUserReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="UserReport" msprop:Generator_UserTableName="UserReport" msprop:Generator_RowDeletedName="UserReportRowDeleted" msprop:Generator_RowChangedName="UserReportRowChanged" msprop:Generator_RowClassName="UserReportRow" msprop:Generator_RowChangingName="UserReportRowChanging" msprop:Generator_RowEvArgName="UserReportRowChangeEvent" msprop:Generator_RowEvHandlerName="UserReportRowChangeEventHandler" msprop:Generator_TableClassName="UserReportDataTable" msprop:Generator_TableVarName="tableUserReport" msprop:Generator_RowDeletingName="UserReportRowDeleting" msprop:Generator_TablePropName="UserReport">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UserId" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="UserId" msprop:Generator_ColumnPropNameInRow="UserId" msprop:Generator_ColumnVarNameInTable="columnUserId" msprop:Generator_ColumnPropNameInTable="UserIdColumn" type="xs:string" />
+              <xs:element name="UserName" msprop:Generator_UserColumnName="UserName" msprop:Generator_ColumnPropNameInRow="UserName" msprop:Generator_ColumnVarNameInTable="columnUserName" msprop:Generator_ColumnPropNameInTable="UserNameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="256" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FullName" msprop:Generator_UserColumnName="FullName" msprop:Generator_ColumnPropNameInRow="FullName" msprop:Generator_ColumnVarNameInTable="columnFullName" msprop:Generator_ColumnPropNameInTable="FullNameColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1073741823" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email" msprop:Generator_UserColumnName="Email" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInTable="EmailColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="256" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsApproved" msprop:Generator_UserColumnName="IsApproved" msprop:Generator_ColumnPropNameInRow="IsApproved" msprop:Generator_ColumnVarNameInTable="columnIsApproved" msprop:Generator_ColumnPropNameInTable="IsApprovedColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IsLockedOut" msprop:Generator_UserColumnName="IsLockedOut" msprop:Generator_ColumnPropNameInRow="IsLockedOut" msprop:Generator_ColumnVarNameInTable="columnIsLockedOut" msprop:Generator_ColumnPropNameInTable="IsLockedOutColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="CreateDate" msprop:Generator_UserColumnName="CreateDate" msprop:Generator_ColumnPropNameInRow="CreateDate" msprop:Generator_ColumnVarNameInTable="columnCreateDate" msprop:Generator_ColumnPropNameInTable="CreateDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LastLoginDate" msprop:Generator_UserColumnName="LastLoginDate" msprop:Generator_ColumnPropNameInRow="LastLoginDate" msprop:Generator_ColumnVarNameInTable="columnLastLoginDate" msprop:Generator_ColumnPropNameInTable="LastLoginDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LastActivityDate" msprop:Generator_UserColumnName="LastActivityDate" msprop:Generator_ColumnPropNameInRow="LastActivityDate" msprop:Generator_ColumnVarNameInTable="columnLastActivityDate" msprop:Generator_ColumnPropNameInTable="LastActivityDateColumn" type="xs:dateTime" />
+              <xs:element name="LastPasswordChangedDate" msprop:Generator_UserColumnName="LastPasswordChangedDate" msprop:Generator_ColumnPropNameInRow="LastPasswordChangedDate" msprop:Generator_ColumnVarNameInTable="columnLastPasswordChangedDate" msprop:Generator_ColumnPropNameInTable="LastPasswordChangedDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DaysPassed" msdata:ReadOnly="true" msprop:Generator_UserColumnName="DaysPassed" msprop:Generator_ColumnPropNameInRow="DaysPassed" msprop:Generator_ColumnVarNameInTable="columnDaysPassed" msprop:Generator_ColumnPropNameInTable="DaysPassedColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="Roles" msdata:ReadOnly="true" msprop:Generator_UserColumnName="Roles" msprop:Generator_ColumnPropNameInRow="Roles" msprop:Generator_ColumnVarNameInTable="columnRoles" msprop:Generator_ColumnPropNameInTable="RolesColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccApproveLimit" msprop:Generator_UserTableName="AccApproveLimit" msprop:Generator_RowDeletedName="AccApproveLimitRowDeleted" msprop:Generator_RowChangedName="AccApproveLimitRowChanged" msprop:Generator_RowClassName="AccApproveLimitRow" msprop:Generator_RowChangingName="AccApproveLimitRowChanging" msprop:Generator_RowEvArgName="AccApproveLimitRowChangeEvent" msprop:Generator_RowEvHandlerName="AccApproveLimitRowChangeEventHandler" msprop:Generator_TableClassName="AccApproveLimitDataTable" msprop:Generator_TableVarName="tableAccApproveLimit" msprop:Generator_RowDeletingName="AccApproveLimitRowDeleting" msprop:Generator_TablePropName="AccApproveLimit">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ApproveRowID" msprop:Generator_UserColumnName="ApproveRowID" msprop:Generator_ColumnVarNameInTable="columnApproveRowID" msprop:Generator_ColumnPropNameInRow="ApproveRowID" msprop:Generator_ColumnPropNameInTable="ApproveRowIDColumn" type="xs:int" />
+              <xs:element name="ApproveLimit_A" msprop:Generator_UserColumnName="ApproveLimit_A" msprop:Generator_ColumnVarNameInTable="columnApproveLimit_A" msprop:Generator_ColumnPropNameInRow="ApproveLimit_A" msprop:Generator_ColumnPropNameInTable="ApproveLimit_AColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ApproveLimit_B" msprop:Generator_UserColumnName="ApproveLimit_B" msprop:Generator_ColumnVarNameInTable="columnApproveLimit_B" msprop:Generator_ColumnPropNameInRow="ApproveLimit_B" msprop:Generator_ColumnPropNameInTable="ApproveLimit_BColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccApproveLimit" />
+      <xs:field xpath="mstns:ApproveRowID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

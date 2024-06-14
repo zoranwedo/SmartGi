@@ -1,0 +1,180 @@
+﻿<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+
+<asp:Menu SkinId="skMainManu" runat="server" 
+    Orientation="Horizontal" 
+    Height="50px" 
+    DynamicEnableDefaultPopOutImage="True" 
+    StaticEnableDefaultPopOutImage="False" 
+    Font-Name="Calibri" 
+    Font-Size="14pt" 
+    Font-Bold="True"
+    CssClass="StaticMenu">
+    <StaticMenuItemStyle CssClass="StaticMenuItem" ItemSpacing="10px" />
+    <StaticHoverStyle CssClass="StaticHoverMenuItem" Height="50px" />
+    <StaticSelectedStyle CssClass="StaticHoverMenuItem" Height="50px" />
+    <DynamicMenuStyle CssClass="DinamicMenu" ForeColor="#005C99" HorizontalPadding="5px" />
+    <DynamicMenuItemStyle ForeColor="#005C99" ItemSpacing="2px" Font-Size="12pt"/>
+    <DynamicHoverStyle CssClass="DinamicHoverMenuItem" ForeColor="#FFFFFF" Font-Size="12pt"/>
+    <DynamicSelectedStyle ForeColor="#005C99" Font-Size="12pt"/>
+</asp:Menu>
+
+<asp:Menu SkinID="skLocalMenu" runat="server" 
+    Orientation="Horizontal" 
+    StaticEnableDefaultPopOutImage="False">
+    <StaticMenuItemStyle CssClass="LocalMenuItem" />
+    <StaticSelectedStyle CssClass="LocalMenuSelected" />
+    <StaticHoverStyle CssClass="LocalMenuHover" />
+</asp:Menu>
+
+<%-- Grid --%>
+
+<asp:Label SkinID="skGridLabel" runat="server" 
+    Height="30px" 
+    CssClass="GridLabel" />
+
+<asp:GridView SkinID="skGridView" runat="server" 
+    AutoGenerateColumns="False" 
+    BorderStyle="None" 
+    GridLines="None" 
+    AllowPaging="False" 
+    AllowSorting="True" >
+    <RowStyle CssClass="GridRow1B" />
+    <PagerStyle CssClass="GridRow1B"  />
+    <SelectedRowStyle CssClass="SelectRow1B" />
+    <HeaderStyle CssClass="GridRow2B" HorizontalAlign="Left" />
+</asp:GridView>
+
+<asp:DetailsView SkinID="skDetailView" runat="server" 
+    AutoGenerateRows="False" 
+    BorderStyle="None" 
+    GridLines="None">
+    <FieldHeaderStyle CssClass="SelectRow1TB" VerticalAlign="Top" />
+    <RowStyle CssClass="GridRow1TB" />
+</asp:DetailsView>
+
+<asp:Button SkinID="skBtnSerach" runat="server" 
+    Text="Edit" CssClass="Button" 
+    BorderStyle="None" ForeColor="White"/>
+    
+<asp:Button SkinID="skBtnFilter" runat="server" 
+    Text="Search" CssClass="Button" 
+    BorderStyle="None" ForeColor="White"/>
+    
+<asp:Button SkinID="skBtnClear" runat="server" 
+    Text="Clear" CssClass="Button" 
+    BorderStyle="None" ForeColor="White"/>
+
+<asp:Button SkinID="skBtnBase" runat="server" 
+    CssClass="Button" 
+    BorderStyle="None" 
+    ForeColor="White" />
+
+<asp:Button SkinID="skBtnSel" runat="server" 
+    CssClass="Button" 
+    BorderStyle="Solid"
+    ForeColor="White" />
+
+<asp:HyperLink SkinID="skHypLink" runat="server" 
+    Font-Size="9pt" 
+    CssClass="GridRowClear" />                
+
+<asp:LinkButton SkinID="skBtnLink" runat="server" 
+    CssClass="Button" 
+    style="color: White; padding: 1px 5px; text-decoration: none;"/> 
+
+
+<%-- validators --%>
+
+<asp:RequiredFieldValidator SkinID="skRequired" runat="server" 
+    ErrorMessage="This is required field!" Display="None" />
+
+<asp:CompareValidator SkinID="skInteger" runat="server" 
+    ErrorMessage="Field value have to be numeric."
+    Display="None" />
+
+<asp:ValidatorCalloutExtender SkinID="skExtender" runat="server" 
+    HighlightCssClass="Watermark" />
+
+
+<%-- Change Password --%>
+
+<asp:ChangePassword SkinID="skChPassword" runat="server" 
+    ChangePasswordTitleText="" 
+    PasswordLabelText="Current Password:"
+    ConfirmNewPasswordLabelText="Confirm:" 
+    ChangePasswordButtonText="Change" >
+    <LabelStyle HorizontalAlign="Left" />
+    <CancelButtonStyle CssClass="Button" ForeColor="White" BorderStyle="None" />
+    <ChangePasswordButtonStyle CssClass="Button" ForeColor="White" BorderStyle="None" />
+    <TextBoxStyle CssClass="TextBox" Width="80%" />
+</asp:ChangePassword>
+
+
+
+
+<%-- Wizard --%>
+
+<asp:Wizard runat="server" SkinID="WizardTemp" CssClass="wizard">   
+    <NavigationStyle HorizontalAlign="Center" CssClass="wizardNavigation" />
+    <SideBarStyle Wrap="True" HorizontalAlign="Left" CssClass="SideWizardBar" />
+    <NavigationButtonStyle CssClass="NavBarWiz" />
+    <HeaderStyle CssClass="wizardHeader" ForeColor="#CCFFCC"/>
+    <StepStyle CssClass="wizardStep"/>
+    <SideBarButtonStyle CssClass="SideWizardButton" />
+    <StartNavigationTemplate>
+        <asp:LinkButton ID="StartNextButton" runat="server" CommandName="MoveNext" CausesValidation="False" CssClass="NavBarWiz">Next</asp:LinkButton>
+        <asp:Image runat="server" ImageUrl="../../Images/move_next.gif" />
+    </StartNavigationTemplate>
+    <StepNavigationTemplate>
+        <asp:Image runat="server" ImageUrl="../../Images/move_previous.gif" />
+        <asp:LinkButton ID="StepPreviousButton" runat="server" CausesValidation="False" CommandName="MovePrevious" CssClass="NavBarWiz">Previouse</asp:LinkButton>&nbsp;|&nbsp;
+        <asp:LinkButton ID="StepNextButton" runat="server" CommandName="MoveNext" CssClass="NavBarWiz">Next</asp:LinkButton>
+        <asp:Image runat="server" ImageUrl="../../Images/move_next.gif" />
+    </StepNavigationTemplate>
+    <FinishNavigationTemplate>
+        <asp:Image runat="server" ImageUrl="../../Images/move_previous.gif" />
+        <asp:LinkButton ID="StepPreviousButton" runat="server" CausesValidation="False" CommandName="MovePrevious" CssClass="NavBarWiz">Previous</asp:LinkButton>&nbsp;|&nbsp;    
+        <asp:LinkButton ID="FinishButton" runat="server" CommandName="MoveComplete" CssClass="NavBarWiz">Finish</asp:LinkButton>
+    </FinishNavigationTemplate>
+</asp:Wizard>
+
+
+<asp:FormView runat="server" SkinID="formviewTitle" >
+<RowStyle CssClass="formviewTitle" ForeColor="White"/>
+</asp:FormView>
+
+
+<asp:Label runat=server SkinID="ErrorLabel" Width="345px" Height="50px" Visible="False"
+    Font-Names="Verdana" Font-Size="0.7em" ForeColor="Red" Font-Bold="False" >
+</asp:Label> 
+
+
+<asp:CreateUserWizard runat=server SkinID="CreateUser" 
+     BorderPadding="4" BorderStyle="Solid" BorderWidth="1px"
+     Font-Names="Verdana" Font-Size="0.7em" >
+     <HeaderStyle CssClass="GridRow2B" ForeColor="White" HorizontalAlign="Center"></HeaderStyle>
+     <CreateUserButtonStyle BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px"
+        Font-Size="0.8em" Font-Names="Verdana" CssClass="Button"/>
+     <CancelButtonStyle BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Width="70" ForeColor="White"
+        Font-Size="0.8em" Font-Names="Verdana" CssClass="Button"/>
+     <FinishCompleteButtonStyle BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Width="70"
+        Font-Size="0.8em" Font-Names="Verdana" CssClass="Button"/>
+</asp:CreateUserWizard>
+
+
+
+

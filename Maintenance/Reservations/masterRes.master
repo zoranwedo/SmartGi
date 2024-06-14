@@ -1,0 +1,30 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="masterRes.master.vb" Inherits="Maintenance_Reservations_masterRes" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 120px; ">
+                    &nbsp;
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Imported Files" Value="Log of imported reservation files." NavigateUrl="~/Maintenance/Reservations/ResLog.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Invoicing Reservation Log" Value="Reservations for invoicing import log" NavigateUrl="~/Maintenance/Reservations/ResHLog.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Import" Value="Reservation Import" NavigateUrl="~/Maintenance/Reservations/ReservationImport.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Parameters" Value="Reservation Import Parameters" NavigateUrl="~/Maintenance/Reservations/ResParams.aspx"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <asp:ContentPlaceHolder ID="ResContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

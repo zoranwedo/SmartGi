@@ -1,0 +1,114 @@
+﻿
+Partial Class Invoices_ProFormas
+    Inherits System.Web.UI.Page
+
+    Protected Sub linkNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles linkNew.Click
+        Response.Redirect("~/Invoices/ProFormaCreate.aspx?InvoiceID=0")
+    End Sub
+
+    Protected Sub btnSerch_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSerch.Click
+        Dim Str As String = txtInvID.Text
+        If Not (String.IsNullOrEmpty(Str)) Then
+
+            Dim cid As Integer
+
+            If Int32.TryParse(txtInvID.Text, cid) Then
+                Dim q As New dsInvoicesTableAdapters.InvoiceTableAdapter
+                Dim t As dsInvoices.InvoiceDataTable = q.GetDataByInvDocID(cid, "PRO")
+                If t.Count > 0 Then
+                    Response.Redirect("~/Invoices/ProFormaCreate.aspx?InvoiceID=" & Str)
+                    Exit Sub
+                End If
+            End If
+            txtInvID.Text = Nothing
+
+        End If
+
+    End Sub
+
+    Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Me.dsFilteredInvoices.Select()
+        pnlCnt.Visible = True
+    End Sub
+
+    Protected Sub GridView1_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles GridView1.RowCommand
+        If e.CommandName = "Details" Then Me.Response.Redirect("~/Invoices/ProFormaCreate.aspx?InvoiceID=" & e.CommandArgument)
+    End Sub
+
+    Protected Sub Button2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button2.Click
+        pnlCnt.Visible = False
+
+        ddlTO.SelectedValue = ""
+        txtInvID.Text = Nothing
+        fltStart.Text = Nothing
+        fltFinish.Text = Nothing
+        fltInvFrom.Text = Nothing
+        fltInvTo.Text = Nothing
+        ddlInvType.SelectedValue = ""
+        ddlHotel.SelectedValue = ""
+        ddlState.SelectedValue = ""
+    End Sub
+
+    Protected Sub linkNew0_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles linkNew0.Click
+        Me.Response.Redirect("~/Invoices/ProFormaResCreate.aspx")
+    End Sub
+
+    Protected Sub linkNew1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles linkNew1.Click
+        Me.Response.Redirect("~/Invoices/ProFormaResCreateAll.aspx")
+    End Sub
+    Protected Sub ProFormasCookie()
+        Dim cName As String = "Proformas_" & Membership.GetUser.UserName
+        If (Request.Cookies(cName) IsNot Nothing) Then
+            If Not Me.IsPostBack Then
+                Try
+
+                    If (Request.Cookies(cName)("InvCancelCB") IsNot Nothing) Then _
+                        cbCancel.Checked = Boolean.Parse(Request.Cookies(cName)("InvCancelCB"))
+                    If (Request.Cookies(cName)("InvHotel") IsNot Nothing) Then _
+                        ddlHotel.SelectedIndex = Integer.Parse(Request.Cookies(cName)("InvHotel"))
+                    If (Request.Cookies(cName)("InvAgency") IsNot Nothing) Then _
+                        ddlTO.SelectedIndex = Integer.Parse(Request.Cookies(cName)("InvAgency"))
+                    If (Request.Cookies(cName)("InvNumFrom") IsNot Nothing) Then _
+                        Me.fltInvFrom.Text = Request.Cookies(cName)("InvNumFrom")
+                    If (Request.Cookies(cName)("InvNumTo") IsNot Nothing) Then _
+                        fltInvTo.Text = Request.Cookies(cName)("InvNumTo")
+                    If (Request.Cookies(cName)("InvPage") IsNot Nothing) Then _
+                        GridView1.PageIndex = Integer.Parse(Request.Cookies(cName)("InvPage"))
+                    If (Request.Cookies(cName)("InvIndex") IsNot Nothing) Then _
+                        GridView1.SelectedIndex = Integer.Parse(Request.Cookies(cName)("InvIndex"))
+                    If (Request.Cookies(cName)("InvCheckIn") IsNot Nothing) Then _
+                        fltStart.Text = Request.Cookies(cName)("InvCheckIn")
+                    If (Request.Cookies(cName)("InvCheckOut") IsNot Nothing) Then _
+                        fltFinish.Text = Request.Cookies(cName)("InvCheckOut")
+                    If (Request.Cookies(cName)("InvType") IsNot Nothing) Then _
+                        ddlInvType.SelectedIndex = Integer.Parse(Request.Cookies(cName)("InvType"))
+                    If (Request.Cookies(cName)("InvState") IsNot Nothing) Then _
+                        ddlState.SelectedIndex = Integer.Parse(Request.Cookies(cName)("InvState"))
+
+                Catch ex As Exception
+                End Try
+            End If
+        End If
+
+        If Me.IsPostBack Then
+            Response.Cookies(cName)("InvCancelCB") = cbCancel.Checked.ToString
+            Response.Cookies(cName)("InvHotel") = ddlHotel.SelectedIndex.ToString
+            Response.Cookies(cName)("InvAgency") = ddlTO.SelectedIndex.ToString
+            Response.Cookies(cName)("InvNumFrom") = fltInvFrom.Text
+            Response.Cookies(cName)("InvNumTo") = fltInvTo.Text
+            Response.Cookies(cName)("InvPage") = GridView1.PageIndex.ToString
+            Response.Cookies(cName)("InvIndex") = GridView1.SelectedIndex.ToString
+            'If fltStart.Text IsNot Nothing Then 
+            Response.Cookies(cName)("InvCheckIn") = fltStart.Text
+            'If fltFinish.Text IsNot Nothing Then 
+            Response.Cookies(cName)("InvCheckOut") = fltFinish.Text
+            Response.Cookies(cName)("InvType") = ddlInvType.SelectedIndex.ToString
+            Response.Cookies(cName)("InvState") = ddlState.SelectedIndex.ToString
+            Response.Cookies(cName).Expires = DateTime.Now.AddYears(1)
+        End If
+    End Sub
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        ProFormasCookie()
+    End Sub
+End Class

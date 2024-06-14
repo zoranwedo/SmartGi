@@ -1,0 +1,32 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="masterContracting.master.vb" Inherits="Maintenance_Contracting_masterContracting" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 120px; ">
+                    &nbsp;
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" Orientation="Horizontal" StaticEnableDefaultPopOutImage="False">
+                        <StaticMenuItemStyle CssClass="LocalMenuItem" ItemSpacing="5px" />
+                        <StaticHoverStyle CssClass="LocalMenuHover" />
+                        <Items>
+                            <asp:MenuItem Text="Contract Titles" Value="Contract Titles" NavigateUrl="~/Maintenance/Contracting/ContractTitle.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Special Categories" Value="Special Categories" NavigateUrl="~/Maintenance/Contracting/SpecialCategory.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Special Discounts" Value="Special Discounts" NavigateUrl="~/Maintenance/Contracting/SpecialDiscount.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="Supplement Categories" Value="Supplement Categories" NavigateUrl="~/Maintenance/Contracting/SupplementCategory.aspx"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <asp:ContentPlaceHolder ID="ContractingContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

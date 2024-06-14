@@ -1,0 +1,345 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false"
+    CodeFile="masterAccounting.master.vb" Inherits="Accounting_masterAccounting" %>
+<%@ Register src="~/App_UserControls/MessagePop.ascx" tagname="MessagePop" tagprefix="uc" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" runat="Server">
+    <script type="text/javascript">
+        function ShowPaymentModalEdit(DocumentID) {
+            var frame = $get('IframePayment');
+            var popup = $find('PaymentModalPopup');
+            frame.src = "AccDocReservation.aspx?AccDocID=" + DocumentID;
+            popup._backgroundElement.onclick = function() { document.getElementById("dummyPaymentClose").click(); }
+            popup.show();
+        }
+        function PaymentUpdated() {
+            window.location.reload();
+            //document.getElementById('<%=btRefresh.ClientID%>').click();
+        }
+    </script>
+
+    <%--<Payment popup>--%>
+    <asp:ModalPopupExtender runat="server" BackgroundCssClass="modalBackground" ID="paymentPopupExtender"
+        X="100" Y="100" TargetControlID="dummyPayment" OkControlID="dummyPaymentOk" CancelControlID="dummyPaymentClose"
+        PopupControlID="paymentPopDiv" OnOkScript="PaymentUpdated();" BehaviorID="PaymentModalPopup">
+    </asp:ModalPopupExtender>
+    <div style="display: none">
+        <asp:Button ID="dummyPayment" runat="server" />
+        <input id="dummyPaymentOk" value="Done" type="button" />
+        <input id="dummyPaymentClose" value="Cancel" type="button" />
+    </div>
+    <div id="paymentPopDiv" style="display: none; width: 100%; height: 100%;">
+        <iframe id="IframePayment" frameborder="0" style="width: 100%; height: 100%; overflow: visible;"
+            scrolling="yes" marginheight="10px" marginwidth="10px"></iframe>
+    </div>
+    <%--</Payment popup>--%>
+    
+    <asp:HiddenField ID="hfShwPayMode" runat="server" Value="False" />
+    <asp:HiddenField ID="hfCanEdit" runat="server" Value="False" />
+    <asp:HiddenField ID="hfCanModify" runat="server" Value="False" />
+    <asp:HiddenField ID="hfCanApply" runat="server" Value="False" />
+    <asp:HiddenField ID="hfBalance" runat="server" Value="0" />
+    <asp:HiddenField ID="hfHBalance" runat="server" Value="0" />
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 5px;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" NavigateUrl="~/Accounting/AccDocSearch.aspx" Text="&lt;&lt; Back to Documents" />
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Details" NavigateUrl="~/Accounting/AccDocDetailNew.aspx" ToolTip="Accounting Document Details" />
+                            <asp:MenuItem Text="Applications" NavigateUrl="~/Accounting/AccApplications.aspx" ToolTip="Accounting Document Applications" />
+                            <asp:MenuItem Text="Transactions" NavigateUrl="~/Accounting/AccTransactions.aspx" ToolTip="Accounting Document Transactions" />
+                            <asp:MenuItem Text="Applications by Booking" NavigateUrl="~/Accounting/AccInvBooking.aspx" ToolTip="Accounting Document Applications by Booking" />
+                            <asp:MenuItem Text="Accounting Document Log" NavigateUrl="~/Accounting/AccDocLog.aspx" ToolTip="Accounting Document Applications by Booking" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <asp:UpdateProgress ID="upProcessing" runat="server" >
+            <ProgressTemplate>
+                <div id="Div1" runat="server"
+                    style="z-index: 100; 
+                           position: fixed;
+                           top: 50%; left: 50%;
+                           transform: translate(-50%, -50%);
+                           -webkit-transform: translate(-50%, -50%);
+                           -moz-transform: translate(-50%, -50%);
+                           -o-transform: translate(-50%, -50%);
+                           -ms-transform: translate(-50%, -50%);
+                           text-align: center;
+                           width: 90%; height: 50px; padding-top: 20px;
+                           border: dotted 1px; border-radius: 10px; 
+                           background: White; filter: alpha(opacity=20); 
+                           -moz-opacity:.8; opacity:.8;">
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/status_anim.gif" />
+                    <b>Processing...</b>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+        <asp:UpdatePanel ID="upHeader" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+        <asp:Button ID="btRefresh" runat="server" style="display: none;" />
+        <asp:FormView ID="fvDocument" runat="server" DataKeyNames="DocumentID,DocCode" DataSourceID="dsDocHeader" Width="100%">
+            <EmptyDataTemplate>
+                <div class="GridLabelBG">
+                    <asp:Label ID="lblTitle" runat="server" SkinID="skGridLabel" Text="Register New Document" />
+                    <asp:HiddenField ID="hfApproved" runat="server" Value="False" />
+                </div>
+                <div class="GridBorder" style="margin-left: 32px; margin-top: 5px; width: 600px; height: 50px;">&nbsp;</div>
+            </EmptyDataTemplate>
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG" colspan="5">
+                            <asp:HiddenField ID="hfApproved" runat="server" Value='<%# Eval("Approved") %>' />
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" Text='<%# Eval("DocCode") & "&nbsp;" & Eval("DocNumber") & "&nbsp;&nbsp;<i>(" & Eval("TrDescription") & ")</i>" %>' />
+                            <asp:Label ID="Label58" runat="server" Text='<%# Eval("DocumentID") %>' style="color: White; vertical-align: top; margin-left: 15px;" />
+                        </td>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="Label10" runat="server" SkinID="skGridLabel" ForeColor="Red" Text="CANCELED"  Visible='<%# Eval("Canceled")=True %>' />
+                        </td>
+                        <td class="GridLabelBG"> &nbsp; </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRowClear" style="text-align: left; width: 100px;"> Hotel: </td>
+                        <td class="GridRowClear" nowrap="nowrap" colspan="4" style="text-align: left; width: 500px;">
+                            <asp:Label ID="HotelHeader" runat="server" Text='<%# Eval("Hotel") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;" nowrap="nowrap">
+                            <asp:Label ID="lblTrDocClass" runat="server" CssClass="TextBox" Text='<%# Eval("TrDocClass") %>' Visible="False" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" style="text-align: left; width: 100px;"> Tour Operator: </td>
+                        <td class="GridRow1T" nowrap="nowrap" colspan="4" style="text-align: left;">
+                            <asp:Label ID="TOHeader" runat="server" Text='<%# Eval("TourOp") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" colspan="2" nowrap="nowrap" style="text-align: right; padding-right: 15px;">
+                            <asp:Label ID="Label11" runat="server" Text='<%# "Amount: " & Eval("Amount", "{0:N2}") %>' />
+                        </td>
+                        <td class="GridRow1T" colspan="3" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label13" runat="server" Text='<%# "On: " & Eval("DocDate","{0:d}") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                    <asp:Panel ID="pnlApprove" runat="server" Visible='<%# Eval("Approvable") %>' >
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" colspan="2" nowrap="nowrap" style="text-align: right; padding-right: 15px; font-weight: bold;">
+                            <asp:Label ID="Label1" runat="server" Text="Approved" Visible='<%# Eval("Approved") %>' ForeColor="Green" />
+                            <asp:Label ID="Label14" runat="server" Text="Not approved" Visible='<%# Not Eval("Approved") %>' ForeColor="Red" />
+                        </td>
+                        <td class="GridRow1T" colspan="3" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label6" runat="server" Text='<%# "On: " & Eval("ApprovalDate") %>' Visible='<%# Eval("Approved") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 10px;" nowrap="nowrap">
+                            <asp:Button ID="btApprove" runat="server" Text="Approve" CommandName="Edit" CssClass="ButtonGreen"
+                                Visible='<%# Not Eval("Approved") AND Not Eval("Canceled") AND CanApprove(Eval("Amount")) %>' />
+                            <asp:Button ID="btUnapprove" runat="server" Text="Unapprove" CommandName="Unaprove" CssClass="ButtonRed"
+                                Visible='<%# Eval("Approved") AND Not Eval("Canceled") AND CanApprove(Eval("Amount")) %>'
+                                OnClientClick="return confirm('Are you sure you want to UNAPROVE this document?')" />
+                        </td>
+                    </tr>
+                    </asp:Panel>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" colspan="2" nowrap="nowrap" style="text-align: right; padding-right: 15px;">
+                            <asp:Label ID="Label8" runat="server" Text='<%# "Balance: " & Eval("Balance","{0:N2}") %>' />
+                        </td>
+                        <td class="GridRow1T" colspan="3" nowrap="nowrap" style="text-align: left;">
+                            <asp:Label ID="Label7" runat="server" Text='<%# "On: " & Eval("BalanceDate","{0:d}") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                    <asp:Panel ID="pnlEffective" runat="server" Visible='<%# ResAmountGt0(Eval("ResAmount")) %>' >
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" colspan="2" nowrap="nowrap" style="text-align: right; padding-right: 15px; font-weight: bold;">
+                            <asp:Label ID="Label2" runat="server" Text='<%# "Effective: " & Eval("EfectiveAmount","{0:N2}") %>' />
+                        </td>
+                        <td class="GridRow1T" colspan="3" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:LinkButton ID="lbPayments" runat="server" Text='<%# "(Reserved: " & Eval("ResAmount","<b>{0:N2}</b>)") %>' 
+                                OnClientClick='<%# ShowPayments() %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                    </asp:Panel>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" style="text-align: left; width: 100px;"> &nbsp; </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: center; padding-right: 5px; font-style: italic; width: 80px;">
+                            <asp:Label ID="lblDocTrSign" runat="server" Text='<%# Iif(Eval("TrSign")="D","Debit","Credit") %>' CssClass="TextBox" Width="75px" />
+                        </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: center; width: 40px; padding-right: 5px;">
+                            <asp:Label ID="lblDocAccType" runat="server" Text='<%# Eval("AccountType") %>' CssClass="TextBox" Width="75px" />
+                        </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: center; width: 60px; padding-right: 5px;">
+                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("TrClass") %>' CssClass="TextBox" Width="75px" />
+                        </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: left; width: 120px; padding-right: 5px;">
+                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("TrAccount") %>' CssClass="TextBox" Width="115px" />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+            <EditItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG" colspan="5">
+                            <asp:HiddenField ID="hfApproved" runat="server" Value='<%# Eval("Approved") %>' />
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" Text='<%# Eval("DocCode") & "&nbsp;" & Eval("DocNumber") & "&nbsp;&nbsp;<i>(" & Eval("TrDescription") & ")</i>" %>' />
+                        </td>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="Label10" runat="server" SkinID="skGridLabel" ForeColor="Red" Text="CANCELED" Visible='<%# Eval("Canceled")=True %>' />
+                        </td>
+                        <td class="GridLabelBG"> &nbsp; </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRowClear" style="text-align: left; width: 100px;"> Hotel: </td>
+                        <td class="GridRowClear" colspan="4" nowrap="nowrap" style="text-align: left; width: 500px;">
+                            <asp:Label ID="HotelHeader" runat="server" Text='<%# Eval("Hotel") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;" nowrap="nowrap">
+                            <asp:Label ID="lblTrDocClass" runat="server" CssClass="TextBox" Text='<%# Eval("TrDocClass") %>' Visible="False" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" style="text-align: left; width: 100px;"> Tour Operator: </td>
+                        <td class="GridRow1T" nowrap="nowrap" colspan="4" style="text-align: left;">
+                            <asp:Label ID="TOHeader" runat="server" Text='<%# Eval("TourOp") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" colspan="2" nowrap="nowrap" style="text-align: right; padding-right: 15px;">
+                            <asp:Label ID="Label11" runat="server" Text='<%# "Amount: " & Eval("Amount", "{0:N2}") %>' />
+                        </td>
+                        <td class="GridRow1T" colspan="3" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label13" runat="server" Text='<%# "On: " & Eval("DocDate","{0:d}") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                    <asp:Panel ID="pnlApprove" runat="server" Visible='<%# Eval("Approvable") %>'>
+                        <tr>
+                            <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                            <td class="GridRow1T" colspan="2" nowrap="nowrap" style="text-align: right; padding-right: 15px; font-weight: bold;">
+                                <asp:Label ID="Label1" runat="server" Text="Approve" ForeColor="Green" />
+                            </td>
+                            <td class="GridRow1T" colspan="3" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                                <asp:Label ID="Label9" runat="server" Text="On:" />
+                                <asp:Label ID="Label6" runat="server" Text='<%# "On: " & Eval("ApprovalDate") %>' Visible='<%# Eval("Approved") %>' />
+                                <asp:TextBox ID="txtAppDate" runat="server" CssClass="TextBox" Text='<%# Bind("ApprovalDate","{0:d}") %>' Width="260px" />
+                                <asp:CalendarExtender ID="txtDate_CalendarExtender" runat="server" CssClass="cal_Theme1"
+                                    Enabled="True" TargetControlID="txtAppDate" />
+                                <asp:CompareValidator ID="txtDate_CompareValidator" runat="server" ControlToValidate="txtAppDate"
+                                    Operator="DataTypeCheck" SkinID="skDate" Type="Date" />
+                                <asp:ValidatorCalloutExtender ID="txtDate_DateValidatorCalloutExtender" runat="server"
+                                    SkinID="skExtender" TargetControlID="txtDate_CompareValidator" />
+                                <asp:RequiredFieldValidator ID="txtDate_RequiredFieldValidator" runat="server" ControlToValidate="txtAppDate"
+                                    Display="None" ErrorMessage="Required Field" />
+                                <asp:ValidatorCalloutExtender ID="txtDate_ReqDateValidatorCalloutExtender" runat="server"
+                                    Enabled="True" TargetControlID="txtDate_RequiredFieldValidator" />
+                            </td>
+                            <td style="text-align: left; padding-left: 10px;" nowrap="nowrap">
+                                <asp:Button ID="btApprove" runat="server" Text="Approve" SkinID="skBtnBase" CommandName="Approve" />
+                                <asp:Button ID="btCancel" runat="server" Text="Cancel" SkinID="skBtnBase" CommandName="Cancel" CausesValidation="false" />
+                            </td>
+                        </tr>
+                    </asp:Panel>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" colspan="2" nowrap="nowrap" style="text-align: right; padding-right: 15px;">
+                            <asp:Label ID="Label8" runat="server" Text='<%# "Balance: " & Eval("Balance","{0:N2}") %>' />
+                        </td>
+                        <td class="GridRow1T" colspan="3" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label7" runat="server" Text='<%# "On: " & Eval("BalanceDate","{0:d}") %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow1T" style="text-align: left; width: 100px;"> &nbsp; </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: center; padding-right: 5px; width: 80px; font-style: italic;">
+                            <asp:Label ID="lblDocTrSign" runat="server" Text='<%# Iif(Eval("TrSign")="D","Debit","Credit") %>' CssClass="TextBox" Width="75px" />
+                        </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: center; width: 40px; padding-right: 5px;">
+                            <asp:Label ID="lblDocAccType" runat="server" Text='<%# Eval("AccountType") %>' CssClass="TextBox" Width="75px" />
+                        </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: center; width: 60px; padding-right: 5px;">
+                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("TrClass") %>' CssClass="TextBox" Width="75px" />
+                        </td>
+                        <td class="GridRow1T" nowrap="nowrap" style="text-align: left; width: 120px; padding-right: 5px;">
+                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("TrAccount") %>' CssClass="TextBox" Width="115px" />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                </table>
+            </EditItemTemplate>
+        </asp:FormView>
+        <asp:FormView ID="fvDocLog" runat="server" DataSourceID="dsDocLog">
+            <EmptyDataTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow2T" style="width: 595px; height: 25px;"> &nbsp; </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                </table>
+            </EmptyDataTemplate>
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;"> &nbsp; </td>
+                        <td class="GridRow2T" style="width: 595px; height: 25px; padding-left: 5px; vertical-align: top; font-style: italic;">
+                            <asp:Label ID="lblTrDocClass" runat="server" Text='<%# "Document <b>" & Eval("lMesage") & "</b> by " & Eval("UserName") & " on " & Eval("LogDate")  %>' />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"> &nbsp; </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+        <uc:MessagePop ID="msgPop" runat="server" Title="Proforma" />
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <asp:ObjectDataSource ID="dsDocHeader" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetDataByDocSgn" TypeName="dsAccountingEffectiveTableAdapters.DocHeaderTableAdapter">
+            <SelectParameters>
+                <asp:QueryStringParameter Name="DocumentID" QueryStringField="DocumentID" Type="Int32" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
+        <asp:ObjectDataSource ID="dsDocLog" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetLast" TypeName="AccApproveTableAdapters.AccDocumentLogTableAdapter">
+            <SelectParameters>
+                <asp:QueryStringParameter Name="DocumentID" QueryStringField="DocumentID" Type="Int32" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
+        <div style="padding-left: 32px;">
+            <asp:ContentPlaceHolder ID="AccountContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <br />
+        </div>
+        <div style="text-align: left; padding-left: 5px; padding-top: 5px;">
+            <asp:Button ID="btNewDoc" runat="server" Text="Register New Document" SkinID="skBtnBase"
+                OnClick="btNewDoc_Click" />
+        </div>
+        <asp:HiddenField ID="dummy" runat="server" />
+    </div>
+</asp:Content>

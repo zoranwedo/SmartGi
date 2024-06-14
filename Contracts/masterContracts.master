@@ -1,0 +1,109 @@
+<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false"
+    CodeFile="masterContracts.master.vb" Inherits="Contracts_masterContract" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" 
+                        NavigateUrl="~/Contracts/Contracts.aspx"
+                        Text="&lt;&lt; Back to Contracts" />
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Overview" NavigateUrl="~/Contracts/ContractOverview.aspx" />
+                            <asp:MenuItem Text="Rates" Value="Selected hotel's sections" NavigateUrl="~/Contracts/ContractRates.aspx" />
+                            <asp:MenuItem Text="Specials" Value="Selected hotel's rates" NavigateUrl="~/Contracts/ContractSpecial.aspx" />
+                            <asp:MenuItem NavigateUrl="~/Contracts/ContractSupplement.aspx" Text="Supplements" Value="Supplements" />
+                            <asp:MenuItem NavigateUrl="~/Contracts/ContractAnex.aspx" Text="Annex" Value="Annex" />
+                            <asp:MenuItem NavigateUrl="~/Contracts/ContractHistory.aspx" Text="History" Value="History" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:FormView ID="fvContract" runat="server" DataKeyNames="ContractID" DataSourceID="dsContractByID"
+            Width="100%">
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG" colspan="5">
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" Text='<%# "[" & Eval("ContractID") & "][" & Eval("RateCodeId") & "] " & Eval("Title") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow1B" style="text-align: left; width: 80px; padding-right: 5px;" nowrap="nowrap">
+                            Duration:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; width: 300px; padding-right: 5px;">
+                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("Start", "{0:d}") & " - " & Eval("Finish", "{0:d}") %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; width: 150px; padding-right: 5px;">
+                            Status:
+                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("ContractState") %>' 
+                                Visible='<%# Eval("StateId")<6 %>' 
+                                Style="font-style: italic; font-weight: bold;" />
+                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("ContractState") %>' 
+                                Visible='<%# Eval("StateId")=6 %>' 
+                                Style="font-style: italic; font-weight: bold; color: Red;" />
+                        </td>
+                        <%--<td style="vertical-align: middle; text-align: left; text-indent: 10px;" rowspan="2">--%>
+                        <td style="padding-left: 10px;">
+                            <asp:Button ID="btnEditHeader" runat="server" Text="Edit" SkinID="skBtnBase" CommandArgument='<%# Eval("StateId") %>' CommandName="GoToWizard" />
+                            <asp:Button ID="btnNewHeader" runat="server" Text="New" SkinID="skBtnBase" CommandArgument='<%# Eval("StateId") %>' CommandName="GoToNew" Visible="false" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; width: 80px; padding-right: 5px;">
+                            Hotel
+                        </td>
+                        <td class="GridRow1B" colspan="2" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("Hotel") %>' />
+                        </td>
+                        <td nowrap="nowrap" style="text-align: left; padding-left: 5px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow2B" nowrap="nowrap" style="text-align: left; width: 80px; padding-right: 5px;">
+                            TTOO:
+                        </td>
+                        <td class="GridRow2B" colspan="2" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="TourOpHeader" runat="server" Text='<%# Eval("TourOp") %>' />
+                        </td>
+                        <td nowrap="nowrap">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+        <asp:ObjectDataSource ID="dsContractByID" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetDataByContractID" TypeName="ContractsTableAdapters.ContractTableAdapter">
+            <SelectParameters>
+                <asp:QueryStringParameter Name="ContractID" QueryStringField="ContractID" Type="Int32" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
+    </div>
+    <br />
+    <div style="margin-top: 5px; margin-left: 25px; margin-bottom: 5px">
+        <asp:ContentPlaceHolder ID="ContractContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>

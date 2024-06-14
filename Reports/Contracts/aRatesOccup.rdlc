@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="csSMART_SQL">
+      <rd:DataSourceID>80e20c4e-4ee7-41fd-9b50-16aa0d82bccb</rd:DataSourceID>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <InteractiveHeight>29.7cm</InteractiveHeight>
+  <ReportParameters>
+    <ReportParameter Name="MealPlan">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Report_Parameter_1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="RateCode">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Report_Parameter_0</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Section">
+      <DataType>Integer</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Report_Parameter_2</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Room">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Report_Parameter_3</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>21cm</InteractiveWidth>
+  <rd:GridSpacing>0.25cm</rd:GridSpacing>
+  <rd:SnapToGrid>true</rd:SnapToGrid>
+  <RightMargin>2.5cm</RightMargin>
+  <LeftMargin>2.5cm</LeftMargin>
+  <BottomMargin>2.5cm</BottomMargin>
+  <rd:ReportID>7ce3b4a6-747a-4d18-98d7-52843d8af9ad</rd:ReportID>
+  <PageWidth>21cm</PageWidth>
+  <DataSets>
+    <DataSet Name="CntReports_RateShOcc">
+      <Fields>
+        <Field Name="MealPlanId">
+          <DataField>MealPlanId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RateCodeId">
+          <DataField>RateCodeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RoomTypeId">
+          <DataField>RoomTypeId</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HotelSectionId">
+          <DataField>HotelSectionId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Category">
+          <DataField>Category</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MaxChld1">
+          <DataField>MaxChld1</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MaxChld2">
+          <DataField>MaxChld2</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MaxChld3">
+          <DataField>MaxChld3</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MaxChld4">
+          <DataField>MaxChld4</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MaxAdult">
+          <DataField>MaxAdult</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ContractId">
+          <DataField>ContractId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>csSMART_SQL</DataSourceName>
+        <CommandText>SELECT DISTINCT 
+                         ContractRate.MealPlanId, ContractRate.RateCodeId, ContractRate.RoomTypeId, ISNULL(HotelRoomType.HotelSectionId, 0) AS HotelSectionId, 
+                         HotelRoomType.Category, vw_ContractMaxOcc.MaxChld1, vw_ContractMaxOcc.MaxChld2, vw_ContractMaxOcc.MaxChld3, vw_ContractMaxOcc.MaxChld4, 
+                         vw_ContractMaxOcc.MaxAdult, ContractRate.ContractId
+FROM            vw_ContractMaxOcc INNER JOIN
+                         ContractRate ON vw_ContractMaxOcc.ContractId = ContractRate.ContractId AND vw_ContractMaxOcc.HotelId = ContractRate.HotelId AND 
+                         vw_ContractMaxOcc.RoomTypeId = ContractRate.RoomTypeId LEFT OUTER JOIN
+                         HotelSection INNER JOIN
+                         HotelRoomType ON HotelSection.HotelId = HotelRoomType.HotelId AND HotelSection.HotelSectionID = HotelRoomType.HotelSectionId ON 
+                         ContractRate.HotelId = HotelRoomType.HotelId AND ContractRate.RoomTypeId = HotelRoomType.RoomTypeID
+WHERE        (ContractRate.ContractId = @ContractID)</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>CntReports</rd:DataSetName>
+        <rd:TableName>RateShOcc</rd:TableName>
+        <rd:TableAdapterName>RateShOccTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Width>17.64418cm</Width>
+  <Body>
+    <ColumnSpacing>1cm</ColumnSpacing>
+    <ReportItems>
+      <Table Name="table1">
+        <DataSetName>CntReports_RateShOcc</DataSetName>
+        <Top>0.11772cm</Top>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="textbox17">
+                      <rd:DefaultName>textbox17</rd:DefaultName>
+                      <Style>
+                        <FontFamily>Arial Narrow</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                        <PaddingLeft>1pt</PaddingLeft>
+                        <PaddingRight>1pt</PaddingRight>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value>="Occupancy: " &amp; iif((Fields!MaxAdult.Value) &gt; 0, "Adults:" &amp; (Fields!MaxAdult.Value) ,"") &amp; iif((Fields!MaxChld1.Value) &gt; 0, " / Chld1:" &amp; (Fields!MaxChld1.Value) ,"")&amp; iif((Fields!MaxChld2.Value) &gt; 0, " /Chld2:" &amp; (Fields!MaxChld2.Value) ,"")&amp; iif((Fields!MaxChld3.Value) &gt; 0, " /Chld3:" &amp; (Fields!MaxChld3.Value) ,"")&amp; iif((Fields!MaxChld4.Value) &gt; 0, " /Chld4:" &amp; (Fields!MaxChld4.Value) ,"")</Value>
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.5cm</Height>
+            </TableRow>
+          </TableRows>
+          <Grouping Name="table1_Details_Group">
+            <GroupExpressions>
+              <GroupExpression>=Fields!MealPlanId.Value</GroupExpression>
+              <GroupExpression>=Fields!MealPlanId.Value</GroupExpression>
+              <GroupExpression>=Fields!HotelSectionId.Value</GroupExpression>
+              <GroupExpression>=Fields!RoomTypeId.Value</GroupExpression>
+            </GroupExpressions>
+            <Filters>
+              <Filter>
+                <FilterExpression>=Fields!MealPlanId.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>=Parameters!MealPlan.Value</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=Fields!RateCodeId.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>=Parameters!RateCode.Value</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=Fields!HotelSectionId.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>=Parameters!Section.Value</FilterValue>
+                </FilterValues>
+              </Filter>
+              <Filter>
+                <FilterExpression>=Fields!RoomTypeId.Value</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>=Parameters!Room.Value</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+          </Grouping>
+        </Details>
+        <TableColumns>
+          <TableColumn>
+            <Width>17.5cm</Width>
+          </TableColumn>
+        </TableColumns>
+        <Left>0.14418cm</Left>
+      </Table>
+    </ReportItems>
+    <Height>0.61772cm</Height>
+  </Body>
+  <DataElementStyle>ElementNormal</DataElementStyle>
+  <Language>en-US</Language>
+  <TopMargin>2.5cm</TopMargin>
+  <PageHeight>29.7cm</PageHeight>
+</Report>

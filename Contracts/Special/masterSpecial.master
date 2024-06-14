@@ -1,0 +1,239 @@
+<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false"
+    CodeFile="masterSpecial.master.vb" Inherits="Contracts_Special_masterSpecial" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctSpecial" ContentPlaceHolderID="MasterContent" runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" NavigateUrl="~/Contracts/Specials.aspx"
+                        Text="&lt;&lt; Back to Specials" />
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <%--(0)--%>
+                            <asp:MenuItem Text="Detail" NavigateUrl="~/Contracts/Special/DetailSpec.aspx" />
+                            <%--(1)--%>
+                            <asp:MenuItem Text="Application" NavigateUrl="~/Contracts/Special/Application.aspx" />
+                            <%--(2)--%>
+                            <asp:MenuItem Text="Application" NavigateUrl="~/Contracts/Special/FRApplication.aspx"
+                                Value="FRApplication" />
+                            <%--(3)--%>
+                            <asp:MenuItem Text="Overview" NavigateUrl="~/Contracts/Special/SpecOverview.aspx" />
+                            <%--(4)--%>
+                            <asp:MenuItem Text="Association" NavigateUrl="~/Contracts/Special/SpecAssociation.aspx" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:FormView ID="fvSpecial" runat="server" DataKeyNames="SpecialID,HotelId" DataSourceID="dsSpecialByID"
+            Width="100%">
+            <EmptyDataTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" Text="Create New Special" />
+                        </td>
+                    </tr>
+                </table>
+            </EmptyDataTemplate>
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG" colspan="5">
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" Text='<%# "[" & Eval("SpecialID") & "] ["& Eval("RateCodeId") & "] "& Eval("Title") %>' />
+                            <asp:HiddenField ID="hfFreeRate" runat="server" Value='<%# Eval("PrDiscountTypeId") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow1B" style="text-align: left; width: 80px; padding-right: 5px;"
+                            nowrap="nowrap">
+                            Duration:
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; width: 300px; padding-right: 5px;">
+                            <asp:Label ID="StartHeader" runat="server" Text='<%# Eval("Start", "{0:d}") & " - " & Eval("Finish", "{0:d}") %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; width: 150px; padding-right: 5px;">
+                            Status:
+                            <asp:Label ID="lblStA" runat="server" Style="font-style: italic" 
+                                Text='<%# iif(Eval("StateId") > 0, "Active", "Inactive") %>'
+                                Visible='<%# Eval("StateId") >= 0  %>' />
+                            <asp:Label ID="Label1" runat="server" Style="font-style: italic; font-weight: bold; color: Red;" 
+                                Text="Suspended" Visible='<%# Eval("StateId") < 0  %>' />
+                            <asp:Label ID="lblState" runat="server" Style="font-style: italic" Text='<%# Eval("StateId") %>'
+                                Visible="False" />
+                        </td>
+                        <td style="padding-left: 10px;">
+                            <asp:Button ID="btMasterEdit" runat="server" SkinID="skBtnBase" 
+                                Text="Edit" CommandName="GoToWizard"
+                                Visible='<%# Eval("PrDiscountTypeId")=6 AND Eval("StateId")=0 %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" style="text-align: left; width: 80px; padding-right: 5px;">
+                            Hotel
+                        </td>
+                        <td class="GridRow1B" colspan="2" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="HotelHeader" runat="server" Text='<%# Eval("Hotel") %>' />
+                        </td>
+                        <td nowrap="nowrap" style="text-align: left; padding-left: 5px;">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow2B" nowrap="nowrap" style="text-align: left; width: 80px; padding-right: 5px;">
+                            Book.Code
+                        </td>
+                        <td class="GridRow2B" nowrap="nowrap" style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="BookingHeader" runat="server" Text='<%# Eval("BookingCode") %>' />
+                        </td>
+                        <td class="GridRow2B" nowrap="nowrap" style="text-align: left; padding-left: 5px;">
+                            Offer:
+                            <asp:Label ID="SpecialDiscType" runat="server" Font-Italic="true" Text='<%# Eval("PrType") %>' />
+                        </td>
+                        <td style="padding-left: 10px;">
+                            <div class="Red">
+                            <asp:Button ID="btMasterSuspend" runat="server" SkinID="skBtnBase" 
+                                Text='Suspend' CommandName="MasterSuspend"
+                                Visible='<%# Eval("StateId") > 0 %>' />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+        <asp:ObjectDataSource ID="dsSpecialByID" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetDataFull" TypeName="dsSpecialTableAdapters.SpecialTableAdapter"
+            DeleteMethod="Delete" InsertMethod="Insert" UpdateMethod="Update">
+            <DeleteParameters>
+                <asp:Parameter Name="Original_SpecialID" Type="Int32" />
+            </DeleteParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="HotelId" Type="Int32" />
+                <asp:Parameter Name="Category" Type="String" />
+                <asp:Parameter Name="BookingCode" Type="String" />
+                <asp:Parameter Name="PerPax" Type="Boolean" />
+                <asp:Parameter Name="RateOption" Type="Int16" />
+                <asp:Parameter Name="Start" Type="DateTime" />
+                <asp:Parameter Name="Finish" Type="DateTime" />
+                <asp:Parameter Name="BkStart" Type="DateTime" />
+                <asp:Parameter Name="BkFinish" Type="DateTime" />
+                <asp:Parameter Name="Payment" Type="DateTime" />
+                <asp:Parameter Name="RoomingList" Type="DateTime" />
+                <asp:Parameter Name="StayCriteriaMin" Type="Int16" />
+                <asp:Parameter Name="StayCriteriaMax" Type="Int16" />
+                <asp:Parameter Name="PrDiscountTypeId" Type="Int32" />
+                <asp:Parameter Name="PrPropagate" Type="Boolean" />
+                <asp:Parameter Name="PrDiscountOn" Type="String" />
+                <asp:Parameter Name="PrDiscount" Type="Decimal" />
+                <asp:Parameter Name="ScDiscountTypeId" Type="Int32" />
+                <asp:Parameter Name="ScDiscountOn" Type="String" />
+                <asp:Parameter Name="ScDiscount" Type="Decimal" />
+                <asp:Parameter Name="Description" Type="String" />
+                <asp:Parameter Name="StateId" Type="Int32" />
+                <asp:Parameter Name="CtrEBB" Type="Boolean" />
+                <asp:Parameter Name="Original_SpecialID" Type="Int32" />
+            </UpdateParameters>
+            <SelectParameters>
+                <asp:QueryStringParameter Name="SpecialID" QueryStringField="SpecialID" Type="Int32" />
+            </SelectParameters>
+            <InsertParameters>
+                <asp:Parameter Name="HotelId" Type="Int32" />
+                <asp:Parameter Name="Category" Type="String" />
+                <asp:Parameter Name="BookingCode" Type="String" />
+                <asp:Parameter Name="PerPax" Type="Boolean" />
+                <asp:Parameter Name="RateOption" Type="Int16" />
+                <asp:Parameter Name="Start" Type="DateTime" />
+                <asp:Parameter Name="Finish" Type="DateTime" />
+                <asp:Parameter Name="BkStart" Type="DateTime" />
+                <asp:Parameter Name="BkFinish" Type="DateTime" />
+                <asp:Parameter Name="Payment" Type="DateTime" />
+                <asp:Parameter Name="RoomingList" Type="DateTime" />
+                <asp:Parameter Name="StayCriteriaMin" Type="Int16" />
+                <asp:Parameter Name="StayCriteriaMax" Type="Int16" />
+                <asp:Parameter Name="PrDiscountTypeId" Type="Int32" />
+                <asp:Parameter Name="PrPropagate" Type="Boolean" />
+                <asp:Parameter Name="PrDiscountOn" Type="String" />
+                <asp:Parameter Name="PrDiscount" Type="Decimal" />
+                <asp:Parameter Name="ScDiscountTypeId" Type="Int32" />
+                <asp:Parameter Name="ScDiscountOn" Type="String" />
+                <asp:Parameter Name="ScDiscount" Type="Decimal" />
+                <asp:Parameter Name="Description" Type="String" />
+                <asp:Parameter Name="StateId" Type="Int32" />
+                <asp:Parameter Name="CtrEBB" Type="Boolean" />
+            </InsertParameters>
+        </asp:ObjectDataSource>
+    </div>
+    <div style="margin-top: 5px; margin-left: 25px; margin-bottom: 5px">
+        <br />
+        <asp:ContentPlaceHolder ID="WizardContent" runat="server">
+        </asp:ContentPlaceHolder>
+        <br />
+        <div class="Blue">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td class="ComandRow2T" style="width: 50%; height: 30px;">
+                        <asp:Button ID="btnWizPrev" runat="server" CommandName="GotoWizPrev" SkinID="skBtnBase"
+                            Text="&lt;&lt; Previous" Width="100px"></asp:Button>
+                        &nbsp;
+                    </td>
+                    <td class="ComandRow2T" style="width: 50%; text-align: left; height: 30px;">
+                        &nbsp;
+                        <asp:Button ID="btnWizNext" runat="server" CommandName="GotoWizNext" SkinID="skBtnBase"
+                            Text="Next &gt;&gt;" Width="100px"></asp:Button>
+                        <asp:Button ID="btnWizFinish" runat="server" CommandName="GotoWizFinish" SkinID="skBtnBase"
+                            Text="Finish" Width="100px" Visible="False"></asp:Button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="Blue">
+        <asp:HiddenField ID="m_dummy" runat="server" />
+        <asp:ModalPopupExtender ID="m_popExtender" runat="server" Enabled="true" 
+            DropShadow="True" BackgroundCssClass="modalBackground" X="200" Y="200"
+            PopupControlID="m_popPanel"
+            PopupDragHandleControlID="m_popLabel" 
+            CancelControlID="m_btnNo" 
+            TargetControlID="m_dummy" >
+        </asp:ModalPopupExtender>
+        <asp:Panel ID="m_popPanel" runat="server" Width="300px" BackColor="White" Style="display: none">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td class="GridLabelBG">
+                        <asp:Label ID="m_popLabel" runat="server" Text="Title" SkinID="skGridLabel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="GridBorder">
+                        <p style="text-align: center;">
+                            <asp:Label ID="m_popMessage" runat="server" Text="Message" />
+                        </p>
+                        <p style="text-align: right;" class="GridRow2T">
+                            <br />
+                            <asp:Button ID="m_btnOK" runat="server" Text="OK" SkinID="skBtnBase" />&nbsp;
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+    </div>
+
+</asp:Content>

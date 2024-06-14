@@ -1,0 +1,190 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false"
+    CodeFile="masterWizard.master.vb" Inherits="Contracts_Special_Wizard_masterWizard" %>
+
+<asp:Content ID="ctTitle" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" NavigateUrl="~/Contracts/Specials.aspx"
+                        Text="&lt;&lt; Back to Specials" />
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Detail" Value="Contract data" 
+                                NavigateUrl="~/Contracts/Special/Wizard/Detail.aspx" />
+                            <asp:MenuItem Text="Policies" Value="Contract policies (no-show, cancelation, children)" NavigateUrl="~/Contracts/Special/Wizard/Penality.aspx" />
+                            <asp:MenuItem Text="Rooms" Value="Contracted rooms" NavigateUrl="~/Contracts/Special/Wizard/Rooms.aspx" />
+                            <asp:MenuItem NavigateUrl="~/Contracts/Special/Wizard/MPAddOn.aspx" Text="MP Adn Taxes" 
+                                Value="MP Adn Taxes"></asp:MenuItem>
+                            <asp:MenuItem Text="Periods" Value="Managing contract periods" NavigateUrl="~/Contracts/Special/Wizard/Periods.aspx" />
+                            <asp:MenuItem Text="Manage Rates" Value="Managing contracting rates" NavigateUrl="~/Contracts/Special/Wizard/ManageRate.aspx" />
+                            <asp:MenuItem Text="Edit Rates" Value="Edit contract rates" NavigateUrl="~/Contracts/Special/Wizard/Rate.aspx" />
+                            <%--<asp:MenuItem Text="EBB" Value="Early booking bonus" NavigateUrl="~/Contracts/Wizard/EBB.aspx" />--%>
+                            <asp:MenuItem Text="Overview" Value="Overview of contract" NavigateUrl="~/Contracts/Special/Wizard/Overview.aspx" />
+                            <asp:MenuItem Text="Validate" Value="Validate contract" NavigateUrl="~/Contracts/Special/Wizard/Validate.aspx" />
+                            <%--<asp:MenuItem Text="MPAddOn" Value="MPAddOn" NavigateUrl="~/Contracts/Wizard/MPAddOn.aspx" />--%>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:FormView ID="fvContract" runat="server" DataKeyNames="Template,StateId" DataSourceID="dsContractByID"
+            Width="100%">
+            <EmptyDataTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG">
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" Text="Create New Contract" />
+                        </td>
+                    </tr>
+                </table>
+            </EmptyDataTemplate>
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td class="GridLabelBG" colspan="5">
+                            <asp:Label ID="lblContractTitle" runat="server" SkinID="skGridLabel" 
+                                Text='<%# "[" & Eval("SpecialID") & "]" & Eval("Title") %>' />
+                            &nbsp;&nbsp;
+                            <asp:Label ID="lblContractTitle0" runat="server" Font-Bold="True" 
+                                Font-Italic="True" ForeColor="White" Height="25px" 
+                                Text='<%# iif(Eval("Template"),"-TEMPLATE-","") %>' Visible="False" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;
+                        </td>
+                        <td class="GridRow1B" style="text-align: left; width: 80px; padding-right: 5px;"
+                            nowrap="nowrap">
+                            Duration:</td>
+                        <td class="GridRow1B" nowrap="nowrap" 
+                            style="text-align: left; width: 300px; padding-right: 5px;">
+                            <asp:Label ID="StartHeader" runat="server" 
+                                Text='<%# Eval("Start", "{0:d}") & " - " & Eval("Finish", "{0:d}") %>' />
+                        </td>
+                        <td class="GridRow1B" nowrap="nowrap" 
+                            style="text-align: left; width: 150px; padding-right: 5px;">
+                            Status:
+                            <asp:Label ID="Label1" runat="server" style="font-style: italic" 
+                                Text='<%# Bind("ContractState") %>' />
+                            <asp:Label ID="lblState" runat="server" style="font-style: italic" 
+                                Text='<%# Eval("StateId") %>' Visible="False" />
+                        </td>
+                        <td style="text-align: left; padding-left: 5px;"
+                            nowrap="nowrap">
+                            <asp:Label ID="lblStart" runat="server" Text='<%# Eval("Start", "{0:d}") %>' 
+                                Visible="False"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;</td>
+                        <td class="GridRow1B" nowrap="nowrap" 
+                            style="text-align: left; width: 80px; padding-right: 5px;">
+                            Hotel</td>
+                        <td class="GridRow1B" colspan="2" nowrap="nowrap" 
+                            style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="HotelHeader" runat="server" Text='<%# Eval("Hotel") %>' />
+                        </td>
+                        <td nowrap="nowrap" style="text-align: left; padding-left: 5px;">
+                            <asp:Label ID="lblFinish" runat="server" Text='<%# Eval("Finish", "{0:d}") %>' 
+                                Visible="False"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="GridRowClear" style="width: 32px;">
+                            &nbsp;</td>
+                        <td class="GridRow2B" nowrap="nowrap" 
+                            style="text-align: left; width: 80px; padding-right: 5px;">
+                            TO:
+                        </td>
+                        <td class="GridRow2B" colspan="2" nowrap="nowrap" 
+                            style="text-align: left; padding-right: 5px;">
+                            <asp:Label ID="TourOpHeader" runat="server" Text='<%# Eval("TourOp") %>' />
+                        </td>
+                        <td nowrap="nowrap" class="GridRow2B">
+                            <asp:Label ID="lblSpecialID" runat="server" style="font-style: italic" 
+                                Text='<%# Eval("SpecialID") %>' Visible="False" />
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+        <asp:ObjectDataSource ID="dsContractByID" runat="server" OldValuesParameterFormatString="original_{0}"
+            SelectMethod="GetDataByContractID" 
+            TypeName="ContractsTableAdapters.ContractSPTableAdapter" DeleteMethod="Delete" 
+            InsertMethod="Insert" UpdateMethod="Update">
+            <DeleteParameters>
+                <asp:Parameter Name="Original_ContractID" Type="Int32" />
+            </DeleteParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="Template" Type="Boolean" />
+                <asp:Parameter Name="HotelId" Type="Int32" />
+                <asp:Parameter Name="MarketId" Type="String" />
+                <asp:Parameter Name="Start" Type="DateTime" />
+                <asp:Parameter Name="Finish" Type="DateTime" />
+                <asp:Parameter Name="Commision" Type="Decimal" />
+                <asp:Parameter Name="Title" Type="String" />
+                <asp:Parameter Name="Year" Type="Int16" />
+                <asp:Parameter Name="Description" Type="String" />
+                <asp:Parameter Name="StateId" Type="Int32" />
+                <asp:Parameter Name="CopyId" Type="Int32" />
+                <asp:Parameter Name="TourOpId" Type="Int32" />
+                <asp:Parameter Name="Original_ContractID" Type="Int32" />
+            </UpdateParameters>
+            <SelectParameters>
+                <asp:QueryStringParameter Name="ContractID" QueryStringField="ContractID" Type="Int32" />
+            </SelectParameters>
+            <InsertParameters>
+                <asp:Parameter Name="Template" Type="Boolean" />
+                <asp:Parameter Name="HotelId" Type="Int32" />
+                <asp:Parameter Name="MarketId" Type="String" />
+                <asp:Parameter Name="Start" Type="DateTime" />
+                <asp:Parameter Name="Finish" Type="DateTime" />
+                <asp:Parameter Name="Commision" Type="Decimal" />
+                <asp:Parameter Name="Title" Type="String" />
+                <asp:Parameter Name="Year" Type="Int16" />
+                <asp:Parameter Name="Description" Type="String" />
+                <asp:Parameter Name="StateId" Type="Int32" />
+                <asp:Parameter Name="CopyId" Type="Int32" />
+                <asp:Parameter Name="TourOpId" Type="Int32" />
+            </InsertParameters>
+        </asp:ObjectDataSource>
+        <asp:HiddenField ID="hfStart" runat="server" />
+        <asp:HiddenField ID="hfSpecialID" runat="server" />
+        <asp:HiddenField ID="hfSpecialState" runat="server" />
+    </div>
+    <div style="margin-top: 5px; margin-left: 25px; margin-bottom: 5px">
+        <br />
+        <asp:ContentPlaceHolder ID="WizardContent" runat="server">
+        </asp:ContentPlaceHolder>
+        <br />
+        <div class="Blue">
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td class="ComandRow2T" style="width: 50%; height: 30px; padding-top: 5px;">
+                        <asp:Button ID="btnWizPrev" runat="server" CommandName="GotoWizPrev" SkinID="skBtnBase"
+                            Text="&lt;&lt; Previous" Width="100px"></asp:Button>
+                        &nbsp;
+                    </td>
+                    <td class="ComandRow2T" 
+                        style="width: 50%; text-align: left; height: 30px; padding-top: 5px;">
+                        &nbsp;
+                        <asp:Button ID="btnWizNext" runat="server" CommandName="GotoWizNext" SkinID="skBtnBase"
+                            Text="Next &gt;&gt;" Width="100px"></asp:Button>
+                        <asp:Button ID="btnWizFinish" runat="server" CommandName="GotoWizFinish" SkinID="skBtnBase"
+                            Text="Finish" Width="100px" Visible="False"></asp:Button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</asp:Content>

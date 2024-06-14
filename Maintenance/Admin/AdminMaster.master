@@ -1,0 +1,74 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="AdminMaster.master.vb" Inherits="Maintenance_Admin_AdminMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="ctMaster" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 120px; ">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" NavigateUrl="~/Maintenance/Admin/Admin.aspx" Text = "<< Back to Users" />                
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="User" Value="User" NavigateUrl="~/Maintenance/Admin/User.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="User Hotels" Value="UserHotels" 
+                                NavigateUrl="~/Maintenance/Admin/UserHotels.aspx"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Maintenance/Admin/UserTO.aspx" 
+                                Text="User Tour Operators" Value="UserTO"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+          <asp:FormView ID="fvUser" runat="server" Width="100%" 
+        DataKeyNames="UserName" DataSourceID="dsUser">
+            <ItemTemplate>
+                <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <tr>
+                        <td style="height: 30px;" class="GridLabelBG">
+                            <asp:Label ID="lblHotelTitle" runat="server" SkinID="skGridLabel" 
+                                Text='<%# Eval("UserName") %>'  />
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+    </div>
+    <asp:ObjectDataSource ID="dsUser" runat="server" 
+        OldValuesParameterFormatString="original_{0}" SelectMethod="GetByUserName" 
+        TypeName="UserTableAdapters.UserTableAdapter" 
+        DataObjectTypeName="System.Guid" DeleteMethod="Delete" InsertMethod="Insert" 
+        UpdateMethod="Update">
+        <UpdateParameters>
+            <asp:Parameter Name="UserName" Type="String" />
+            <asp:Parameter Name="LogonDate" Type="DateTime" />
+            <asp:Parameter Name="PeriodYear" Type="Int32" />
+            <asp:Parameter Name="PeriodMonth" Type="Int16" />
+            <asp:Parameter Name="AllHotels" Type="Boolean" />
+            <asp:Parameter Name="AllTO" Type="Boolean" />
+            <asp:Parameter Name="Deleted" Type="Boolean" />
+            <asp:Parameter DbType="Guid" Name="Original_UserId" />
+        </UpdateParameters>
+        <SelectParameters>
+            <asp:QueryStringParameter Name="UserName" QueryStringField="username" 
+                Type="String" />
+        </SelectParameters>
+        <InsertParameters>
+            <asp:Parameter DbType="Guid" Name="UserId" />
+            <asp:Parameter Name="UserName" Type="String" />
+            <asp:Parameter Name="LogonDate" Type="DateTime" />
+            <asp:Parameter Name="PeriodYear" Type="Int32" />
+            <asp:Parameter Name="PeriodMonth" Type="Int16" />
+            <asp:Parameter Name="AllHotels" Type="Boolean" />
+            <asp:Parameter Name="AllTO" Type="Boolean" />
+            <asp:Parameter Name="Deleted" Type="Boolean" />
+        </InsertParameters>
+    </asp:ObjectDataSource>
+    <asp:ContentPlaceHolder ID="AminContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

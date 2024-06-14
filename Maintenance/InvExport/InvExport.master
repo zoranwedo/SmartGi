@@ -1,0 +1,28 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="InvExport.master.vb" Inherits="Maintenance_InvExport_InvExport" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">&nbsp;</td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Export Log" NavigateUrl="~/Maintenance/InvExport/InvExportLog.aspx" />
+                            <asp:MenuItem Text="Setup" NavigateUrl="~/Maintenance/InvExport/InvExportSetup.aspx" />
+                            <asp:MenuItem Text="Manual Export" NavigateUrl="~/Maintenance/InvExport/InvExportManual.aspx" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:ContentPlaceHolder ID="ExpContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+

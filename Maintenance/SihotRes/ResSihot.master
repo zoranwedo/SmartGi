@@ -1,0 +1,40 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="ResSihot.master.vb" Inherits="Maintenance_SihotRes_ResSihot" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue"> 
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 135px;">&nbsp;</td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Today" Value="Today's reservation import process overview" 
+                                NavigateUrl="~/Maintenance/SihotRes/ImportedToday.aspx" />
+                            <asp:MenuItem Text="Pending" Value="Reservation files pending for import" 
+                                NavigateUrl="~/Maintenance/SihotRes/PendingToday.aspx" />
+                            <asp:MenuItem Text="Missing Mappings" Value="Mappings missing for import on a date" 
+                                NavigateUrl="~/Maintenance/SihotRes/NoMapping.aspx" />
+                            <asp:MenuItem Text="Import On" Value="Reservation files import overview on a date" 
+                                NavigateUrl="~/Maintenance/SihotRes/ImportOnDay.aspx" />
+                            <asp:MenuItem Text="Import Setup" Value="Reservation import process setup" 
+                                NavigateUrl="~/Maintenance/SihotRes/ResParams.aspx" />
+                            <%--
+                            <asp:MenuItem Text="Imported" Value="SIHOT Imported Reservation Files" NavigateUrl="~/Maintenance/SihotRes/ResImported.aspx" />
+                            <asp:MenuItem Text="Import" Value="SIHOT Reservation Files Manual Import" NavigateUrl="~/Maintenance/SihotRes/ResImport.aspx" />
+                            <asp:MenuItem Text="Parameters" Value="SIHOT Reservation Import Parameters" NavigateUrl="~/Maintenance/SihotRes/ResParams.aspx" />
+                            --%>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div> 
+    <br />
+    <asp:ContentPlaceHolder ID="PageContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

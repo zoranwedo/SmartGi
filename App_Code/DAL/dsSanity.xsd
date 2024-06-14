@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsSanity" targetNamespace="http://tempuri.org/dsSanity.xsd" xmlns:mstns="http://tempuri.org/dsSanity.xsd" xmlns="http://tempuri.org/dsSanity.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="HotelRoomsNotMappedTableAdapter" GeneratorDataComponentClassName="HotelRoomsNotMappedTableAdapter" Name="HotelRoomsNotMapped" UserDataComponentName="HotelRoomsNotMappedTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.Reservation" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT DISTINCT r.HotelHID,r.RoomTypeHID
+FROM Reservation r
+      LEFT OUTER JOIN HotelRoomMap m
+            ON m.HotelHID = r.HotelHID
+            AND m.RoomTypeHID = r.RoomTypeHID
+WHERE r.TourOpID IS NOT NULL
+AND r.CheckIn &gt; DATEADD(d,-8,GETDATE())
+AND m.HotelID IS NULL 
+ORDER BY r.HotelHID,r.RoomTypeHID
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="HotelHID" DataSetColumn="HotelHID" />
+              <Mapping SourceColumn="RoomTypeHID" DataSetColumn="RoomTypeHID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SmartRoomsNotMappedTableAdapter" GeneratorDataComponentClassName="SmartRoomsNotMappedTableAdapter" Name="SmartRoomsNotMapped" UserDataComponentName="SmartRoomsNotMappedTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT h.HotelID, h.Hotel,r.RoomTypeID, r.RoomType
+FROM Hotel h
+      INNER JOIN HotelRoomType r
+            ON r.HotelId = h.HotelID
+      LEFT OUTER JOIN HotelRoomMap m
+            ON m.RoomTypeID = r.RoomTypeID 
+            AND m.HotelID = r.HotelId
+WHERE r.[Active] = 1
+      AND h.[Active] = 1
+      AND m.HotelID IS NULL
+ORDER BY m.HotelID, m.RoomTypeID
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="HotelID" DataSetColumn="HotelID" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="RoomTypeID" DataSetColumn="RoomTypeID" />
+              <Mapping SourceColumn="RoomType" DataSetColumn="RoomType" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SmartMultiMapTableAdapter" GeneratorDataComponentClassName="SmartMultiMapTableAdapter" Name="SmartMultiMap" UserDataComponentName="SmartMultiMapTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT dm.HotelHID, dm.RoomTypeHID,rm.HotelID, h.Hotel, rm.RoomTypeID
+FROM (SELECT m.HotelHID, m.RoomTypeHID
+      FROM HotelRoomMap m
+      GROUP BY  m.HotelHID, m.RoomTypeHID
+      HAVING COUNT(*) &gt; 1) dm
+      INNER JOIN HotelRoomMap rm
+            ON rm.HotelHID = dm.HotelHID
+            AND rm.RoomTypeHID = dm.RoomTypeHID
+      INNER JOIN Hotel h
+            ON h.HotelID = rm.HotelID
+ORDER BY  dm.HotelHID, dm.RoomTypeHID,rm.HotelID, rm.RoomTypeID
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="HotelHID" DataSetColumn="HotelHID" />
+              <Mapping SourceColumn="RoomTypeHID" DataSetColumn="RoomTypeHID" />
+              <Mapping SourceColumn="HotelID" DataSetColumn="HotelID" />
+              <Mapping SourceColumn="Hotel" DataSetColumn="Hotel" />
+              <Mapping SourceColumn="RoomTypeID" DataSetColumn="RoomTypeID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsSanity" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="dsSanity" msprop:Generator_UserDSName="dsSanity">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="HotelRoomsNotMapped" msprop:Generator_TableClassName="HotelRoomsNotMappedDataTable" msprop:Generator_TableVarName="tableHotelRoomsNotMapped" msprop:Generator_TablePropName="HotelRoomsNotMapped" msprop:Generator_RowDeletingName="HotelRoomsNotMappedRowDeleting" msprop:Generator_RowChangingName="HotelRoomsNotMappedRowChanging" msprop:Generator_RowEvHandlerName="HotelRoomsNotMappedRowChangeEventHandler" msprop:Generator_RowDeletedName="HotelRoomsNotMappedRowDeleted" msprop:Generator_UserTableName="HotelRoomsNotMapped" msprop:Generator_RowChangedName="HotelRoomsNotMappedRowChanged" msprop:Generator_RowEvArgName="HotelRoomsNotMappedRowChangeEvent" msprop:Generator_RowClassName="HotelRoomsNotMappedRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HotelHID" msprop:Generator_ColumnVarNameInTable="columnHotelHID" msprop:Generator_ColumnPropNameInRow="HotelHID" msprop:Generator_ColumnPropNameInTable="HotelHIDColumn" msprop:Generator_UserColumnName="HotelHID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomTypeHID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeHID" msprop:Generator_ColumnPropNameInRow="RoomTypeHID" msprop:Generator_ColumnPropNameInTable="RoomTypeHIDColumn" msprop:Generator_UserColumnName="RoomTypeHID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SmartRoomsNotMapped" msprop:Generator_TableClassName="SmartRoomsNotMappedDataTable" msprop:Generator_TableVarName="tableSmartRoomsNotMapped" msprop:Generator_TablePropName="SmartRoomsNotMapped" msprop:Generator_RowDeletingName="SmartRoomsNotMappedRowDeleting" msprop:Generator_RowChangingName="SmartRoomsNotMappedRowChanging" msprop:Generator_RowEvHandlerName="SmartRoomsNotMappedRowChangeEventHandler" msprop:Generator_RowDeletedName="SmartRoomsNotMappedRowDeleted" msprop:Generator_UserTableName="SmartRoomsNotMapped" msprop:Generator_RowChangedName="SmartRoomsNotMappedRowChanged" msprop:Generator_RowEvArgName="SmartRoomsNotMappedRowChangeEvent" msprop:Generator_RowClassName="SmartRoomsNotMappedRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HotelID" msprop:Generator_ColumnVarNameInTable="columnHotelID" msprop:Generator_ColumnPropNameInRow="HotelID" msprop:Generator_ColumnPropNameInTable="HotelIDColumn" msprop:Generator_UserColumnName="HotelID" type="xs:int" />
+              <xs:element name="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn" msprop:Generator_UserColumnName="Hotel">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomTypeID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeID" msprop:Generator_ColumnPropNameInRow="RoomTypeID" msprop:Generator_ColumnPropNameInTable="RoomTypeIDColumn" msprop:Generator_UserColumnName="RoomTypeID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomType" msprop:Generator_ColumnVarNameInTable="columnRoomType" msprop:Generator_ColumnPropNameInRow="RoomType" msprop:Generator_ColumnPropNameInTable="RoomTypeColumn" msprop:Generator_UserColumnName="RoomType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SmartMultiMap" msprop:Generator_TableClassName="SmartMultiMapDataTable" msprop:Generator_TableVarName="tableSmartMultiMap" msprop:Generator_TablePropName="SmartMultiMap" msprop:Generator_RowDeletingName="SmartMultiMapRowDeleting" msprop:Generator_RowChangingName="SmartMultiMapRowChanging" msprop:Generator_RowEvHandlerName="SmartMultiMapRowChangeEventHandler" msprop:Generator_RowDeletedName="SmartMultiMapRowDeleted" msprop:Generator_UserTableName="SmartMultiMap" msprop:Generator_RowChangedName="SmartMultiMapRowChanged" msprop:Generator_RowEvArgName="SmartMultiMapRowChangeEvent" msprop:Generator_RowClassName="SmartMultiMapRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HotelHID" msprop:Generator_ColumnVarNameInTable="columnHotelHID" msprop:Generator_ColumnPropNameInRow="HotelHID" msprop:Generator_ColumnPropNameInTable="HotelHIDColumn" msprop:Generator_UserColumnName="HotelHID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomTypeHID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeHID" msprop:Generator_ColumnPropNameInRow="RoomTypeHID" msprop:Generator_ColumnPropNameInTable="RoomTypeHIDColumn" msprop:Generator_UserColumnName="RoomTypeHID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HotelID" msprop:Generator_ColumnVarNameInTable="columnHotelID" msprop:Generator_ColumnPropNameInRow="HotelID" msprop:Generator_ColumnPropNameInTable="HotelIDColumn" msprop:Generator_UserColumnName="HotelID" type="xs:int" />
+              <xs:element name="Hotel" msprop:Generator_ColumnVarNameInTable="columnHotel" msprop:Generator_ColumnPropNameInRow="Hotel" msprop:Generator_ColumnPropNameInTable="HotelColumn" msprop:Generator_UserColumnName="Hotel">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RoomTypeID" msprop:Generator_ColumnVarNameInTable="columnRoomTypeID" msprop:Generator_ColumnPropNameInRow="RoomTypeID" msprop:Generator_ColumnPropNameInTable="RoomTypeIDColumn" msprop:Generator_UserColumnName="RoomTypeID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

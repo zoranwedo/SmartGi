@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsAccDocument" targetNamespace="http://tempuri.org/dsAccDocument.xsd" xmlns:mstns="http://tempuri.org/dsAccDocument.xsd" xmlns="http://tempuri.org/dsAccDocument.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ftAccDocClassTableAdapter" GeneratorDataComponentClassName="ftAccDocClassTableAdapter" Name="ftAccDocClass" UserDataComponentName="ftAccDocClassTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectType="Unknown" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+	adc.TrDocClass + ISNULL('-' + adc.TrTypeClass,'') AS ClassText, 
+	adc.TrDocClass + ISNULL('-' + adc.TrTypeClass,'%') ClassValue
+FROM AccDocClass AS adc
+WHERE ISNULL(adc.AccountType,'0') &lt;&gt; 'G'
+ORDER BY 1 
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ClassText" DataSetColumn="ClassText" />
+              <Mapping SourceColumn="ClassValue" DataSetColumn="ClassValue" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ftAccTypeTableAdapter" GeneratorDataComponentClassName="ftAccTypeTableAdapter" Name="ftAccType" UserDataComponentName="ftAccTypeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccType" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT at.AccType 
+FROM AccType AS at
+WHERE at.AccType &lt;&gt; 'G'
+ORDER BY 1
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccType" DataSetColumn="AccType" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ftAccTranTypeTableAdapter" GeneratorDataComponentClassName="ftAccTranTypeTableAdapter" Name="ftAccTranType" UserDataComponentName="ftAccTranTypeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccTranType" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT att.AccTranType
+FROM AccTranType AS att
+ORDER BY 1
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccTranType" DataSetColumn="AccTranType" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ftAccDocTypeTableAdapter" GeneratorDataComponentClassName="ftAccDocTypeTableAdapter" Name="ftAccDocType" UserDataComponentName="ftAccDocTypeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocType" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT adt.AccDocType
+FROM AccDocType AS adt
+ORDER BY 1</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="AccDocType" DataSetColumn="AccDocType" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsAccDocument" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsAccDocument" msprop:Generator_DataSetName="dsAccDocument">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ftAccDocClass" msprop:Generator_UserTableName="ftAccDocClass" msprop:Generator_RowDeletedName="ftAccDocClassRowDeleted" msprop:Generator_TableClassName="ftAccDocClassDataTable" msprop:Generator_RowChangedName="ftAccDocClassRowChanged" msprop:Generator_RowClassName="ftAccDocClassRow" msprop:Generator_RowChangingName="ftAccDocClassRowChanging" msprop:Generator_RowEvArgName="ftAccDocClassRowChangeEvent" msprop:Generator_RowEvHandlerName="ftAccDocClassRowChangeEventHandler" msprop:Generator_TablePropName="ftAccDocClass" msprop:Generator_TableVarName="tableftAccDocClass" msprop:Generator_RowDeletingName="ftAccDocClassRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ClassText" msdata:ReadOnly="true" msprop:Generator_UserColumnName="ClassText" msprop:Generator_ColumnPropNameInRow="ClassText" msprop:Generator_ColumnVarNameInTable="columnClassText" msprop:Generator_ColumnPropNameInTable="ClassTextColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ClassValue" msdata:ReadOnly="true" msprop:Generator_UserColumnName="ClassValue" msprop:Generator_ColumnPropNameInRow="ClassValue" msprop:Generator_ColumnVarNameInTable="columnClassValue" msprop:Generator_ColumnPropNameInTable="ClassValueColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ftAccType" msprop:Generator_UserTableName="ftAccType" msprop:Generator_RowDeletedName="ftAccTypeRowDeleted" msprop:Generator_TableClassName="ftAccTypeDataTable" msprop:Generator_RowChangedName="ftAccTypeRowChanged" msprop:Generator_RowClassName="ftAccTypeRow" msprop:Generator_RowChangingName="ftAccTypeRowChanging" msprop:Generator_RowEvArgName="ftAccTypeRowChangeEvent" msprop:Generator_RowEvHandlerName="ftAccTypeRowChangeEventHandler" msprop:Generator_TablePropName="ftAccType" msprop:Generator_TableVarName="tableftAccType" msprop:Generator_RowDeletingName="ftAccTypeRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccType" msprop:Generator_UserColumnName="AccType" msprop:Generator_ColumnPropNameInRow="AccType" msprop:Generator_ColumnVarNameInTable="columnAccType" msprop:Generator_ColumnPropNameInTable="AccTypeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ftAccTranType" msprop:Generator_UserTableName="ftAccTranType" msprop:Generator_RowDeletedName="ftAccTranTypeRowDeleted" msprop:Generator_TableClassName="ftAccTranTypeDataTable" msprop:Generator_RowChangedName="ftAccTranTypeRowChanged" msprop:Generator_RowClassName="ftAccTranTypeRow" msprop:Generator_RowChangingName="ftAccTranTypeRowChanging" msprop:Generator_RowEvArgName="ftAccTranTypeRowChangeEvent" msprop:Generator_RowEvHandlerName="ftAccTranTypeRowChangeEventHandler" msprop:Generator_TablePropName="ftAccTranType" msprop:Generator_TableVarName="tableftAccTranType" msprop:Generator_RowDeletingName="ftAccTranTypeRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccTranType" msprop:Generator_UserColumnName="AccTranType" msprop:Generator_ColumnPropNameInRow="AccTranType" msprop:Generator_ColumnVarNameInTable="columnAccTranType" msprop:Generator_ColumnPropNameInTable="AccTranTypeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ftAccDocType" msprop:Generator_UserTableName="ftAccDocType" msprop:Generator_RowDeletedName="ftAccDocTypeRowDeleted" msprop:Generator_TableClassName="ftAccDocTypeDataTable" msprop:Generator_RowChangedName="ftAccDocTypeRowChanged" msprop:Generator_RowClassName="ftAccDocTypeRow" msprop:Generator_RowChangingName="ftAccDocTypeRowChanging" msprop:Generator_RowEvArgName="ftAccDocTypeRowChangeEvent" msprop:Generator_RowEvHandlerName="ftAccDocTypeRowChangeEventHandler" msprop:Generator_TablePropName="ftAccDocType" msprop:Generator_TableVarName="tableftAccDocType" msprop:Generator_RowDeletingName="ftAccDocTypeRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccDocType" msprop:Generator_UserColumnName="AccDocType" msprop:Generator_ColumnPropNameInRow="AccDocType" msprop:Generator_ColumnVarNameInTable="columnAccDocType" msprop:Generator_ColumnPropNameInTable="AccDocTypeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

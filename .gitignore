@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Invoices/backup
+/Invoices/NewInvoice
+/.vs
+/Images/GridImg/_vti_cnf
+/Images/_vti_cnf
+/Images/Thumbs.db
+/Maintenance/Admin/_vti_cnf
+/Maintenance/Contracting/_vti_cnf
+/Maintenance/Hotel/_vti_cnf
+/Maintenance/Pay/_vti_cnf
+/Maintenance/TO/_vti_cnf
+/Maintenance/_vti_cnf
+/_temp
+/web.config

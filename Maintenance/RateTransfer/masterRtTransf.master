@@ -1,0 +1,33 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="masterRtTransf.master.vb" Inherits="Maintenance_RateTransfer_masterRtTransf" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+ <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+<div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                  <%--  <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" NavigateUrl="~/Invoices/ProFormas.aspx"
+                        Text="&lt;&lt; Back to ProFormas" />
+               --%>
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Rate Export Files" NavigateUrl="~/Maintenance/RateTransfer/RTransfExported.aspx" />
+                            <asp:MenuItem Text="Rate Export Log" NavigateUrl="~/Maintenance/RateTransfer/RTransfLog.aspx" />
+                            <asp:MenuItem Text="Export" NavigateUrl="~/Maintenance/RateTransfer/RTransfExport.aspx" />
+                            <asp:MenuItem Text="Setup" NavigateUrl="~/Maintenance/RateTransfer/RTransfSetup.aspx" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:ContentPlaceHolder ID="ProFormaContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,30 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" CodeFile="OperaRes.master.vb" Inherits="Maintenance_Opera_OperaRes" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue"> 
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 135px;">&nbsp;</td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="Imports" Value="Import tasks overview" 
+                                NavigateUrl="~/Maintenance/Opera/OperaImport.aspx" />
+                            <%--<asp:MenuItem Text="Missing Mappings" Value="Mappings missing for import task" 
+                                NavigateUrl="~/Maintenance/Opera/OperaMissingMapping.aspx" />--%>
+                            <asp:MenuItem Text="Import Setup" Value="Reservation import process setup" 
+                                NavigateUrl="~/Maintenance/Opera/OperaImportSetup.aspx" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div> 
+    <br />
+    <asp:ContentPlaceHolder ID="PageContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

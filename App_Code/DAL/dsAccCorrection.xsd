@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsAccCorrection" targetNamespace="http://tempuri.org/dsAccCorrection.xsd" xmlns:mstns="http://tempuri.org/dsAccCorrection.xsd" xmlns="http://tempuri.org/dsAccCorrection.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="csSMART_SQL" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="csSMART_SQL (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.csSMART_SQL.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccCorrectionTableAdapter" GeneratorDataComponentClassName="AccCorrectionTableAdapter" Name="AccCorrection" UserDataComponentName="AccCorrectionTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocument" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT d.TrDocID,
+       d.TrDocClass,
+       d.TrTypeClass,
+       d.TrClass,
+       d.TrCode,
+       d.AccountType,
+       d.AccountTypeID,
+       d.TranType,
+       d.TranTypeID,
+       d.DocType,
+       d.DocTypeID,
+       d.TrOrd,
+       d.TrSign,
+       d.TrAccount,
+       d.TrDescription
+FROM   AccDocument d
+WHERE  (d.TrDocID &gt; 0)
+	AND (d.Correction = 1)
+ORDER BY
+       d.TrDocClass,
+       d.TrTypeClass,
+       d.TrCode
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrDocID" DataSetColumn="TrDocID" />
+              <Mapping SourceColumn="TrDocClass" DataSetColumn="TrDocClass" />
+              <Mapping SourceColumn="TrTypeClass" DataSetColumn="TrTypeClass" />
+              <Mapping SourceColumn="TrClass" DataSetColumn="TrClass" />
+              <Mapping SourceColumn="TrCode" DataSetColumn="TrCode" />
+              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
+              <Mapping SourceColumn="AccountTypeID" DataSetColumn="AccountTypeID" />
+              <Mapping SourceColumn="TranType" DataSetColumn="TranType" />
+              <Mapping SourceColumn="TranTypeID" DataSetColumn="TranTypeID" />
+              <Mapping SourceColumn="DocType" DataSetColumn="DocType" />
+              <Mapping SourceColumn="DocTypeID" DataSetColumn="DocTypeID" />
+              <Mapping SourceColumn="TrOrd" DataSetColumn="TrOrd" />
+              <Mapping SourceColumn="TrSign" DataSetColumn="TrSign" />
+              <Mapping SourceColumn="TrAccount" DataSetColumn="TrAccount" />
+              <Mapping SourceColumn="TrDescription" DataSetColumn="TrDescription" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AccNoCorrectionTableAdapter" GeneratorDataComponentClassName="AccNoCorrectionTableAdapter" Name="AccNoCorrection" UserDataComponentName="AccNoCorrectionTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccDocument" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="GetData">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT d.TrDocID,
+       d.TrDocClass,
+       d.TrTypeClass,
+       d.TrClass,
+       d.TrCode,
+       d.AccountType,
+       d.AccountTypeID,
+       d.TranType,
+       d.TranTypeID,
+       d.DocType,
+       d.DocTypeID,
+       d.TrOrd,
+       d.TrSign,
+       d.TrAccount,
+       d.TrDescription
+FROM   AccDocument d
+WHERE  (d.TrDocID &gt; 0)
+	AND (d.Correction = 0)
+	AND (@TrCode IS NULL OR d.TrCode LIKE '%' + @TrCode + '%')
+ORDER BY
+       d.TrDocClass,
+       d.TrTypeClass,
+       d.TrCode
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="TrCode" ColumnName="TrCode" DataSourceName="LIVE_SMART_SQL.dbo.AccDocument" DataTypeServer="varchar(10)" DbType="AnsiString" Direction="Input" ParameterName="@TrCode" Precision="0" ProviderType="VarChar" Scale="0" Size="10" SourceColumn="TrCode" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="TrDocID" DataSetColumn="TrDocID" />
+              <Mapping SourceColumn="TrDocClass" DataSetColumn="TrDocClass" />
+              <Mapping SourceColumn="TrTypeClass" DataSetColumn="TrTypeClass" />
+              <Mapping SourceColumn="TrClass" DataSetColumn="TrClass" />
+              <Mapping SourceColumn="TrCode" DataSetColumn="TrCode" />
+              <Mapping SourceColumn="AccountType" DataSetColumn="AccountType" />
+              <Mapping SourceColumn="AccountTypeID" DataSetColumn="AccountTypeID" />
+              <Mapping SourceColumn="TranType" DataSetColumn="TranType" />
+              <Mapping SourceColumn="TranTypeID" DataSetColumn="TranTypeID" />
+              <Mapping SourceColumn="DocType" DataSetColumn="DocType" />
+              <Mapping SourceColumn="DocTypeID" DataSetColumn="DocTypeID" />
+              <Mapping SourceColumn="TrOrd" DataSetColumn="TrOrd" />
+              <Mapping SourceColumn="TrSign" DataSetColumn="TrSign" />
+              <Mapping SourceColumn="TrAccount" DataSetColumn="TrAccount" />
+              <Mapping SourceColumn="TrDescription" DataSetColumn="TrDescription" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources>
+          <DbSource ConnectionRef="csSMART_SQL (Web.config)" DbObjectName="LIVE_SMART_SQL.dbo.AccCorrection" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="AccCorrection" MethodsParameterType="CLR" Modifier="Public" Name="AccCorrection" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="AccCorrection">
+            <SelectCommand>
+              <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                <CommandText>dbo.AccCorrection</CommandText>
+                <Parameters>
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@TrDocID" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                  <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@Correction" Precision="1" ProviderType="Bit" Scale="0" Size="1" SourceColumnNullMapping="false" SourceVersion="Current" />
+                </Parameters>
+              </DbCommand>
+            </SelectCommand>
+          </DbSource>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsAccCorrection" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsAccCorrection" msprop:Generator_DataSetName="dsAccCorrection">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AccCorrection" msprop:Generator_UserTableName="AccCorrection" msprop:Generator_RowDeletedName="AccCorrectionRowDeleted" msprop:Generator_RowChangedName="AccCorrectionRowChanged" msprop:Generator_RowClassName="AccCorrectionRow" msprop:Generator_RowChangingName="AccCorrectionRowChanging" msprop:Generator_RowEvArgName="AccCorrectionRowChangeEvent" msprop:Generator_RowEvHandlerName="AccCorrectionRowChangeEventHandler" msprop:Generator_TableClassName="AccCorrectionDataTable" msprop:Generator_TableVarName="tableAccCorrection" msprop:Generator_RowDeletingName="AccCorrectionRowDeleting" msprop:Generator_TablePropName="AccCorrection">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrDocID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TrDocID" msprop:Generator_ColumnVarNameInTable="columnTrDocID" msprop:Generator_ColumnPropNameInRow="TrDocID" msprop:Generator_ColumnPropNameInTable="TrDocIDColumn" type="xs:int" />
+              <xs:element name="TrDocClass" msprop:Generator_UserColumnName="TrDocClass" msprop:Generator_ColumnVarNameInTable="columnTrDocClass" msprop:Generator_ColumnPropNameInRow="TrDocClass" msprop:Generator_ColumnPropNameInTable="TrDocClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrTypeClass" msprop:Generator_UserColumnName="TrTypeClass" msprop:Generator_ColumnVarNameInTable="columnTrTypeClass" msprop:Generator_ColumnPropNameInRow="TrTypeClass" msprop:Generator_ColumnPropNameInTable="TrTypeClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrClass" msprop:Generator_UserColumnName="TrClass" msprop:Generator_ColumnVarNameInTable="columnTrClass" msprop:Generator_ColumnPropNameInRow="TrClass" msprop:Generator_ColumnPropNameInTable="TrClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrCode" msprop:Generator_UserColumnName="TrCode" msprop:Generator_ColumnVarNameInTable="columnTrCode" msprop:Generator_ColumnPropNameInRow="TrCode" msprop:Generator_ColumnPropNameInTable="TrCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AccountType" msprop:Generator_UserColumnName="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AccountTypeID" msprop:Generator_UserColumnName="AccountTypeID" msprop:Generator_ColumnVarNameInTable="columnAccountTypeID" msprop:Generator_ColumnPropNameInRow="AccountTypeID" msprop:Generator_ColumnPropNameInTable="AccountTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TranType" msprop:Generator_UserColumnName="TranType" msprop:Generator_ColumnVarNameInTable="columnTranType" msprop:Generator_ColumnPropNameInRow="TranType" msprop:Generator_ColumnPropNameInTable="TranTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TranTypeID" msprop:Generator_UserColumnName="TranTypeID" msprop:Generator_ColumnVarNameInTable="columnTranTypeID" msprop:Generator_ColumnPropNameInRow="TranTypeID" msprop:Generator_ColumnPropNameInTable="TranTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocType" msprop:Generator_UserColumnName="DocType" msprop:Generator_ColumnVarNameInTable="columnDocType" msprop:Generator_ColumnPropNameInRow="DocType" msprop:Generator_ColumnPropNameInTable="DocTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocTypeID" msprop:Generator_UserColumnName="DocTypeID" msprop:Generator_ColumnVarNameInTable="columnDocTypeID" msprop:Generator_ColumnPropNameInRow="DocTypeID" msprop:Generator_ColumnPropNameInTable="DocTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrOrd" msprop:Generator_UserColumnName="TrOrd" msprop:Generator_ColumnVarNameInTable="columnTrOrd" msprop:Generator_ColumnPropNameInRow="TrOrd" msprop:Generator_ColumnPropNameInTable="TrOrdColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrSign" msprop:Generator_UserColumnName="TrSign" msprop:Generator_ColumnVarNameInTable="columnTrSign" msprop:Generator_ColumnPropNameInRow="TrSign" msprop:Generator_ColumnPropNameInTable="TrSignColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrAccount" msprop:Generator_UserColumnName="TrAccount" msprop:Generator_ColumnVarNameInTable="columnTrAccount" msprop:Generator_ColumnPropNameInRow="TrAccount" msprop:Generator_ColumnPropNameInTable="TrAccountColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrDescription" msprop:Generator_UserColumnName="TrDescription" msprop:Generator_ColumnVarNameInTable="columnTrDescription" msprop:Generator_ColumnPropNameInRow="TrDescription" msprop:Generator_ColumnPropNameInTable="TrDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AccNoCorrection" msprop:Generator_UserTableName="AccNoCorrection" msprop:Generator_RowDeletedName="AccNoCorrectionRowDeleted" msprop:Generator_RowChangedName="AccNoCorrectionRowChanged" msprop:Generator_RowClassName="AccNoCorrectionRow" msprop:Generator_RowChangingName="AccNoCorrectionRowChanging" msprop:Generator_RowEvArgName="AccNoCorrectionRowChangeEvent" msprop:Generator_RowEvHandlerName="AccNoCorrectionRowChangeEventHandler" msprop:Generator_TableClassName="AccNoCorrectionDataTable" msprop:Generator_TableVarName="tableAccNoCorrection" msprop:Generator_RowDeletingName="AccNoCorrectionRowDeleting" msprop:Generator_TablePropName="AccNoCorrection">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrDocID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="TrDocID" msprop:Generator_ColumnVarNameInTable="columnTrDocID" msprop:Generator_ColumnPropNameInRow="TrDocID" msprop:Generator_ColumnPropNameInTable="TrDocIDColumn" type="xs:int" />
+              <xs:element name="TrDocClass" msprop:Generator_UserColumnName="TrDocClass" msprop:Generator_ColumnVarNameInTable="columnTrDocClass" msprop:Generator_ColumnPropNameInRow="TrDocClass" msprop:Generator_ColumnPropNameInTable="TrDocClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrTypeClass" msprop:Generator_UserColumnName="TrTypeClass" msprop:Generator_ColumnVarNameInTable="columnTrTypeClass" msprop:Generator_ColumnPropNameInRow="TrTypeClass" msprop:Generator_ColumnPropNameInTable="TrTypeClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrClass" msprop:Generator_UserColumnName="TrClass" msprop:Generator_ColumnVarNameInTable="columnTrClass" msprop:Generator_ColumnPropNameInRow="TrClass" msprop:Generator_ColumnPropNameInTable="TrClassColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrCode" msprop:Generator_UserColumnName="TrCode" msprop:Generator_ColumnVarNameInTable="columnTrCode" msprop:Generator_ColumnPropNameInRow="TrCode" msprop:Generator_ColumnPropNameInTable="TrCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AccountType" msprop:Generator_UserColumnName="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AccountTypeID" msprop:Generator_UserColumnName="AccountTypeID" msprop:Generator_ColumnVarNameInTable="columnAccountTypeID" msprop:Generator_ColumnPropNameInRow="AccountTypeID" msprop:Generator_ColumnPropNameInTable="AccountTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TranType" msprop:Generator_UserColumnName="TranType" msprop:Generator_ColumnVarNameInTable="columnTranType" msprop:Generator_ColumnPropNameInRow="TranType" msprop:Generator_ColumnPropNameInTable="TranTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TranTypeID" msprop:Generator_UserColumnName="TranTypeID" msprop:Generator_ColumnVarNameInTable="columnTranTypeID" msprop:Generator_ColumnPropNameInRow="TranTypeID" msprop:Generator_ColumnPropNameInTable="TranTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocType" msprop:Generator_UserColumnName="DocType" msprop:Generator_ColumnVarNameInTable="columnDocType" msprop:Generator_ColumnPropNameInRow="DocType" msprop:Generator_ColumnPropNameInTable="DocTypeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocTypeID" msprop:Generator_UserColumnName="DocTypeID" msprop:Generator_ColumnVarNameInTable="columnDocTypeID" msprop:Generator_ColumnPropNameInRow="DocTypeID" msprop:Generator_ColumnPropNameInTable="DocTypeIDColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrOrd" msprop:Generator_UserColumnName="TrOrd" msprop:Generator_ColumnVarNameInTable="columnTrOrd" msprop:Generator_ColumnPropNameInRow="TrOrd" msprop:Generator_ColumnPropNameInTable="TrOrdColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrSign" msprop:Generator_UserColumnName="TrSign" msprop:Generator_ColumnVarNameInTable="columnTrSign" msprop:Generator_ColumnPropNameInRow="TrSign" msprop:Generator_ColumnPropNameInTable="TrSignColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrAccount" msprop:Generator_UserColumnName="TrAccount" msprop:Generator_ColumnVarNameInTable="columnTrAccount" msprop:Generator_ColumnPropNameInRow="TrAccount" msprop:Generator_ColumnPropNameInTable="TrAccountColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TrDescription" msprop:Generator_UserColumnName="TrDescription" msprop:Generator_ColumnVarNameInTable="columnTrDescription" msprop:Generator_ColumnPropNameInRow="TrDescription" msprop:Generator_ColumnPropNameInTable="TrDescriptionColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccCorrection" />
+      <xs:field xpath="mstns:TrDocID" />
+    </xs:unique>
+    <xs:unique name="AccNoCorrection_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:AccNoCorrection" />
+      <xs:field xpath="mstns:TrDocID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

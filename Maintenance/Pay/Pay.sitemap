@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title="Pay"  description="">
+        <siteMapNode url="~/Maintenance/Pay/PayCondition.aspx" title="Payment Options"  description="Payment options" />
+        <siteMapNode url="~/Maintenance/Pay/PayMode.aspx" title="Payment Mode"  description="Mode of payment" />
+    </siteMapNode>
+</siteMap>

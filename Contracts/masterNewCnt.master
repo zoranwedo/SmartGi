@@ -1,0 +1,34 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="masterNewCnt.master.vb" Inherits="Contracts_masterNewCnt" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">
+                    <asp:HyperLink ID="linkBack" runat="server" SkinID="skHypLink" 
+                        NavigateUrl="~/Contracts/Contracts.aspx" Text = "&lt;&lt; Back to Contracts" />                
+                </td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="New" NavigateUrl="~/Contracts/NewContract.aspx" />
+                            <asp:MenuItem Text="New From Contracts" Value="New From Contracts" 
+                                NavigateUrl="~/Contracts/NewContractContract.aspx" />
+                            <asp:MenuItem Text="New From Template" Value="New From Template" 
+                                NavigateUrl="~/Contracts/NewContractTemplate.aspx" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+  </div>
+  
+<asp:ContentPlaceHolder ID="CreateCntContent" runat="server">
+</asp:ContentPlaceHolder>
+
+
+</asp:Content>
+

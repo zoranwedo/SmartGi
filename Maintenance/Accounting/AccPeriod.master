@@ -1,0 +1,32 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/masterSMART.master" AutoEventWireup="false" CodeFile="AccPeriod.master.vb" Inherits="Maintenance_Accounting_AccPeriod" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="title" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MasterContent" Runat="Server">
+    <div class="Blue">
+        <table cellpadding="0" cellspacing="0" style="width: 100%;">
+            <tr>
+                <td class="LocalMenuRow" style="width: 130px;">&nbsp;</td>
+                <td class="LocalMenuRow">
+                    <asp:Menu ID="LocalMenu" runat="server" SkinID="skLocalMenu">
+                        <Items>
+                            <asp:MenuItem Text="CCI Accounting Periods" NavigateUrl="~/Maintenance/Accounting/AccPeriodCCI.aspx" 
+                                Value="AP" ToolTip="Maintenance of CCI Accounting Periods" />
+                            <asp:MenuItem Text="All Accounting Periods" NavigateUrl="~/Maintenance/Accounting/AccPeriodCCIAll.aspx" 
+                                Value="AAP" ToolTip="Maintenance of CCI Accounting Periods" />
+                            <asp:MenuItem Text="Hotel Accounting Periods" Value="HAP" 
+                                NavigateUrl="~/Maintenance/Accounting/AccPeriodHotel.aspx" 
+                                ToolTip="Maintenance of Hotel Accounting Periods" />
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <asp:ContentPlaceHolder ID="AccountContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+
